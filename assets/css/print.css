@@ -1,0 +1,15 @@
+/* RawLaw — print stylesheet for clean article printing. */
+@media print {
+	body { background: #fff; color: #000; font: 12pt/1.5 Georgia, serif; }
+	.site-header, .site-footer, .site-nav, .site-search, .breadcrumbs, .related, .newsletter,
+	.comments, .author-bio, .share, .toc, .article__rail, .lawyer-profile__cta, .marketplace__search,
+	.filters, .pagination, .skip-link { display: none !important; }
+	a { color: #000; text-decoration: underline; }
+	a[href]::after { content: " (" attr(href) ")"; font-size: 10pt; color: #555; }
+	.article__title { font-size: 24pt; }
+	.prose { font-size: 11pt; }
+	.container, .article__layout, .lawyer-profile__layout { display: block !important; max-width: none !important; padding: 0 !important; }
+	img { max-width: 100% !important; page-break-inside: avoid; }
+	h1, h2, h3 { page-break-after: avoid; }
+	p, li, blockquote { orphans: 3; widows: 3; }
+}

@@ -1,0 +1,11 @@
+/* RawLaw — critical above-the-fold styles, inlined for first paint. */
+:root{--ink:#0B1220;--paper:#FFFFFF;--surface:#FFFFFF;--navy:#1A3F72;--muted:#55657C;--border:#DCE4EE}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+img,svg,video{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+.skip-link{position:absolute;left:-9999px}.skip-link:focus{left:1rem;top:1rem;background:var(--ink);color:#fff;padding:.75rem 1rem;border-radius:6px;z-index:999}
+.container{width:100%;max-width:1240px;margin:0 auto;padding:0 24px}
+.site-header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.site-logo{display:block;height:auto;width:200px}

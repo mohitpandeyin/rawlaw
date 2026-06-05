@@ -1,0 +1,18 @@
+/*
+Theme Name: RawLaw
+Theme URI: https://rawlaw.in
+Author: Safflower Infotech Private Limited
+Author URI: https://safflower.in
+Description: A premium editorial-first WordPress theme for RawLaw — built for legal news, judgments, and analysis, with an integrated, secondary marketplace for lawyers and advocates. Clean typography, generous whitespace, schema-ready, accessible, fast, and SEO-optimised.
+Version: 1.0.0
+Requires at least: 6.2
+Tested up to: 6.6
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: rawlaw
+Tags: news, editorial, magazine, blog, marketplace, custom-colors, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, block-styles, wide-blocks, accessibility-ready
+*/
+
+/* The full stylesheet lives in /assets/css/main.css for performance and clarity.
+   This file exists only for the WordPress theme header. */
