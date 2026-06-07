@@ -1704,6 +1704,126 @@ a.eyebrow:hover { color: var(--navy-700); }
 .np-text__title a { color: var(--ink); text-decoration: none; }
 .np-text__title a:hover { color: var(--navy); }
 
+/* ─── Hooked UX: Meta, Badges, Cross-sell ─── */
+.np-meta {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+	flex-wrap: wrap;
+}
+.np-meta--sm { font-size: .85rem; }
+.np-read {
+	color: var(--muted);
+	display: inline-flex;
+	align-items: center;
+	gap: .25em;
+}
+.np-read::before {
+	content: "";
+	width: 3px;
+	height: 3px;
+	border-radius: 50%;
+	background: var(--muted);
+}
+.np-badge {
+	position: absolute;
+	top: .5rem;
+	left: .5rem;
+	padding: .2em .55em;
+	font-size: .7rem;
+	font-weight: 700;
+	letter-spacing: .02em;
+	text-transform: uppercase;
+	border-radius: var(--r-sm);
+	pointer-events: none;
+	z-index: 2;
+}
+.np-badge--new {
+	background: var(--coral);
+	color: #fff;
+}
+.np-badge--sm {
+	font-size: .6rem;
+	padding: .15em .4em;
+}
+/* Feature card badge position */
+.np-feature__media { position: relative; }
+.np-col__media { position: relative; }
+.np-stack__media { position: relative; }
+
+/* Marketplace cross-sell link (Hooked: loads next trigger) */
+.np-crosslink {
+	display: inline-flex;
+	align-items: center;
+	gap: .35em;
+	margin-top: .5rem;
+	font-size: .8rem;
+	font-weight: 600;
+	color: var(--navy);
+	text-decoration: none;
+	padding: .3em .6em;
+	margin-left: -.6em;
+	border-radius: var(--r-sm);
+	transition: background .18s ease, color .18s ease;
+}
+.np-crosslink:hover {
+	background: var(--sky);
+	color: var(--navy-700);
+}
+.np-crosslink span {
+	transition: transform .18s ease;
+}
+.np-crosslink:hover span {
+	transform: translateX(3px);
+}
+
+/* Inline newsletter hook (Hooked: Investment phase) */
+.np-inline-hook {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--s-3);
+	padding: var(--s-4);
+	margin: var(--s-5) 0;
+	background: var(--surface-alt);
+	border-radius: var(--r-lg);
+	border: 1px solid var(--border);
+}
+.np-inline-hook__text {
+	margin: 0;
+	font-size: .95rem;
+	color: var(--muted);
+}
+.np-inline-hook__btn {
+	white-space: nowrap;
+}
+.np-inline-hook__btn span {
+	transition: transform .18s ease;
+}
+.np-inline-hook__btn:hover span {
+	transform: translateX(3px);
+}
+
+/* ─── Improved hover micro-interactions (Hooked: Reward anticipation) ─── */
+.np-feature:hover .np-feature__media img,
+.np-col:hover .np-col__media img,
+.np-stack__item:hover .np-stack__media img,
+.np-text:hover .np-text__media img {
+	transform: scale(1.04);
+}
+.np-feature__media img,
+.np-col__media img,
+.np-stack__media img,
+.np-text__media img {
+	transition: transform .3s ease;
+}
+.np-feature:hover .np-feature__title a,
+.np-col:hover .np-col__title a,
+.np-stack__item:hover .np-stack__title a,
+.np-text:hover .np-text__title a {
+	color: var(--coral);
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
 	.np-zone--top { grid-template-columns: 1fr; }
@@ -1739,6 +1859,8 @@ a.eyebrow:hover { color: var(--navy-700); }
 	.np-duo { grid-template-columns: 1fr; gap: var(--s-4); }
 	.np-feature__title { font-size: 1.05rem; }
 	.np-stack__item { grid-template-columns: 96px 1fr; }
+	.np-inline-hook { flex-direction: column; text-align: center; gap: var(--s-2); }
+	.np-crosslink { display: none; }
 }
 
 @media (max-width: 480px) {
@@ -1748,6 +1870,9 @@ a.eyebrow:hover { color: var(--navy-700); }
 	.np-feature__title { font-size: 1rem; }
 	.np-stack__title { font-size: .95rem; }
 	.np-stack__item { grid-template-columns: 84px 1fr; column-gap: var(--s-2); }
+	.np-inline-hook { padding: var(--s-3); }
+	.np-inline-hook__text { font-size: .85rem; }
+}
 }
 
 /* App download section */
