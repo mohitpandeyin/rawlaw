@@ -837,6 +837,18 @@ a.eyebrow:hover { color: var(--navy-700); }
 .cat-grid > .card--featured { grid-row: span 3; }
 @media (max-width: 880px) { .cat-grid { grid-template-columns: 1fr; } .cat-grid > .card--featured { grid-row: auto; } }
 
+/* Cat duo: two featured cards side-by-side */
+.cat-duo {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--s-5);
+	margin-bottom: var(--s-6);
+}
+.cat-duo .card--featured .card__media { aspect-ratio: 16/10; }
+.cat-duo .card--featured .card__title { font-size: clamp(20px, 1.5vw + 12px, 28px); }
+.cat-duo .card--featured .card__excerpt { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+@media (max-width: 768px) { .cat-duo { grid-template-columns: 1fr; } }
+
 /* ---------- 12. Meta ---------- */
 .meta { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; font-size: 13px; color: var(--muted); }
 .meta__author { color: var(--ink); font-weight: 600; }

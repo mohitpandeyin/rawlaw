@@ -28,18 +28,22 @@ $children = get_terms( array( 'taxonomy' => 'category', 'parent' => $cat->term_i
 
 		<?php if ( have_posts() ) : ?>
 			<div class="cat-archive">
+				<div class="cat-duo">
 				<?php
-				$first = true;
+				$count = 0;
 				while ( have_posts() ) : the_post();
-					if ( $first ) {
+					if ( $count < 2 ) {
 						get_template_part( 'template-parts/article/card-featured' );
-						echo '<div class="cat-archive__rest grid grid--3">';
-						$first = false;
+						$count++;
+						if ( $count === 2 ) {
+							echo '</div><div class="cat-archive__rest grid grid--3">';
+						}
 					} else {
 						get_template_part( 'template-parts/article/card' );
 					}
 				endwhile;
-				if ( ! $first ) echo '</div>';
+				if ( $count >= 2 ) echo '</div>';
+				elseif ( $count > 0 ) echo '</div>'; // close cat-duo if only 1 post
 				?>
 			</div>
 			<?php rawlaw_pagination(); ?>
