@@ -30,8 +30,8 @@ if ( ! $ticker_q->have_posts() ) {
 	return;
 }
 ?>
-<div class="ticker-bar">
-<div class="ticker container" aria-label="<?php esc_attr_e( 'Top News', 'rawlaw' ); ?>">
+<div class="container">
+<div class="ticker" aria-label="<?php esc_attr_e( 'Top News', 'rawlaw' ); ?>">
 	<span class="ticker__label"><?php esc_html_e( 'Top News', 'rawlaw' ); ?></span>
 	<div class="ticker__track">
 		<div class="ticker__marquee">
@@ -58,5 +58,5 @@ if ( ! $ticker_q->have_posts() ) {
 		</div>
 	</div>
 </div><!-- .ticker -->
-</div><!-- .ticker-bar -->
+</div><!-- .container -->
 <?php wp_reset_postdata(); ?>
