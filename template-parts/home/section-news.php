@@ -16,7 +16,7 @@ if ( ! isset( $displayed_ids ) ) {
 
 $news_q = new WP_Query( array(
 	'post_type'           => 'post',
-	'posts_per_page'      => 13,
+	'posts_per_page'      => 9,
 	'post__not_in'        => $displayed_ids,
 	'ignore_sticky_posts' => 1,
 ) );
@@ -46,76 +46,74 @@ if ( $news_q->have_posts() ) :
 			<a class="link-arrow" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/news/' ) ); ?>"><?php esc_html_e( 'View all', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span></a>
 		</header>
 
-		<?php // — Zone A: Two feature stories + stacked briefs — ?>
-		<div class="np-zone np-zone--top" data-reveal-stagger>
-			<div class="np-duo">
-				<?php for ( $i = 0; $i <= 1; $i++ ) : if ( empty( $all_posts[ $i ] ) ) continue; $p = $all_posts[ $i ]; ?>
-				<article class="np-feature">
-					<?php if ( $p['thumb'] ) : ?>
-						<a class="np-feature__media" href="<?php echo esc_url( $p['permalink'] ); ?>" aria-hidden="true" tabindex="-1">
-							<?php echo $p['thumb']; ?>
-						</a>
-					<?php endif; ?>
-					<?php if ( $p['cat'] ) : ?>
-						<a class="np-cat" href="<?php echo esc_url( get_term_link( $p['cat'] ) ); ?>"><?php echo esc_html( $p['cat']->name ); ?></a>
-					<?php endif; ?>
-					<h3 class="np-feature__title"><a href="<?php echo esc_url( $p['permalink'] ); ?>"><?php echo esc_html( $p['title'] ); ?></a></h3>
-					<time class="np-time" datetime="<?php echo esc_attr( $p['datetime'] ); ?>"><?php echo esc_html( $p['date'] ); ?></time>
-				</article>
-				<?php endfor; ?>
-			</div>
-
-			<div class="np-stack">
-				<?php for ( $i = 2; $i <= 4; $i++ ) : if ( empty( $all_posts[ $i ] ) ) continue; $p = $all_posts[ $i ]; ?>
-				<article class="np-stack__item">
-					<?php if ( $p['thumb'] ) : ?>
-						<a class="np-stack__media" href="<?php echo esc_url( $p['permalink'] ); ?>" aria-hidden="true" tabindex="-1">
-							<?php echo $p['thumb']; ?>
-						</a>
-					<?php endif; ?>
-					<?php if ( $p['cat'] ) : ?>
-						<a class="np-cat" href="<?php echo esc_url( get_term_link( $p['cat'] ) ); ?>"><?php echo esc_html( $p['cat']->name ); ?></a>
-					<?php endif; ?>
-					<h3 class="np-stack__title"><a href="<?php echo esc_url( $p['permalink'] ); ?>"><?php echo esc_html( $p['title'] ); ?></a></h3>
-					<time class="np-time" datetime="<?php echo esc_attr( $p['datetime'] ); ?>"><?php echo esc_html( $p['date'] ); ?></time>
-				</article>
-				<?php endfor; ?>
-			</div>
-		</div>
-
-		<?php // — Zone B: 4-column image row — ?>
-		<div class="np-zone np-zone--mid" data-reveal-stagger>
-			<?php for ( $i = 5; $i <= 8; $i++ ) : if ( empty( $all_posts[ $i ] ) ) continue; $p = $all_posts[ $i ]; ?>
-			<article class="np-col">
+		<?php // — Screenshot-style mosaic: 2 large stories + spotlight + compact rows — ?>
+		<div class="np-mosaic" data-reveal-stagger>
+			<?php if ( ! empty( $all_posts[0] ) ) : $p = $all_posts[0]; ?>
+			<article class="np-feature np-feature--a">
 				<?php if ( $p['thumb'] ) : ?>
-					<a class="np-col__media" href="<?php echo esc_url( $p['permalink'] ); ?>" aria-hidden="true" tabindex="-1">
+					<a class="np-feature__media" href="<?php echo esc_url( $p['permalink'] ); ?>" aria-hidden="true" tabindex="-1">
 						<?php echo $p['thumb']; ?>
 					</a>
 				<?php endif; ?>
 				<?php if ( $p['cat'] ) : ?>
 					<a class="np-cat" href="<?php echo esc_url( get_term_link( $p['cat'] ) ); ?>"><?php echo esc_html( $p['cat']->name ); ?></a>
 				<?php endif; ?>
-				<h3 class="np-col__title"><a href="<?php echo esc_url( $p['permalink'] ); ?>"><?php echo esc_html( $p['title'] ); ?></a></h3>
+				<h3 class="np-feature__title"><a href="<?php echo esc_url( $p['permalink'] ); ?>"><?php echo esc_html( $p['title'] ); ?></a></h3>
 				<time class="np-time" datetime="<?php echo esc_attr( $p['datetime'] ); ?>"><?php echo esc_html( $p['date'] ); ?></time>
 			</article>
-			<?php endfor; ?>
-		</div>
+			<?php endif; ?>
 
-		<?php // — Zone C: Compact headline cards with thumbnails (4-column) — ?>
-		<div class="np-zone np-zone--bottom" data-reveal-stagger>
-			<?php for ( $i = 9; $i <= 12; $i++ ) : if ( empty( $all_posts[ $i ] ) ) continue; $p = $all_posts[ $i ]; ?>
-			<article class="np-text">
+			<?php if ( ! empty( $all_posts[1] ) ) : $p = $all_posts[1]; ?>
+			<article class="np-feature np-feature--b">
 				<?php if ( $p['thumb'] ) : ?>
-					<a class="np-text__media" href="<?php echo esc_url( $p['permalink'] ); ?>" aria-hidden="true" tabindex="-1">
+					<a class="np-feature__media" href="<?php echo esc_url( $p['permalink'] ); ?>" aria-hidden="true" tabindex="-1">
 						<?php echo $p['thumb']; ?>
 					</a>
 				<?php endif; ?>
 				<?php if ( $p['cat'] ) : ?>
 					<a class="np-cat" href="<?php echo esc_url( get_term_link( $p['cat'] ) ); ?>"><?php echo esc_html( $p['cat']->name ); ?></a>
 				<?php endif; ?>
-				<h3 class="np-text__title"><a href="<?php echo esc_url( $p['permalink'] ); ?>"><?php echo esc_html( $p['title'] ); ?></a></h3>
+				<h3 class="np-feature__title"><a href="<?php echo esc_url( $p['permalink'] ); ?>"><?php echo esc_html( $p['title'] ); ?></a></h3>
 				<time class="np-time" datetime="<?php echo esc_attr( $p['datetime'] ); ?>"><?php echo esc_html( $p['date'] ); ?></time>
 			</article>
+			<?php endif; ?>
+
+			<?php if ( ! empty( $all_posts[2] ) ) : $p = $all_posts[2]; ?>
+			<article class="np-spotlight">
+				<?php if ( $p['thumb'] ) : ?>
+					<a class="np-spotlight__media" href="<?php echo esc_url( $p['permalink'] ); ?>" aria-hidden="true" tabindex="-1">
+						<?php echo $p['thumb']; ?>
+					</a>
+				<?php endif; ?>
+				<p class="np-spotlight__label"><?php esc_html_e( 'Digest', 'rawlaw' ); ?></p>
+				<h3 class="np-spotlight__title"><a href="<?php echo esc_url( $p['permalink'] ); ?>"><?php echo esc_html( $p['title'] ); ?></a></h3>
+				<time class="np-time" datetime="<?php echo esc_attr( $p['datetime'] ); ?>"><?php echo esc_html( $p['date'] ); ?></time>
+			</article>
+			<?php endif; ?>
+
+			<?php
+			$brief_columns = array(
+				array( 3, 4 ),
+				array( 5, 6 ),
+				array( 7, 8 ),
+			);
+			for ( $col = 0; $col < 3; $col++ ) :
+			?>
+			<div class="np-brief-col np-brief-col--<?php echo esc_attr( $col + 1 ); ?>">
+				<?php foreach ( $brief_columns[ $col ] as $idx ) : if ( empty( $all_posts[ $idx ] ) ) continue; $p = $all_posts[ $idx ]; ?>
+				<article class="np-brief">
+					<?php if ( $p['thumb'] ) : ?>
+						<a class="np-brief__media" href="<?php echo esc_url( $p['permalink'] ); ?>" aria-hidden="true" tabindex="-1">
+							<?php echo $p['thumb']; ?>
+						</a>
+					<?php endif; ?>
+					<div class="np-brief__body">
+						<h4 class="np-brief__title"><a href="<?php echo esc_url( $p['permalink'] ); ?>"><?php echo esc_html( $p['title'] ); ?></a></h4>
+						<time class="np-time" datetime="<?php echo esc_attr( $p['datetime'] ); ?>"><?php echo esc_html( $p['date'] ); ?></time>
+					</div>
+				</article>
+				<?php endforeach; ?>
+			</div>
 			<?php endfor; ?>
 		</div>
 
