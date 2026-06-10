@@ -30,7 +30,7 @@ if ( ! $ticker_q->have_posts() ) {
 	return;
 }
 ?>
-<div class="container">
+<div class="container ticker-wrap">
 <div class="ticker" aria-label="<?php esc_attr_e( 'Top News', 'rawlaw' ); ?>">
 	<span class="ticker__label"><?php esc_html_e( 'Top News', 'rawlaw' ); ?></span>
 	<div class="ticker__track">

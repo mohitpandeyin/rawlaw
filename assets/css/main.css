@@ -213,6 +213,7 @@ a.eyebrow:hover { color: var(--navy-700); }
 .breadcrumbs li[aria-current="page"] { color: var(--ink); }
 
 /* ---------- 8. Ticker — marquee bar between header and hero ---------- */
+.ticker-wrap { margin-top: var(--s-4); }
 .ticker {
 	display: flex; align-items: stretch; overflow: hidden;
 	border-bottom: 1px solid var(--border);
