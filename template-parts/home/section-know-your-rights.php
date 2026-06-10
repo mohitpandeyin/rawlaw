@@ -13,42 +13,42 @@ $issues = array(
 		'color' => 'lavender',
 		'title' => __( 'I am going through a divorce', 'rawlaw' ),
 		'sub'   => __( 'Family law · Maintenance · Custody', 'rawlaw' ),
-		'url'   => home_url( '/practice-areas/family-law/' ),
+		'url'   => 'https://app.rawlaw.in',
 	),
 	array(
 		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>',
 		'color' => 'peach',
 		'title' => __( 'I need bail for someone', 'rawlaw' ),
 		'sub'   => __( 'Criminal law · Bail application', 'rawlaw' ),
-		'url'   => home_url( '/practice-areas/criminal-law/' ),
+		'url'   => 'https://app.rawlaw.in',
 	),
 	array(
 		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>',
 		'color' => 'mint',
 		'title' => __( 'My landlord is threatening eviction', 'rawlaw' ),
 		'sub'   => __( 'Property · Tenancy rights', 'rawlaw' ),
-		'url'   => home_url( '/practice-areas/property/' ),
+		'url'   => 'https://app.rawlaw.in',
 	),
 	array(
 		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>',
 		'color' => 'sky',
 		'title' => __( 'I received a legal notice', 'rawlaw' ),
 		'sub'   => __( 'Civil law · Reply and next steps', 'rawlaw' ),
-		'url'   => home_url( '/practice-areas/civil/' ),
+		'url'   => 'https://app.rawlaw.in',
 	),
 	array(
 		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.25-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z"/></svg>',
 		'color' => 'peach',
 		'title' => __( 'I want to file a consumer complaint', 'rawlaw' ),
 		'sub'   => __( 'Consumer protection · E-filing', 'rawlaw' ),
-		'url'   => home_url( '/practice-areas/consumer/' ),
+		'url'   => 'https://app.rawlaw.in',
 	),
 	array(
 		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>',
 		'color' => 'mint',
 		'title' => __( 'I need to register property', 'rawlaw' ),
 		'sub'   => __( 'Property · Registration process', 'rawlaw' ),
-		'url'   => home_url( '/practice-areas/property/' ),
+		'url'   => 'https://app.rawlaw.in',
 	),
 );
 
@@ -87,7 +87,7 @@ $kyr_steps = array(
 			<div class="kyr-left" data-reveal-stagger>
 				<div class="grid grid--issues">
 					<?php foreach ( $issues as $issue ) : ?>
-					<a class="issue-card" href="<?php echo esc_url( $issue['url'] ); ?>">
+					<a class="issue-card" href="<?php echo esc_url( $issue['url'] ); ?>" target="_blank" rel="noopener noreferrer">
 						<span class="issue-card__icon issue-card__icon--<?php echo esc_attr( $issue['color'] ); ?>">
 							<?php echo $issue['svg']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						</span>
