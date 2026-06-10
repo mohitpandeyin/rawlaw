@@ -1013,6 +1013,15 @@ a.eyebrow:hover { color: var(--navy-700); }
 }
 .site-footer__trust-item svg { width: 14px; height: 14px; color: #8CB4FF; }
 
+.site-footer__fine-print {
+	margin: var(--s-2) 0 0;
+	padding-top: var(--s-3);
+	border-top: 1px solid rgba(255,255,255,.12);
+	font-size: 12px;
+	color: rgba(255,255,255,.38);
+	max-width: 34ch;
+}
+
 .site-footer__links {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));

@@ -15,13 +15,15 @@
 				<a class="site-footer__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'RawLaw.in — Home', 'rawlaw' ); ?>">
 					<img class="site-logo site-logo--mono" src="<?php echo esc_url( RAWLAW_URI . 'assets/media/rawlaw-logo-mono.svg' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="332" height="84">
 				</a>
-				<p class="site-footer__about"><?php esc_html_e( 'Editorial legal intelligence and verified legal discovery for India.', 'rawlaw' ); ?></p>
+				<p class="site-footer__about"><?php esc_html_e( 'Understand your legal problem, follow important legal developments and explore the right legal support.', 'rawlaw' ); ?></p>
 				<?php get_template_part( 'template-parts/components/socials' ); ?>
 
 				<ul class="site-footer__trust" aria-label="<?php esc_attr_e( 'Trust signals', 'rawlaw' ); ?>">
-					<li class="site-footer__trust-item"><?php rawlaw_icon( 'verified' ); ?> <?php esc_html_e( 'Verified Advocate Profiles', 'rawlaw' ); ?></li>
-					<li class="site-footer__trust-item"><?php rawlaw_icon( 'lock' ); ?> <?php esc_html_e( 'Privacy-first legal discovery', 'rawlaw' ); ?></li>
+					<li class="site-footer__trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <?php esc_html_e( 'Legal updates and practical insights', 'rawlaw' ); ?></li>
+					<li class="site-footer__trust-item"><?php rawlaw_icon( 'lock' ); ?> <?php esc_html_e( 'Share your query privately', 'rawlaw' ); ?></li>
 				</ul>
+
+				<p class="site-footer__fine-print"><?php esc_html_e( 'Made with clarity, trust and access.', 'rawlaw' ); ?></p>
 			</div>
 
 			<nav class="site-footer__links" aria-label="<?php esc_attr_e( 'Footer navigation', 'rawlaw' ); ?>">
