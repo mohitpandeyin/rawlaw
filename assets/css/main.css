@@ -1827,12 +1827,12 @@ a.eyebrow:hover { color: var(--navy-700); }
 	align-items: start;
 }
 .kyr-left { display: flex; flex-direction: column; gap: var(--s-6); }
-.kyr-header { display: flex; flex-direction: column; gap: var(--s-2); }
+.kyr-header {
+	display: flex; flex-direction: column; gap: var(--s-2);
+	margin-bottom: var(--s-6);
+}
 .kyr-header .section__title { margin: 0; }
 .kyr-header .section__sub { margin: 0; max-width: 52ch; }
-.kyr-actions {
-	display: flex; gap: var(--s-3); flex-wrap: wrap; align-items: center;
-}
 
 .grid--issues { grid-template-columns: repeat(2, 1fr); gap: var(--s-3); }
 @media (max-width: 600px) { .grid--issues { grid-template-columns: 1fr; } }

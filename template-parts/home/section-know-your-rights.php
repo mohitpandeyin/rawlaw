@@ -75,16 +75,16 @@ $kyr_steps = array(
 ?>
 <section class="section section--alt section--know-your-rights" aria-labelledby="kyr-heading" data-reveal>
 	<div class="container">
+		<header class="kyr-header">
+			<p class="section__eyebrow"><?php esc_html_e( 'Know your rights', 'rawlaw' ); ?></p>
+			<h2 id="kyr-heading" class="section__title"><?php esc_html_e( 'Not sure where to start?', 'rawlaw' ); ?></h2>
+			<p class="section__sub"><?php esc_html_e( 'Tell us what happened, and we will help you understand your rights and find the right advocate.', 'rawlaw' ); ?></p>
+		</header>
+
 		<div class="kyr-layout">
 
-			<?php // ── Left column: header + issue cards + CTAs ── ?>
+			<?php // ── Left column: issue cards ── ?>
 			<div class="kyr-left" data-reveal-stagger>
-				<header class="kyr-header">
-					<p class="section__eyebrow"><?php esc_html_e( 'Know your rights', 'rawlaw' ); ?></p>
-					<h2 id="kyr-heading" class="section__title"><?php esc_html_e( 'Not sure where to start?', 'rawlaw' ); ?></h2>
-					<p class="section__sub"><?php esc_html_e( 'Tell us what happened, and we will help you understand your rights and find the right advocate.', 'rawlaw' ); ?></p>
-				</header>
-
 				<div class="grid grid--issues">
 					<?php foreach ( $issues as $issue ) : ?>
 					<a class="issue-card" href="<?php echo esc_url( $issue['url'] ); ?>">
@@ -97,15 +97,6 @@ $kyr_steps = array(
 						</div>
 					</a>
 					<?php endforeach; ?>
-				</div>
-
-				<div class="kyr-actions">
-					<a class="btn btn--primary btn--lg" href="<?php echo esc_url( home_url( '/post-requirement/' ) ); ?>">
-						<?php esc_html_e( 'Post Your Legal Issue', 'rawlaw' ); ?>
-					</a>
-					<a class="btn btn--ghost" href="<?php echo esc_url( home_url( '/practice-areas/' ) ); ?>">
-						<?php esc_html_e( 'Browse Practice Areas', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span>
-					</a>
 				</div>
 			</div>
 
