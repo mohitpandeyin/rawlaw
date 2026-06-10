@@ -25,7 +25,12 @@ get_header();
 $displayed_ids = array();
 
 /*--------------------------------------------------------------
- * S2 — Hero: ticker + split layout
+ * Ticker: Top News marquee — full-width bar between header and hero
+ *-------------------------------------------------------------*/
+get_template_part( 'template-parts/home/ticker' );
+
+/*--------------------------------------------------------------
+ * S2 — Hero: centered layout
  *-------------------------------------------------------------*/
 ?>
 <section class="hero hero--finder" data-reveal>
