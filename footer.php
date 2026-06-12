@@ -76,10 +76,7 @@
 		</div>
 
 		<div class="site-footer__bottom">
-			<div class="site-footer__copy-wrap">
-				<p class="site-footer__copy">&copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'Independent legal journalism and discovery platform for India.', 'rawlaw' ); ?></p>
-				<p class="site-footer__copy site-footer__copy--author"><?php esc_html_e( 'Theme by', 'rawlaw' ); ?> <a href="https://safflower.in" target="_blank" rel="noopener"><?php esc_html_e( 'Safflower Infotech', 'rawlaw' ); ?></a></p>
-			</div>
+			<p class="site-footer__copy">&copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'Independent legal journalism and discovery platform for India.', 'rawlaw' ); ?></p>
 			<nav class="site-footer__nav" aria-label="<?php esc_attr_e( 'Legal footer links', 'rawlaw' ); ?>">
 				<ul class="menu menu--footer">
 					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Contact', 'rawlaw' ); ?></a></li>

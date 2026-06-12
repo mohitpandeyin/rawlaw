@@ -962,9 +962,7 @@ a.eyebrow:hover { color: var(--navy-700); }
 	flex-wrap: wrap;
 	gap: var(--s-3);
 }
-.site-footer__copy-wrap { display: grid; gap: 4px; }
 .site-footer__copy { color: rgba(255,255,255,.58); font-size: 13px; margin: 0; }
-.site-footer__copy--author { color: rgba(255,255,255,.5); font-size: 12px; }
 .site-footer .menu--footer { display: flex; gap: var(--s-4); flex-wrap: wrap; font-size: 13px; }
 
 .socials { list-style: none; padding: 0; margin: 0; display: flex; gap: 8px; }
