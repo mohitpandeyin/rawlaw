@@ -7,6 +7,35 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Recursively strip null/empty values so JSON-LD stays clean for validators.
+ *
+ * @param mixed $value Value to sanitize.
+ * @return mixed
+ */
+function rawlaw_schema_strip_empty( $value ) {
+	if ( is_array( $value ) ) {
+		$clean = array();
+		foreach ( $value as $key => $item ) {
+			$item = rawlaw_schema_strip_empty( $item );
+			if ( null === $item ) {
+				continue;
+			}
+			if ( is_array( $item ) && empty( $item ) ) {
+				continue;
+			}
+			$clean[ $key ] = $item;
+		}
+		return $clean;
+	}
+
+	if ( null === $value || '' === $value ) {
+		return null;
+	}
+
+	return $value;
+}
+
 function rawlaw_schema_jsonld() {
 	if ( is_admin() ) { return; }
 	$nodes = array();
@@ -96,7 +125,8 @@ function rawlaw_schema_jsonld() {
 		$nodes[] = $node;
 	}
 
-	$out = array( '@context' => 'https://schema.org', '@graph' => $nodes );
+	$nodes = array_values( array_filter( array_map( 'rawlaw_schema_strip_empty', $nodes ) ) );
+	$out = rawlaw_schema_strip_empty( array( '@context' => 'https://schema.org', '@graph' => $nodes ) );
 	echo "\n<script type=\"application/ld+json\">" . wp_json_encode( $out, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "</script>\n";
 }
 add_action( 'wp_head', 'rawlaw_schema_jsonld', 20 );
