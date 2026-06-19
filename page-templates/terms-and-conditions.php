@@ -55,7 +55,8 @@ $updated = get_post_meta( get_the_ID(), '_rawlaw_last_updated', true ) ?: get_th
 						<li><a href="#terms-liability"><?php esc_html_e( '10. Limitation of Liability', 'rawlaw' ); ?></a></li>
 						<li><a href="#terms-termination"><?php esc_html_e( '11. Termination', 'rawlaw' ); ?></a></li>
 						<li><a href="#terms-governing"><?php esc_html_e( '12. Governing Law', 'rawlaw' ); ?></a></li>
-						<li><a href="#terms-contact"><?php esc_html_e( '13. Contact Us', 'rawlaw' ); ?></a></li>
+						<li><a href="#terms-grievance"><?php esc_html_e( '13. Grievance Officer', 'rawlaw' ); ?></a></li>
+						<li><a href="#terms-contact"><?php esc_html_e( '14. Contact Us', 'rawlaw' ); ?></a></li>
 					</ol>
 				</nav>
 			</div>

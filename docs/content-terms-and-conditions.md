@@ -1,145 +1,283 @@
-# Terms and Conditions
+# Terms and Conditions — WordPress Block Editor Content
 
-> **Paste this content into the WordPress page editor for the "Terms and Conditions" page.**
-> Set the page template to **"Terms & Conditions"** in the Page Attributes panel.
-> Headings must use the **H2** format so the sidebar TOC anchors work correctly.
+<!-- HOW TO USE:
+1. In WordPress → Pages → Add New
+2. Type the title: Terms and Conditions
+3. Click the three-dot menu ⋮ (top-right) → Code editor
+4. Delete any existing content in the editor
+5. Copy and paste everything from the first <!-- wp: tag below
+6. In the right sidebar → Page Attributes → Template → select "Terms & Conditions"
+7. Click Publish
+-->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-acceptance"} -->
+<h2 class="wp-block-heading" id="terms-acceptance">Acceptance of Terms</h2>
+<!-- /wp:heading -->
 
-## Acceptance of Terms {#terms-acceptance}
+<!-- wp:paragraph -->
+<p>By accessing or using the RawLaw platform available at <a href="https://rawlaw.in">rawlaw.in</a> and its associated web application at <a href="https://app.rawlaw.in">app.rawlaw.in</a> (collectively, "the Platform"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, please do not use the Platform.</p>
+<!-- /wp:paragraph -->
 
-By accessing or using the RawLaw platform available at [rawlaw.in](https://rawlaw.in) and its associated web application at [app.rawlaw.in](https://app.rawlaw.in) (collectively, "the Platform"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, please do not use the Platform.
+<!-- wp:paragraph -->
+<p>These Terms constitute a legally binding agreement between you ("User") and RawLaw ("Platform", "we", "us", or "our"), the operator of rawlaw.in.</p>
+<!-- /wp:paragraph -->
 
-These Terms constitute a legally binding agreement between you ("User") and RawLaw ("Platform", "we", "us", or "our"), the operator of rawlaw.in.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-services"} -->
+<h2 class="wp-block-heading" id="terms-services">Description of Services</h2>
+<!-- /wp:heading -->
 
-## Description of Services {#terms-services}
+<!-- wp:paragraph -->
+<p>RawLaw is an online legal marketplace and information platform that provides:</p>
+<!-- /wp:paragraph -->
 
-RawLaw is an online legal marketplace and information platform that provides:
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>A directory of verified advocates and law firms across India</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>A query-and-bid system that allows users to post legal queries and receive fee proposals from advocates</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Legal news, judgment summaries, and plain-language rights guides</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Litigation support and drafting services for advocates and law firms</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Subscription plans for advocates to access premium features on the marketplace</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
 
-- A directory of verified advocates and law firms across India
-- A query-and-bid system that allows users to post legal queries and receive fee proposals from advocates
-- Legal news, judgment summaries, and plain-language rights guides
-- Litigation support and drafting services for advocates and law firms
-- Subscription plans for advocates to access premium features on the marketplace
+<!-- wp:paragraph -->
+<p>RawLaw is a <strong>technology platform</strong>, not a law firm. We do not provide legal advice. The information published on this Platform is for general informational purposes only and does not constitute legal advice or create an attorney-client relationship.</p>
+<!-- /wp:paragraph -->
 
-RawLaw is a **technology platform**, not a law firm. We do not provide legal advice. The information published on this Platform is for general informational purposes only and does not constitute legal advice or create an attorney-client relationship.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-eligibility"} -->
+<h2 class="wp-block-heading" id="terms-eligibility">Eligibility</h2>
+<!-- /wp:heading -->
 
-## Eligibility {#terms-eligibility}
+<!-- wp:paragraph -->
+<p>You must be at least <strong>18 years of age</strong> to use this Platform. By using the Platform, you represent and warrant that you are 18 years of age or older and have the legal capacity to enter into these Terms.</p>
+<!-- /wp:paragraph -->
 
-You must be at least **18 years of age** to use this Platform. By using the Platform, you represent and warrant that you are 18 years of age or older and have the legal capacity to enter into these Terms.
+<!-- wp:paragraph -->
+<p>Advocates registering on the Platform must hold a valid enrollment certificate from a State Bar Council of India or the Bar Council of India as required under the Advocates Act, 1961.</p>
+<!-- /wp:paragraph -->
 
-Advocates registering on the Platform must hold a valid enrollment certificate from a State Bar Council of India or the Bar Council of India as required under the Advocates Act, 1961.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-accounts"} -->
+<h2 class="wp-block-heading" id="terms-accounts">User Accounts</h2>
+<!-- /wp:heading -->
 
-## User Accounts {#terms-accounts}
+<!-- wp:paragraph -->
+<p>To access certain features of the Platform, you will need to create an account. You agree to:</p>
+<!-- /wp:paragraph -->
 
-To access certain features of the Platform, you will need to create an account. You agree to:
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Provide accurate, current, and complete information during registration</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Keep your account credentials confidential and not share your password with any third party</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Notify us immediately at <strong>support@rawlaw.in</strong> if you suspect any unauthorised use of your account</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Take responsibility for all activities that occur under your account</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
 
-- Provide accurate, current, and complete information during registration
-- Keep your account credentials confidential and not share your password with any third party
-- Notify us immediately at **support@rawlaw.in** if you suspect any unauthorised use of your account
-- Take responsibility for all activities that occur under your account
+<!-- wp:paragraph -->
+<p>We reserve the right to suspend or terminate accounts that contain inaccurate information or that we believe have been used in violation of these Terms.</p>
+<!-- /wp:paragraph -->
 
-We reserve the right to suspend or terminate accounts that contain inaccurate information or that we believe have been used in violation of these Terms.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-conduct"} -->
+<h2 class="wp-block-heading" id="terms-conduct">User Conduct</h2>
+<!-- /wp:heading -->
 
-## User Conduct {#terms-conduct}
+<!-- wp:paragraph -->
+<p>You agree not to use the Platform to:</p>
+<!-- /wp:paragraph -->
 
-You agree not to use the Platform to:
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Post false, misleading, or fraudulent information</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Impersonate any person or entity, including other users or advocates</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Upload or transmit any content that is defamatory, obscene, or violates any applicable law</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Engage in any activity that disrupts or interferes with the proper functioning of the Platform</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Attempt to gain unauthorised access to any part of the Platform or its systems</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Use the Platform for any unlawful purpose or in violation of any applicable Indian or international law</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
 
-- Post false, misleading, or fraudulent information
-- Impersonate any person or entity, including other users or advocates
-- Upload or transmit any content that is defamatory, obscene, or violates any applicable law
-- Engage in any activity that disrupts or interferes with the proper functioning of the Platform
-- Attempt to gain unauthorised access to any part of the Platform or its systems
-- Use the Platform for any unlawful purpose or in violation of any applicable Indian or international law
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-lawyers"} -->
+<h2 class="wp-block-heading" id="terms-lawyers">Lawyer Listings</h2>
+<!-- /wp:heading -->
 
-## Lawyer Listings {#terms-lawyers}
+<!-- wp:paragraph -->
+<p>Advocates listed on RawLaw have submitted their Bar Council enrollment details for verification. However, RawLaw does not independently guarantee the competence, conduct, or outcome of any legal service provided by listed advocates.</p>
+<!-- /wp:paragraph -->
 
-Advocates listed on RawLaw have submitted their Bar Council enrollment details for verification. However, RawLaw does not independently guarantee the competence, conduct, or outcome of any legal service provided by listed advocates.
+<!-- wp:paragraph -->
+<p>Users are encouraged to independently verify advocate credentials on the Bar Council of India website before engaging their services. The decision to engage an advocate is entirely at the user's discretion and risk.</p>
+<!-- /wp:paragraph -->
 
-Users are encouraged to independently verify advocate credentials on the Bar Council of India website before engaging their services. The decision to engage an advocate is entirely at the user's discretion and risk.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-payments"} -->
+<h2 class="wp-block-heading" id="terms-payments">Payments &amp; Fees</h2>
+<!-- /wp:heading -->
 
-## Payments & Fees {#terms-payments}
+<!-- wp:paragraph -->
+<p>Certain features on the Platform, including advocate subscription plans and litigation support services, are offered for a fee. By making a payment, you authorise us to charge the applicable fees to your selected payment method.</p>
+<!-- /wp:paragraph -->
 
-Certain features on the Platform, including advocate subscription plans and litigation support services, are offered for a fee. By making a payment, you authorise us to charge the applicable fees to your selected payment method.
+<!-- wp:paragraph -->
+<p>All fees are quoted in Indian Rupees (INR) and are inclusive of applicable taxes unless stated otherwise. Payments are processed through third-party payment gateways. We do not store your full card or bank account details on our servers.</p>
+<!-- /wp:paragraph -->
 
-All fees are quoted in Indian Rupees (INR) and are inclusive of applicable taxes unless stated otherwise. Payments are processed through third-party payment gateways. We do not store your full card or bank account details on our servers.
+<!-- wp:paragraph -->
+<p>Subscription fees are billed on a recurring basis (monthly or annual, as selected). You may cancel your subscription at any time, subject to our <a href="/cancellation-refund-policy/">Cancellation &amp; Refund Policy</a>.</p>
+<!-- /wp:paragraph -->
 
-Subscription fees are billed on a recurring basis (monthly or annual, as selected). You may cancel your subscription at any time, subject to our [Cancellation & Refund Policy](#).
+<!-- wp:paragraph -->
+<p><strong>Service Fulfilment:</strong> Subscription access is activated <strong>immediately</strong> upon successful payment confirmation. Litigation support deliverables are provided within <strong>5&#8211;7 business days</strong> of order confirmation, as specified in the service agreement.</p>
+<!-- /wp:paragraph -->
 
-**Service Fulfilment:** Subscription access is activated **immediately** upon successful payment confirmation. Litigation support deliverables are provided within **5–7 business days** of order confirmation, as specified in the service agreement.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-ip"} -->
+<h2 class="wp-block-heading" id="terms-ip">Intellectual Property</h2>
+<!-- /wp:heading -->
 
-## Intellectual Property {#terms-ip}
+<!-- wp:paragraph -->
+<p>All content on this Platform, including but not limited to text, articles, judgment summaries, graphics, logos, and software, is the property of RawLaw or its licensors and is protected by applicable Indian intellectual property laws.</p>
+<!-- /wp:paragraph -->
 
-All content on this Platform, including but not limited to text, articles, judgment summaries, graphics, logos, and software, is the property of RawLaw or its licensors and is protected by applicable Indian intellectual property laws.
+<!-- wp:paragraph -->
+<p>You are granted a limited, non-exclusive, non-transferable licence to access and use the Platform for personal, non-commercial purposes. You may not reproduce, distribute, modify, or create derivative works from any content on this Platform without our prior written consent.</p>
+<!-- /wp:paragraph -->
 
-You are granted a limited, non-exclusive, non-transferable licence to access and use the Platform for personal, non-commercial purposes. You may not reproduce, distribute, modify, or create derivative works from any content on this Platform without our prior written consent.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-disclaimer"} -->
+<h2 class="wp-block-heading" id="terms-disclaimer">Disclaimer</h2>
+<!-- /wp:heading -->
 
-## Disclaimer {#terms-disclaimer}
+<!-- wp:paragraph -->
+<p>The Platform and its content are provided on an <strong>&#8220;as is&#8221; and &#8220;as available&#8221;</strong> basis without any warranties, express or implied. We make no representation that:</p>
+<!-- /wp:paragraph -->
 
-The Platform and its content are provided on an **"as is" and "as available"** basis without any warranties, express or implied. We make no representation that:
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>The Platform will be uninterrupted, error-free, or secure</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>Any information on the Platform is accurate, complete, or current</li>
+<!-- /wp:list-item --><!-- wp:list-item -->
+<li>The results of using the Platform will meet your requirements</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
 
-- The Platform will be uninterrupted, error-free, or secure
-- Any information on the Platform is accurate, complete, or current
-- The results of using the Platform will meet your requirements
+<!-- wp:paragraph -->
+<p>Nothing on this Platform constitutes legal advice. Always consult a qualified advocate for advice specific to your circumstances.</p>
+<!-- /wp:paragraph -->
 
-Nothing on this Platform constitutes legal advice. Always consult a qualified advocate for advice specific to your circumstances.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-liability"} -->
+<h2 class="wp-block-heading" id="terms-liability">Limitation of Liability</h2>
+<!-- /wp:heading -->
 
-## Limitation of Liability {#terms-liability}
+<!-- wp:paragraph -->
+<p>To the maximum extent permitted by applicable law, RawLaw shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of, or inability to use, the Platform.</p>
+<!-- /wp:paragraph -->
 
-To the maximum extent permitted by applicable law, RawLaw shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of, or inability to use, the Platform.
+<!-- wp:paragraph -->
+<p>Our total liability to you for any claim arising from the use of this Platform shall not exceed the amount you paid to us in the three months preceding the claim.</p>
+<!-- /wp:paragraph -->
 
-Our total liability to you for any claim arising from the use of this Platform shall not exceed the amount you paid to us in the three months preceding the claim.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-termination"} -->
+<h2 class="wp-block-heading" id="terms-termination">Termination</h2>
+<!-- /wp:heading -->
 
-## Termination {#terms-termination}
+<!-- wp:paragraph -->
+<p>We reserve the right to suspend or terminate your access to the Platform at any time, with or without notice, if we believe you have violated these Terms or if required by applicable law.</p>
+<!-- /wp:paragraph -->
 
-We reserve the right to suspend or terminate your access to the Platform at any time, with or without notice, if we believe you have violated these Terms or if required by applicable law.
+<!-- wp:paragraph -->
+<p>Upon termination, your right to use the Platform ceases immediately. Provisions of these Terms that by their nature should survive termination shall continue to apply.</p>
+<!-- /wp:paragraph -->
 
-Upon termination, your right to use the Platform ceases immediately. Provisions of these Terms that by their nature should survive termination shall continue to apply.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-governing"} -->
+<h2 class="wp-block-heading" id="terms-governing">Governing Law</h2>
+<!-- /wp:heading -->
 
-## Governing Law {#terms-governing}
+<!-- wp:paragraph -->
+<p>These Terms shall be governed by and construed in accordance with the laws of India. Any disputes arising out of or relating to these Terms or your use of the Platform shall be subject to the exclusive jurisdiction of the courts located in <strong>New Delhi, India</strong>.</p>
+<!-- /wp:paragraph -->
 
-These Terms shall be governed by and construed in accordance with the laws of India. Any disputes arising out of or relating to these Terms or your use of the Platform shall be subject to the exclusive jurisdiction of the courts located in **New Delhi, India**.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-grievance"} -->
+<h2 class="wp-block-heading" id="terms-grievance">Grievance Officer</h2>
+<!-- /wp:heading -->
 
-## Grievance Officer {#terms-grievance}
+<!-- wp:paragraph -->
+<p>In accordance with the Information Technology Act, 2000 and the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, the details of the Grievance Officer are as follows:</p>
+<!-- /wp:paragraph -->
 
-In accordance with the Information Technology Act, 2000 and the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, the details of the Grievance Officer are as follows:
+<!-- wp:paragraph -->
+<p><strong>Name:</strong> Siddharth Jha<br><strong>Designation:</strong> Grievance Officer<br><strong>Email:</strong> <a href="mailto:grievance@rawlaw.in">grievance@rawlaw.in</a><br><strong>Response time:</strong> We will acknowledge your grievance within <strong>24 hours</strong> and resolve it within <strong>15 days</strong> of receipt.</p>
+<!-- /wp:paragraph -->
 
-**Name:** Siddharth Jha  
-**Designation:** Grievance Officer  
-**Email:** **grievance@rawlaw.in**  
-**Response time:** We will acknowledge your grievance within **24 hours** and resolve it within **15 days** of receipt.
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
 
----
+<!-- wp:heading {"level":2,"anchor":"terms-contact"} -->
+<h2 class="wp-block-heading" id="terms-contact">Contact Us</h2>
+<!-- /wp:heading -->
 
-## Contact Us {#terms-contact}
+<!-- wp:paragraph -->
+<p>If you have any questions about these Terms, please contact us:</p>
+<!-- /wp:paragraph -->
 
-If you have any questions about these Terms, please contact us:
-
-**RawLaw**  
-Email: **legal@rawlaw.in**  
-Grievance: **grievance@rawlaw.in**  
-Website: [rawlaw.in/contact](https://rawlaw.in/contact/)
+<!-- wp:paragraph -->
+<p><strong>RawLaw</strong><br>Email: <a href="mailto:legal@rawlaw.in">legal@rawlaw.in</a><br>Grievance: <a href="mailto:grievance@rawlaw.in">grievance@rawlaw.in</a><br>Website: <a href="https://rawlaw.in/contact/">rawlaw.in/contact</a></p>
+<!-- /wp:paragraph -->
