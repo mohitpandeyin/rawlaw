@@ -2616,3 +2616,204 @@ a.eyebrow:hover { color: var(--navy-700); }
 	.hero__trust-stat strong { font-size: 17px; }
 	.how-it-works__cta .btn { width: 100%; justify-content: center; }
 }
+
+/* ---------- 27. Legal pages (Terms, Privacy, Refund) ---------- */
+
+/* Page header */
+.legal-page__header {
+	background: var(--surface);
+	border-bottom: 1px solid var(--border);
+	padding: clamp(48px, 6vw, 80px) 0 clamp(32px, 4vw, 52px);
+}
+.legal-page__eyebrow {
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--coral);
+	margin: 0 0 12px;
+}
+.legal-page__title {
+	font-size: clamp(28px, 4vw, 44px);
+	font-weight: 800;
+	color: var(--ink);
+	letter-spacing: -0.03em;
+	line-height: 1.15;
+	margin: 0 0 16px;
+}
+.legal-page__meta {
+	font-size: 14px;
+	color: var(--muted);
+	margin: 0;
+}
+
+/* Body: two-column layout (sidebar TOC + content) */
+.legal-page__body {
+	display: grid;
+	grid-template-columns: 240px 1fr;
+	gap: 64px;
+	align-items: start;
+	padding-top: clamp(40px, 5vw, 64px);
+	padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+/* TOC sidebar */
+.legal-page__toc {
+	position: sticky;
+	top: 100px;
+}
+.legal-toc {
+	background: var(--surface-alt);
+	border: 1px solid var(--border);
+	border-radius: var(--r-md);
+	padding: 20px 24px;
+}
+.legal-toc__heading {
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--muted);
+	margin: 0 0 14px;
+}
+.legal-toc__list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	counter-reset: none;
+}
+.legal-toc__list li { margin: 0; }
+.legal-toc__list a {
+	display: block;
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--ink);
+	text-decoration: none;
+	padding: 5px 8px;
+	border-radius: var(--r-sm);
+	transition: background 0.15s ease, color 0.15s ease;
+	line-height: 1.4;
+}
+.legal-toc__list a:hover {
+	background: var(--surface);
+	color: var(--navy);
+}
+
+/* Prose content area */
+.legal-page__content {
+	min-width: 0;
+}
+.legal-page__content .prose,
+.legal-page__content.prose {
+	font-size: 16px;
+	line-height: 1.8;
+}
+.legal-page__content h2 {
+	font-size: clamp(18px, 2.5vw, 24px);
+	font-weight: 700;
+	color: var(--ink);
+	margin: 2.4em 0 0.6em;
+	padding-bottom: 10px;
+	border-bottom: 1px solid var(--border);
+	letter-spacing: -0.02em;
+	scroll-margin-top: 100px;
+}
+.legal-page__content h2:first-child { margin-top: 0; }
+.legal-page__content h3 {
+	font-size: 17px;
+	font-weight: 700;
+	color: var(--ink);
+	margin: 1.8em 0 0.5em;
+	scroll-margin-top: 100px;
+}
+.legal-page__content p { color: var(--muted); }
+.legal-page__content ul,
+.legal-page__content ol {
+	padding-left: 1.4em;
+	margin: 0 0 1.2em;
+}
+.legal-page__content li { margin: 0.35em 0; color: var(--muted); }
+
+/* Table inside prose (used in refund timeline) */
+.legal-page__content table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.4em 0;
+	font-size: 15px;
+}
+.legal-page__content th {
+	text-align: left;
+	font-weight: 700;
+	color: var(--ink);
+	background: var(--surface-alt);
+	padding: 10px 16px;
+	border: 1px solid var(--border);
+}
+.legal-page__content td {
+	padding: 10px 16px;
+	border: 1px solid var(--border);
+	color: var(--muted);
+}
+.legal-page__content tr:nth-child(even) td { background: var(--surface-alt); }
+
+/* Horizontal rule as section divider */
+.legal-page__content hr {
+	border: none;
+	border-top: 1px solid var(--border);
+	margin: 2em 0;
+}
+
+/* CTA strip at bottom */
+.legal-page__cta {
+	background: var(--surface-alt);
+	border-top: 1px solid var(--border);
+	padding: 40px 0;
+}
+.legal-page__cta .container {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	flex-wrap: wrap;
+}
+.legal-page__cta p {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--ink);
+	margin: 0;
+	flex: 1;
+}
+
+/* Breadcrumb on legal pages */
+.legal-page__header .breadcrumb {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+	color: var(--muted);
+	margin-bottom: 20px;
+}
+.legal-page__header .breadcrumb a {
+	color: var(--navy);
+	text-decoration: none;
+}
+.legal-page__header .breadcrumb a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+	.legal-page__body { grid-template-columns: 200px 1fr; gap: 40px; }
+}
+@media (max-width: 880px) {
+	.legal-page__body {
+		grid-template-columns: 1fr;
+		gap: 32px;
+	}
+	.legal-page__toc { position: static; }
+	.legal-toc { display: none; } /* collapse TOC on mobile — section links are still in content */
+	.legal-page__cta .container { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+	.legal-page__cta .btn { width: 100%; text-align: center; justify-content: center; }
+}
