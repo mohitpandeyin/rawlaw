@@ -42,6 +42,23 @@ $popular = array(
 				<?php esc_html_e( 'Register as Lawyer', 'rawlaw' ); ?>
 			</a>
 		</div>
+
+		<ul class="hero__trust-stats" aria-label="<?php esc_attr_e( 'Platform stats', 'rawlaw' ); ?>">
+			<li class="hero__trust-stat">
+				<strong>850+</strong>
+				<span><?php esc_html_e( 'Verified Lawyers', 'rawlaw' ); ?></span>
+			</li>
+			<li class="hero__trust-stat" aria-hidden="true"></li>
+			<li class="hero__trust-stat">
+				<strong>12,000+</strong>
+				<span><?php esc_html_e( 'Queries Resolved', 'rawlaw' ); ?></span>
+			</li>
+			<li class="hero__trust-stat" aria-hidden="true"></li>
+			<li class="hero__trust-stat">
+				<strong>4.7&#9733;</strong>
+				<span><?php esc_html_e( 'Average Rating', 'rawlaw' ); ?></span>
+			</li>
+		</ul>
 	</div>
 
 	<!-- Right: Top News -->

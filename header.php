@@ -53,7 +53,7 @@
 				</button>
 				<a class="btn btn--primary" href="https://app.rawlaw.in/register/client" target="_blank" rel="noopener">
 					<?php rawlaw_icon( 'user' ); ?>
-					<?php esc_html_e( 'Sign Up', 'rawlaw' ); ?>
+					<?php esc_html_e( 'Get Legal Help', 'rawlaw' ); ?>
 				</a>
 			</div>
 		</div>

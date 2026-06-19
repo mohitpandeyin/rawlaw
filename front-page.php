@@ -42,38 +42,49 @@ $displayed_ids = array();
 
 <?php
 /*--------------------------------------------------------------
- * S3 — Latest Legal News & Insights (editorial content)
+ * S3 — Know Your Rights (issue-based guidance — moved up to help users
+ *      self-identify their problem immediately after hero)
+ *-------------------------------------------------------------*/
+get_template_part( 'template-parts/home/section-know-your-rights' );
+
+/*--------------------------------------------------------------
+ * S4 — Latest Legal News & Insights (editorial content)
  * This builds trust and authority before asking for action.
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-news' );
 
 /*--------------------------------------------------------------
- * S4 — Popular Legal Services (now after news, users ready to explore)
+ * S5 — Popular Legal Services (after news, users ready to explore)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-practice-areas' );
 
 /*--------------------------------------------------------------
- * S5 — How RawLaw.in Works (conversion funnel)
+ * S6 — How RawLaw.in Works (conversion funnel)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-how-it-works' );
 
 /*--------------------------------------------------------------
- * S6 — Featured Lawyers
+ * S7 — Social Proof: stats + testimonials (reinforce trust post-funnel)
+ *-------------------------------------------------------------*/
+get_template_part( 'template-parts/home/section-social-proof' );
+
+/*--------------------------------------------------------------
+ * S8 — Featured Lawyers
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-advocates' );
 
 /*--------------------------------------------------------------
- * S7 — Judgment Digest
+ * S9 — Judgment Digest
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-judgments' );
 
 /*--------------------------------------------------------------
- * S8 — Know Your Rights
+ * S10 — FAQ (SEO rich results + user reassurance pre-CTA)
  *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-know-your-rights' );
+get_template_part( 'template-parts/home/section-faq' );
 
 /*--------------------------------------------------------------
- * S9 — Closing CTA (final conversion push)
+ * S11 — Closing CTA (final conversion push)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-closing-cta' );
 

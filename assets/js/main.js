@@ -142,4 +142,21 @@
 		window.addEventListener('scroll', onScroll, { passive: true });
 		onScroll();
 	}
+
+	/* --- 9. FAQ accordion ---------------------------------------------- */
+	doc.querySelectorAll('[data-faq-toggle]').forEach(function (btn) {
+		btn.addEventListener('click', function () {
+			var expanded = btn.getAttribute('aria-expanded') === 'true';
+			var answerId = btn.getAttribute('aria-controls');
+			var answer   = answerId ? doc.getElementById(answerId) : null;
+			btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+			if (answer) {
+				if (expanded) {
+					answer.setAttribute('hidden', '');
+				} else {
+					answer.removeAttribute('hidden');
+				}
+			}
+		});
+	});
 })();
