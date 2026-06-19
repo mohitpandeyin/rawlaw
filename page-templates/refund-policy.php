@@ -17,11 +17,6 @@ $updated = get_post_meta( get_the_ID(), '_rawlaw_last_updated', true ) ?: get_th
 	<!-- Page header -->
 	<header class="legal-page__header" data-reveal>
 		<div class="container">
-			<nav class="breadcrumb" aria-label="<?php esc_attr_e( 'Breadcrumb', 'rawlaw' ); ?>">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'rawlaw' ); ?></a>
-				<span aria-hidden="true">/</span>
-				<span aria-current="page"><?php the_title(); ?></span>
-			</nav>
 			<p class="legal-page__eyebrow"><?php esc_html_e( 'Legal', 'rawlaw' ); ?></p>
 			<h1 id="legal-page-title" class="legal-page__title"><?php the_title(); ?></h1>
 			<p class="legal-page__meta">
