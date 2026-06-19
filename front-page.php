@@ -42,21 +42,19 @@ $displayed_ids = array();
 
 <?php
 /*--------------------------------------------------------------
- * S3 — Know Your Rights (issue-based guidance — moved up to help users
- *      self-identify their problem immediately after hero)
+ * S3 — Popular Legal Services (immediately after hero for quick navigation)
+ *-------------------------------------------------------------*/
+get_template_part( 'template-parts/home/section-practice-areas' );
+
+/*--------------------------------------------------------------
+ * S4 — Know Your Rights (issue-based guidance)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-know-your-rights' );
 
 /*--------------------------------------------------------------
- * S4 — Latest Legal News & Insights (editorial content)
- * This builds trust and authority before asking for action.
+ * S5 — Latest Legal News & Insights (editorial content)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-news' );
-
-/*--------------------------------------------------------------
- * S5 — Popular Legal Services (after news, users ready to explore)
- *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-practice-areas' );
 
 /*--------------------------------------------------------------
  * S6 — How RawLaw.in Works (conversion funnel)
