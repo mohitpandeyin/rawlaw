@@ -8,7 +8,7 @@
 
 ## Introduction {#pp-intro}
 
-Safflower Infotech Private Limited ("we", "our", or "us"), the operator of RawLaw (available at [rawlaw.in](https://rawlaw.in) and [app.rawlaw.in](https://app.rawlaw.in)), is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you use our Platform.
+RawLaw ("we", "our", or "us"), the operator of the platform available at [rawlaw.in](https://rawlaw.in) and [app.rawlaw.in](https://app.rawlaw.in), is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you use our Platform.
 
 By accessing or using the Platform, you consent to the practices described in this Privacy Policy. This Policy should be read alongside our [Terms and Conditions](#).
 
@@ -146,11 +146,30 @@ Your continued use of the Platform after changes are posted constitutes your acc
 
 ---
 
+## Grievance Officer {#pp-grievance}
+
+In accordance with the **Information Technology Act, 2000** and the **Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021**, a Grievance Officer has been appointed to address complaints and concerns related to your personal data and use of the Platform.
+
+**Name:** Siddharth Jha  
+**Designation:** Grievance Officer  
+**Email:** **grievance@rawlaw.in**
+
+You may contact the Grievance Officer for:
+
+- Complaints regarding processing of your personal data
+- Requests for access, correction, or deletion of your data
+- Any violation of this Privacy Policy
+- Any other privacy-related concern
+
+We will acknowledge your complaint within **24 hours** and resolve it within **15 days** of receipt.
+
+---
+
 ## Contact Us {#pp-contact}
 
 For any questions, concerns, or requests regarding this Privacy Policy:
 
-**Data Protection Officer**  
-Safflower Infotech Private Limited  
+**RawLaw — Privacy Team**  
 Email: **privacy@rawlaw.in**  
+Grievance: **grievance@rawlaw.in**  
 Website: [rawlaw.in/contact](https://rawlaw.in/contact/)

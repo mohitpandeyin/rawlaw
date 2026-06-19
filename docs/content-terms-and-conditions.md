@@ -10,7 +10,7 @@
 
 By accessing or using the RawLaw platform available at [rawlaw.in](https://rawlaw.in) and its associated web application at [app.rawlaw.in](https://app.rawlaw.in) (collectively, "the Platform"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, please do not use the Platform.
 
-These Terms constitute a legally binding agreement between you ("User") and RawLaw, operated by **Safflower Infotech Private Limited** ("Company", "we", "us", or "our"), a company incorporated under the laws of India.
+These Terms constitute a legally binding agreement between you ("User") and RawLaw ("Platform", "we", "us", or "our"), the operator of rawlaw.in.
 
 ---
 
@@ -76,13 +76,15 @@ Certain features on the Platform, including advocate subscription plans and liti
 
 All fees are quoted in Indian Rupees (INR) and are inclusive of applicable taxes unless stated otherwise. Payments are processed through third-party payment gateways. We do not store your full card or bank account details on our servers.
 
-Subscription fees are billed on a recurring basis (monthly or annual, as selected). You may cancel your subscription at any time, subject to our [Refund Policy](#).
+Subscription fees are billed on a recurring basis (monthly or annual, as selected). You may cancel your subscription at any time, subject to our [Cancellation & Refund Policy](#).
+
+**Service Fulfilment:** Subscription access is activated **immediately** upon successful payment confirmation. Litigation support deliverables are provided within **5–7 business days** of order confirmation, as specified in the service agreement.
 
 ---
 
 ## Intellectual Property {#terms-ip}
 
-All content on this Platform, including but not limited to text, articles, judgment summaries, graphics, logos, and software, is the property of Safflower Infotech Private Limited or its licensors and is protected by applicable Indian intellectual property laws.
+All content on this Platform, including but not limited to text, articles, judgment summaries, graphics, logos, and software, is the property of RawLaw or its licensors and is protected by applicable Indian intellectual property laws.
 
 You are granted a limited, non-exclusive, non-transferable licence to access and use the Platform for personal, non-commercial purposes. You may not reproduce, distribute, modify, or create derivative works from any content on this Platform without our prior written consent.
 
@@ -102,7 +104,7 @@ Nothing on this Platform constitutes legal advice. Always consult a qualified ad
 
 ## Limitation of Liability {#terms-liability}
 
-To the maximum extent permitted by applicable law, Safflower Infotech Private Limited shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of, or inability to use, the Platform.
+To the maximum extent permitted by applicable law, RawLaw shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of, or inability to use, the Platform.
 
 Our total liability to you for any claim arising from the use of this Platform shall not exceed the amount you paid to us in the three months preceding the claim.
 
@@ -122,10 +124,22 @@ These Terms shall be governed by and construed in accordance with the laws of In
 
 ---
 
+## Grievance Officer {#terms-grievance}
+
+In accordance with the Information Technology Act, 2000 and the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, the details of the Grievance Officer are as follows:
+
+**Name:** Siddharth Jha  
+**Designation:** Grievance Officer  
+**Email:** **grievance@rawlaw.in**  
+**Response time:** We will acknowledge your grievance within **24 hours** and resolve it within **15 days** of receipt.
+
+---
+
 ## Contact Us {#terms-contact}
 
 If you have any questions about these Terms, please contact us:
 
-**Safflower Infotech Private Limited**  
+**RawLaw**  
 Email: **legal@rawlaw.in**  
+Grievance: **grievance@rawlaw.in**  
 Website: [rawlaw.in/contact](https://rawlaw.in/contact/)

@@ -1,6 +1,6 @@
-# Refund Policy
+# Cancellation & Refund Policy
 
-> **Paste this content into the WordPress page editor for the "Refund Policy" page.**
+> **Paste this content into the WordPress page editor for the "Cancellation & Refund Policy" page.**
 > Set the page template to **"Refund Policy"** in the Page Attributes panel.
 > Headings must use the **H2** format so the sidebar TOC anchors work correctly.
 
@@ -8,11 +8,28 @@
 
 ## Overview {#rp-overview}
 
-At RawLaw, we strive to ensure every user has a positive experience on our Platform. This Refund Policy outlines the circumstances under which refunds are available for payments made through RawLaw (available at [rawlaw.in](https://rawlaw.in) and [app.rawlaw.in](https://app.rawlaw.in)).
+At RawLaw, we strive to ensure every user has a positive experience on our Platform. This Cancellation & Refund Policy outlines how you may cancel a service and the circumstances under which refunds are available for payments made through RawLaw (available at [rawlaw.in](https://rawlaw.in) and [app.rawlaw.in](https://app.rawlaw.in)).
 
-This Policy should be read alongside our [Terms and Conditions](#) and [Privacy Policy](#). By making a payment on the Platform, you agree to this Refund Policy.
+This Policy should be read alongside our [Terms and Conditions](#) and [Privacy Policy](#). By making a payment on the Platform, you agree to this Policy.
 
-Refunds are governed by the **Consumer Protection Act, 2019** and other applicable Indian laws.
+This Policy is governed by the **Consumer Protection Act, 2019** and other applicable Indian laws.
+
+---
+
+## How to Cancel {#rp-cancel}
+
+You may cancel a service or subscription on RawLaw at any time by:
+
+1. **Logging into your account** at [app.rawlaw.in](https://app.rawlaw.in) → Settings → Subscription → Cancel Plan, or
+2. **Emailing us** at **refunds@rawlaw.in** with the subject line: "Cancellation Request – [Your Order ID]"
+
+Cancellations take effect as follows:
+
+- **Subscriptions:** Cancellation takes effect at the end of the current billing period. You retain access to premium features until that date. No further charges will be made after cancellation.
+- **Litigation support orders:** Cancellation is accepted only before work has commenced. Once work begins, the order cannot be cancelled.
+- **Free queries:** No cancellation needed — posting a query is free and carries no obligation.
+
+We will confirm your cancellation by email within **2 business days**.
 
 ---
 
@@ -109,19 +126,32 @@ The following are **not eligible for refunds** under any circumstances:
 
 ## Disputes {#rp-disputes}
 
-If you believe a charge was made in error or you have a dispute regarding a refund decision, you may escalate by emailing **support@rawlaw.in** with "Refund Dispute" in the subject line. We will review escalated disputes within **10 business days**.
+If you believe a charge was made in error or you have a dispute regarding a refund decision, you may escalate by emailing **grievance@rawlaw.in** with the subject "Refund Dispute" in the subject line. We will review escalated disputes within **10 business days**.
 
 If you are not satisfied with our resolution, you may pursue remedies available under the **Consumer Protection Act, 2019** through the appropriate Consumer Disputes Redressal Forum.
 
 ---
 
+## Grievance Officer {#rp-grievance}
+
+If you are not satisfied with the resolution of your refund or cancellation request, you may escalate to our Grievance Officer:
+
+**Name:** Siddharth Jha  
+**Designation:** Grievance Officer  
+**Email:** **grievance@rawlaw.in**  
+**Response time:** We will acknowledge your grievance within **24 hours** and resolve it within **15 days**.
+
+If your concern remains unresolved, you may approach the **Consumer Disputes Redressal Forum** under the Consumer Protection Act, 2019.
+
+---
+
 ## Contact Us {#rp-contact}
 
-For all refund-related queries:
+For all cancellation and refund queries:
 
 **RawLaw Support Team**  
-Safflower Infotech Private Limited  
 Email: **refunds@rawlaw.in**  
+Grievance: **grievance@rawlaw.in**  
 Support: **support@rawlaw.in**  
 Website: [rawlaw.in/contact](https://rawlaw.in/contact/)
 
