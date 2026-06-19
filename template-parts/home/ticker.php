@@ -1,14 +1,22 @@
 <?php
 /**
- * Top News Ticker — CSS-only marquee, AMP-compatible.
+ * Top News Ticker — CSS-only marquee, standalone component.
+ *
+ * Can be called via get_template_part(), or via the [rawlaw_ticker] shortcode.
  *
  * @package RawLaw
+ *
+ * @var array $args {
+ *   @type int $count Number of posts to show. Default 6.
+ * }
  */
+
+$count = isset( $args['count'] ) ? (int) $args['count'] : 6;
 
 $ticker_q = new WP_Query( array(
 	'post_type'           => 'post',
 	'post_status'         => 'publish',
-	'posts_per_page'      => 6,
+	'posts_per_page'      => $count,
 	'ignore_sticky_posts' => true,
 	'no_found_rows'       => true,
 	'meta_key'            => '_rawlaw_top_news',
@@ -20,7 +28,7 @@ if ( ! $ticker_q->have_posts() ) {
 	$ticker_q = new WP_Query( array(
 		'post_type'           => 'post',
 		'post_status'         => 'publish',
-		'posts_per_page'      => 6,
+		'posts_per_page'      => $count,
 		'ignore_sticky_posts' => true,
 		'no_found_rows'       => true,
 	) );
@@ -30,7 +38,6 @@ if ( ! $ticker_q->have_posts() ) {
 	return;
 }
 ?>
-<div class="container ticker-wrap">
 <div class="ticker" aria-label="<?php esc_attr_e( 'Top News', 'rawlaw' ); ?>">
 	<span class="ticker__label"><?php esc_html_e( 'Top News', 'rawlaw' ); ?></span>
 	<div class="ticker__track">
@@ -40,7 +47,7 @@ if ( ! $ticker_q->have_posts() ) {
 				<?php if ( has_post_thumbnail() ) : ?>
 					<span class="ticker__thumb"><?php the_post_thumbnail( 'thumbnail' ); ?></span>
 				<?php endif; ?>
-				<span class="ticker__headline"><?php the_title(); ?></span>
+				<span class="ticker__headline"><?php echo esc_html( wp_trim_words( get_the_title(), 10, '&hellip;' ) ); ?></span>
 				<span class="ticker__date">&bull; <?php echo esc_html( get_the_date() ); ?></span>
 			</a>
 			<?php endwhile; ?>
@@ -51,12 +58,11 @@ if ( ! $ticker_q->have_posts() ) {
 				<?php if ( has_post_thumbnail() ) : ?>
 					<span class="ticker__thumb"><?php the_post_thumbnail( 'thumbnail' ); ?></span>
 				<?php endif; ?>
-				<span class="ticker__headline"><?php the_title(); ?></span>
+				<span class="ticker__headline"><?php echo esc_html( wp_trim_words( get_the_title(), 10, '&hellip;' ) ); ?></span>
 				<span class="ticker__date">&bull; <?php echo esc_html( get_the_date() ); ?></span>
 			</a>
 			<?php endwhile; ?>
 		</div>
 	</div>
 </div><!-- .ticker -->
-</div><!-- .container -->
 <?php wp_reset_postdata(); ?>

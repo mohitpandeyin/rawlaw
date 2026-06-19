@@ -8,6 +8,35 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
+ * [rawlaw_ticker] shortcode — renders the ticker anywhere in WordPress.
+ *
+ * Usage: [rawlaw_ticker count="6" wrap="1"]
+ *
+ * @param array $atts {
+ *   @type int    $count  Number of posts. Default 6.
+ *   @type string $wrap   Set "1" to add container div (default "1").
+ * }
+ * @return string HTML output.
+ */
+function rawlaw_ticker_shortcode( $atts ) {
+	$atts = shortcode_atts( array(
+		'count' => 6,
+		'wrap'  => '1',
+	), $atts, 'rawlaw_ticker' );
+
+	ob_start();
+	if ( '1' === (string) $atts['wrap'] ) {
+		echo '<div class="container ticker-wrap">';
+	}
+	get_template_part( 'template-parts/home/ticker', null, array( 'count' => (int) $atts['count'] ) );
+	if ( '1' === (string) $atts['wrap'] ) {
+		echo '</div>';
+	}
+	return ob_get_clean();
+}
+add_shortcode( 'rawlaw_ticker', 'rawlaw_ticker_shortcode' );
+
+/**
  * Estimated reading time.
  */
 function rawlaw_reading_time( $post_id = null ) {
