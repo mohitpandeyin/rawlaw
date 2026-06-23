@@ -27,3 +27,4 @@ require RAWLAW_DIR . 'inc/meta-boxes.php';
 require RAWLAW_DIR . 'inc/marketplace.php';
 require RAWLAW_DIR . 'inc/search-router.php';
 require RAWLAW_DIR . 'inc/amp.php';
+require RAWLAW_DIR . 'inc/contact-form.php';
