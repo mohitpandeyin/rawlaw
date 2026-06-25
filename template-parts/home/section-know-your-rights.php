@@ -77,8 +77,8 @@ $kyr_steps = array(
 	<div class="container">
 		<header class="kyr-header">
 			<p class="section__eyebrow"><?php esc_html_e( 'Know your rights', 'rawlaw' ); ?></p>
-			<h2 id="kyr-heading" class="section__title"><?php esc_html_e( 'Not sure where to start?', 'rawlaw' ); ?></h2>
-			<p class="section__sub"><?php esc_html_e( 'Tell us what happened, and we will help you understand your rights and find the right advocate.', 'rawlaw' ); ?></p>
+			<h2 id="kyr-heading" class="section__title"><?php esc_html_e( 'Not sure what your legal issue is called?', 'rawlaw' ); ?></h2>
+			<p class="section__sub"><?php esc_html_e( 'Choose the situation closest to yours. RawLaw turns legal confusion into clear next steps, related guides, and advocate options.', 'rawlaw' ); ?></p>
 		</header>
 
 		<div class="kyr-layout">
@@ -122,7 +122,7 @@ $kyr_steps = array(
 
 					<div class="kyr-infographic__trust">
 						<?php rawlaw_icon( 'verified' ); ?>
-						<span><?php esc_html_e( 'Trusted by thousands of users across India', 'rawlaw' ); ?></span>
+						<span><?php esc_html_e( 'Verification, reviews, fees, and location stay visible before you decide.', 'rawlaw' ); ?></span>
 					</div>
 				</div>
 			</aside>

@@ -10,6 +10,13 @@ Editorial-first legal news theme with a verified lawyer marketplace. Built lean:
 - **Accessibility** — semantic landmarks, skip links, focus styles, full keyboard navigation, `aria-expanded` toggles, full `prefers-reduced-motion` honor.
 - **Security** — disables XML-RPC, removes generator/RSD/wlwmanifest, escapes all output, nonce-protected forms, security headers, file editing disabled.
 
+## Platform flow alignment
+- RawLaw's public theme is the editorial trust and acquisition layer: news, guides, judgments, service pages, lawyer discovery surfaces, and SEO pages.
+- Marketplace CTAs must support the content journey without overpowering it: article → related service → find lawyer / post query → consultation.
+- Homepage order should preserve the article-first traffic engine before deeper marketplace modules: hero search, top news, featured/latest articles, trending topics, find legal help, services, featured lawyers, how it works, judgments, footer links.
+- Unified search should route informational, service, lawyer, location, and complex legal-help intent to the right public template or workspace entry point.
+- Full product and system flow references live in `app/public/docs/specs/PRD.md`, `SYSTEM_DESIGN.md`, and `PLATFORM_FLOW.md`.
+
 ## Activation
 1. Folder is already installed at `wp-content/themes/rawlaw/`.
 2. Appearance → Themes → **Activate**. Rewrites flush automatically (`after_switch_theme`).

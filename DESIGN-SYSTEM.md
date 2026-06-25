@@ -220,6 +220,13 @@ Icons are inline SVGs stored in `assets/icons/` and rendered via the `rawlaw_ico
 
 ## Components
 
+### Platform Flow Principles
+- The public theme is the trust layer first and the marketplace entry layer second.
+- Editorial pages should always keep the article/news/judgment content dominant.
+- Marketplace actions should be contextual: related legal service, find lawyer for this issue, or post your legal query.
+- Avoid stacking competing CTAs. Use one primary action and one supporting action per major section.
+- Trust cues such as verified badge, location, practice area, experience, fee, language, rating, and response quality should be visible before high-commitment actions.
+
 ### Cards
 - White background (`--surface`)
 - No heavy border — rely on spacing and typography hierarchy
@@ -242,6 +249,21 @@ Three-zone layout:
 - Serif headline, fluid `clamp()` sizing
 - Unified search input (pill-shaped, 1-field)
 - Subtle radial gradient background
+- The hero search must support legal issues, services, lawyers, locations, and posting a requirement.
+- Keep the hero sparse. Do not add multiple marketplace panels above first-screen editorial news.
+
+### Article Conversion Blocks
+- Article pages should move from legal understanding to legal action without feeling sales-heavy.
+- Preferred order: short answer/key takeaway, detailed context, related law/court/entities, related legal service, find-lawyer CTA, post-query CTA, related articles, FAQs.
+- Newsletter capture may appear, but it must not overpower legal-help conversion.
+- Related lawyer modules should emphasize verification, practice area, city, experience, and consultation action.
+
+### Unified Search Results
+- Informational intent should show articles/guides first with related services and lawyers.
+- Service intent should show service pages, lawyer listings, and post-query CTA.
+- Lawyer intent should show filtered lawyer listings.
+- Complex legal issue intent should guide the user to post a legal requirement.
+- Zero-result states should show fallback categories and a post-query prompt.
 
 ### Header
 - Sticky, white, blur backdrop
@@ -322,6 +344,8 @@ Editor parity: `assets/css/editor.css`
 8. **Buttons are pills** — `border-radius: 999px` on all button variants.
 9. **Editorial images** — no border-radius (squared crops for newspaper feel).
 10. **Column rules** — vertical `1px solid var(--border)` between adjacent editorial columns (newspaper grid convention).
+11. **Editorial-first conversion** — every major page can expose legal action, but content clarity and trust come before marketplace pressure.
+12. **Mobile-first trust** — verification, location, practice area, reviews, fees, and response cues must remain visible on compact screens.
 
 ---
 

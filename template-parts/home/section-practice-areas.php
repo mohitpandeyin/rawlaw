@@ -23,11 +23,11 @@ $services = array(
 	<div class="container">
 		<header class="section__header">
 			<div>
-				<p class="section__eyebrow"><?php esc_html_e( 'Explore', 'rawlaw' ); ?></p>
-				<h2 id="services-heading" class="section__title"><?php esc_html_e( 'Popular Legal Services', 'rawlaw' ); ?></h2>
-				<p class="section__sub"><?php esc_html_e( 'Find expert help for your specific legal needs.', 'rawlaw' ); ?></p>
+				<p class="section__eyebrow"><?php esc_html_e( 'Trending legal topics', 'rawlaw' ); ?></p>
+				<h2 id="services-heading" class="section__title"><?php esc_html_e( 'Find the issue you need help with', 'rawlaw' ); ?></h2>
+				<p class="section__sub"><?php esc_html_e( 'Start from a topic, read plain-language guidance, then compare verified lawyers when you are ready.', 'rawlaw' ); ?></p>
 			</div>
-			<a class="link-arrow" href="<?php echo esc_url( home_url( '/practice-areas/' ) ); ?>"><?php esc_html_e( 'All Services', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span></a>
+			<a class="link-arrow" href="<?php echo esc_url( home_url( '/practice-areas/' ) ); ?>"><?php esc_html_e( 'Browse practice areas', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span></a>
 		</header>
 
 		<div class="services-grid" data-reveal-stagger>
@@ -51,6 +51,7 @@ $services = array(
 				<a class="service-card service-card--cluster" href="<?php echo esc_url( $link ); ?>" title="<?php echo esc_attr( $svc['name'] ); ?>">
 					<span class="service-card__icon" aria-hidden="true"><?php rawlaw_icon( $svc['icon'] ); ?></span>
 					<h3 class="service-card__name"><?php echo esc_html( $svc['name'] ); ?></h3>
+					<span class="service-card__action"><?php esc_html_e( 'Read guides and find help', 'rawlaw' ); ?></span>
 					<div class="service-card__meta">
 						<?php if ( $post_count > 0 ) : ?>
 							<span><?php echo esc_html( $post_count ); ?> <?php esc_html_e( 'articles', 'rawlaw' ); ?></span>
@@ -61,6 +62,12 @@ $services = array(
 					</div>
 				</a>
 			<?php endforeach; ?>
+		</div>
+
+		<div class="section__cta section__cta--quiet">
+			<a class="btn btn--ghost btn--lg" href="https://app.rawlaw.in">
+				<?php esc_html_e( 'Describe your legal issue', 'rawlaw' ); ?>
+			</a>
 		</div>
 	</div>
 </section>

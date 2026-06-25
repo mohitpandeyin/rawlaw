@@ -2,20 +2,23 @@
 /**
  * Homepage — award-winning landing page for India's legal marketplace.
  *
- * Section order (optimized for user intent & engagement):
+ * Section order (optimized for editorial trust -> legal action):
  *   S1  Skip-link / header / utility bar (via get_header)
  *   S2  Hero — headline + search + trust + features bar
- *   S3  Latest Legal News — editorial content (trust driver, 12-card grid)
- *   S4  Popular Legal Services — action items (users ready to explore)
- *   S5  How RawLaw.in Works — conversion funnel (4-step)
- *   S6  Featured Lawyers — showcase cards with photos
- *   S7  Judgment Digest — curated legal content
- *   S8  Know Your Rights — issue-based guidance
- *   S9  Closing CTA — final conversion push
- *   S10 Footer (via get_footer)
+ *   S3  Latest Legal News — editorial content and trust driver
+ *   S4  Trending Legal Topics — practice-area/service discovery
+ *   S5  Know Your Rights — issue-based guidance
+ *   S6  How RawLaw.in Works — conversion funnel
+ *   S7  Social Proof — trust reinforcement
+ *   S8  Featured Lawyers — verified supply preview
+ *   S9  Judgment Digest — additional authority layer
+ *   S10 FAQ — reassurance before final CTA
+ *   S11 Closing CTA — final conversion push
+ *   S12 Footer (via get_footer)
  *
- * Rationale: Editorial content builds trust early, then service discovery, then conversion funnel.
- * This follows user intent: Discover (via news) → Explore (via services) → Commit (via lawyer/CTA)
+ * Rationale: RawLaw's strongest path is content-led trust. The page should
+ * move from news and legal understanding to topic/service discovery, then
+ * verified help, consultation, and review loops.
  *
  * @package RawLaw
  */
@@ -42,19 +45,19 @@ $displayed_ids = array();
 
 <?php
 /*--------------------------------------------------------------
- * S3 — Popular Legal Services (immediately after hero for quick navigation)
+ * S3 — Latest Legal News & Insights (editorial trust driver)
+ *-------------------------------------------------------------*/
+get_template_part( 'template-parts/home/section-news' );
+
+/*--------------------------------------------------------------
+ * S4 — Trending Legal Topics / Popular Legal Services
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-practice-areas' );
 
 /*--------------------------------------------------------------
- * S4 — Know Your Rights (issue-based guidance)
+ * S5 — Know Your Rights (issue-based guidance)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-know-your-rights' );
-
-/*--------------------------------------------------------------
- * S5 — Latest Legal News & Insights (editorial content)
- *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-news' );
 
 /*--------------------------------------------------------------
  * S6 — How RawLaw.in Works (conversion funnel)

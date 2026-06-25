@@ -37,10 +37,11 @@ if ( $lawyers->have_posts() ) : ?>
 	<div class="container">
 		<header class="section__header">
 			<div>
-				<p class="section__eyebrow"><?php esc_html_e( 'Top Rated', 'rawlaw' ); ?></p>
-				<h2 id="advocates-heading" class="section__title"><?php esc_html_e( 'Featured Lawyers', 'rawlaw' ); ?></h2>
+				<p class="section__eyebrow"><?php esc_html_e( 'Verified help', 'rawlaw' ); ?></p>
+				<h2 id="advocates-heading" class="section__title"><?php esc_html_e( 'Featured lawyers when you need one', 'rawlaw' ); ?></h2>
+				<p class="section__sub"><?php esc_html_e( 'Compare practice area, city, experience, rating, and consultation action before sharing sensitive details.', 'rawlaw' ); ?></p>
 			</div>
-			<a class="link-arrow" href="<?php echo esc_url( get_post_type_archive_link( 'lawyer' ) ?: home_url( '/find-a-lawyer/' ) ); ?>"><?php esc_html_e( 'View all lawyers', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span></a>
+			<a class="link-arrow" href="<?php echo esc_url( get_post_type_archive_link( 'lawyer' ) ?: home_url( '/find-a-lawyer/' ) ); ?>"><?php esc_html_e( 'Explore lawyers', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span></a>
 		</header>
 
 		<div class="grid grid--showcase" data-reveal-stagger>
@@ -91,7 +92,7 @@ if ( $lawyers->have_posts() ) : ?>
 				</div>
 				<div class="showcase-card__cta">
 					<a class="btn btn--ghost btn--sm" href="<?php the_permalink(); ?>"><?php esc_html_e( 'View Profile', 'rawlaw' ); ?></a>
-					<a class="btn btn--primary btn--sm" href="<?php the_permalink(); ?>?action=consult"><?php esc_html_e( 'Message', 'rawlaw' ); ?></a>
+					<a class="btn btn--primary btn--sm" href="<?php the_permalink(); ?>?action=consult"><?php esc_html_e( 'Request Consult', 'rawlaw' ); ?></a>
 				</div>
 			</div>
 			<?php endwhile; ?>

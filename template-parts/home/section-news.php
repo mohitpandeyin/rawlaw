@@ -42,7 +42,11 @@ if ( $news_q->have_posts() ) :
 <section class="section section--news" aria-labelledby="news-heading" data-reveal>
 	<div class="container">
 		<header class="section__header section__header--newspaper">
-			<h2 id="news-heading" class="section__title section__title--newspaper"><?php esc_html_e( 'News & Insights', 'rawlaw' ); ?></h2>
+			<div>
+				<p class="section__eyebrow"><?php esc_html_e( 'Legal news first', 'rawlaw' ); ?></p>
+				<h2 id="news-heading" class="section__title section__title--newspaper"><?php esc_html_e( 'News & Insights', 'rawlaw' ); ?></h2>
+				<p class="section__sub section__sub--newspaper"><?php esc_html_e( 'Follow the latest legal developments, then take the right next step when an issue affects you.', 'rawlaw' ); ?></p>
+			</div>
 			<a class="link-arrow" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/news/' ) ); ?>"><?php esc_html_e( 'View all', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span></a>
 		</header>
 
@@ -117,10 +121,14 @@ if ( $news_q->have_posts() ) :
 			<?php endfor; ?>
 		</div>
 
-		<div class="section__cta">
+		<div class="section__cta section__cta--bridge">
 			<a class="btn btn--primary btn--lg" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/news/' ) ); ?>">
 				<?php esc_html_e( 'Read More News', 'rawlaw' ); ?>
 			</a>
+			<a class="btn btn--ghost btn--lg" href="https://app.rawlaw.in">
+				<?php esc_html_e( 'Post a Legal Query', 'rawlaw' ); ?>
+			</a>
+			<p class="section__cta-note"><?php esc_html_e( 'Not sure whether you need a lawyer? Start with the issue; RawLaw connects it to services, lawyers, and next steps.', 'rawlaw' ); ?></p>
 		</div>
 	</div>
 </section>
