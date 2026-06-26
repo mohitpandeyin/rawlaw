@@ -1,6 +1,6 @@
 <?php
 /**
- * Section — Social Proof: platform stats + client testimonials.
+ * Section — Trust proof: platform stats + decision checkpoints.
  *
  * Placed after the How It Works section to convert intent into trust.
  *
@@ -14,21 +14,18 @@ $stats = array(
 	array( 'value' => '50+',     'label' => __( 'Cities Covered', 'rawlaw' ) ),
 );
 
-$testimonials = array(
+$trust_points = array(
 	array(
-		'quote'  => __( 'I posted my query about a property dispute at night and had three bids by morning. The lawyer I chose was excellent and resolved the issue in two hearings.', 'rawlaw' ),
-		'name'   => __( 'Rajesh M.', 'rawlaw' ),
-		'detail' => __( 'Property Dispute, Pune', 'rawlaw' ),
+		'title' => __( 'Verification before visibility', 'rawlaw' ),
+		'desc'  => __( 'Lawyer profiles are designed to show Bar Council details, verification status, practice areas and city before a user takes the next step.', 'rawlaw' ),
 	),
 	array(
-		'quote'  => __( 'As someone unfamiliar with legal processes, RawLaw made everything simple. The verified badge on lawyers gave me confidence I was in safe hands.', 'rawlaw' ),
-		'name'   => __( 'Priya S.', 'rawlaw' ),
-		'detail' => __( 'Consumer Complaint, Delhi', 'rawlaw' ),
+		'title' => __( 'Choice without pressure', 'rawlaw' ),
+		'desc'  => __( 'Citizens can read guidance, compare lawyers, save profiles, or post a query instead of being pushed into a paid consultation too early.', 'rawlaw' ),
 	),
 	array(
-		'quote'  => __( 'The transparency of seeing multiple bids and lawyer profiles before deciding is something I have never experienced anywhere else. Highly recommended.', 'rawlaw' ),
-		'name'   => __( 'Anand K.', 'rawlaw' ),
-		'detail' => __( 'Employment Dispute, Bengaluru', 'rawlaw' ),
+		'title' => __( 'Private by default', 'rawlaw' ),
+		'desc'  => __( 'Legal query and document flows should stay inside the workspace, with moderation and audit trails for sensitive actions.', 'rawlaw' ),
 	),
 );
 ?>
@@ -45,19 +42,20 @@ $testimonials = array(
 		</ul>
 
 		<header class="section__header section__header--centered sp-header">
-			<p class="section__eyebrow"><?php esc_html_e( 'Testimonials', 'rawlaw' ); ?></p>
-			<h2 id="sp-heading" class="section__title"><?php esc_html_e( 'Trusted by Thousands Across India', 'rawlaw' ); ?></h2>
+			<p class="section__eyebrow"><?php esc_html_e( 'Trust layer', 'rawlaw' ); ?></p>
+			<h2 id="sp-heading" class="section__title"><?php esc_html_e( 'Proof before persuasion', 'rawlaw' ); ?></h2>
+			<p class="section__sub"><?php esc_html_e( 'Legal help is high trust. RawLaw should show users why they can compare, ask, and consult with confidence.', 'rawlaw' ); ?></p>
 		</header>
 
 		<div class="sp-testimonials" data-reveal-stagger>
-			<?php foreach ( $testimonials as $t ) : ?>
+			<?php foreach ( $trust_points as $point ) : ?>
 			<blockquote class="sp-testimonial">
-				<svg class="sp-testimonial__mark" aria-hidden="true" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 8C6.686 8 4 10.686 4 14C4 17.314 6.686 20 10 20V24C10 24 4 22 4 14C4 10.686 2 8 2 8H10ZM22 8C18.686 8 16 10.686 16 14C16 17.314 18.686 20 22 20V24C22 24 16 22 16 14C16 10.686 14 8 14 8H22Z" fill="currentColor"/></svg>
-				<p class="sp-testimonial__quote"><?php echo esc_html( $t['quote'] ); ?></p>
+				<span class="sp-testimonial__mark" aria-hidden="true"><?php rawlaw_icon( 'shield-checkmark' ); ?></span>
+				<h3 class="sp-testimonial__name"><?php echo esc_html( $point['title'] ); ?></h3>
+				<p class="sp-testimonial__quote"><?php echo esc_html( $point['desc'] ); ?></p>
 				<footer>
 					<cite>
-						<strong class="sp-testimonial__name"><?php echo esc_html( $t['name'] ); ?></strong>
-						<span class="sp-testimonial__detail"><?php echo esc_html( $t['detail'] ); ?></span>
+						<span class="sp-testimonial__detail"><?php esc_html_e( 'Designed for legal-service trust', 'rawlaw' ); ?></span>
 					</cite>
 				</footer>
 			</blockquote>

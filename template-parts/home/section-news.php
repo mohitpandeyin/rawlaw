@@ -34,7 +34,7 @@ if ( $news_q->have_posts() ) :
 			'date'      => get_the_date( 'j M Y' ),
 			'datetime'  => get_the_date( 'c' ),
 			'cat'       => ! empty( $cats ) ? $cats[0] : null,
-			'thumb'     => has_post_thumbnail() ? get_the_post_thumbnail( get_the_ID(), 'rawlaw-card', array( 'loading' => 'lazy', 'decoding' => 'async' ) ) : '',
+			'thumb'     => has_post_thumbnail() ? get_the_post_thumbnail( get_the_ID(), 'rawlaw-card', array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => '' ) ) : '',
 		);
 	}
 	wp_reset_postdata();

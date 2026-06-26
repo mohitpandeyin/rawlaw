@@ -51,7 +51,7 @@
 					<?php rawlaw_icon( 'search' ); ?>
 					<span class="screen-reader-text"><?php esc_html_e( 'Search', 'rawlaw' ); ?></span>
 				</button>
-				<a class="btn btn--primary" href="https://app.rawlaw.in/register/client" target="_blank" rel="noopener">
+				<a class="btn btn--primary" href="https://app.rawlaw.in/register/client" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Get legal help', 'rawlaw' ); ?>">
 					<?php rawlaw_icon( 'user' ); ?>
 					<?php esc_html_e( 'Get Legal Help', 'rawlaw' ); ?>
 				</a>

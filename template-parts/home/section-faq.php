@@ -11,7 +11,7 @@
 $faqs = array(
 	array(
 		'q' => __( 'Is it free to post a legal query on RawLaw?', 'rawlaw' ),
-		'a' => __( 'Yes. Posting a query on RawLaw is completely free. You describe your issue and receive bids from verified advocates. You only pay when you decide to hire a lawyer.', 'rawlaw' ),
+		'a' => __( 'Yes. Posting a query on RawLaw is free. You describe your issue and can review responses from verified advocates before deciding whether to book a consultation.', 'rawlaw' ),
 	),
 	array(
 		'q' => __( 'How are lawyers verified on RawLaw?', 'rawlaw' ),
@@ -27,7 +27,7 @@ $faqs = array(
 	),
 	array(
 		'q' => __( 'How quickly will I hear from a lawyer after posting a query?', 'rawlaw' ),
-		'a' => __( 'Most queries receive their first lawyer bid within a few hours. For urgent matters, you can mark your query as urgent and typically receive responses within 60 minutes.', 'rawlaw' ),
+		'a' => __( 'Response time depends on the issue, city, urgency and lawyer availability. Urgent matters should be marked clearly so relevant advocates can prioritize them.', 'rawlaw' ),
 	),
 	array(
 		'q' => __( 'Is my legal query and personal data kept confidential?', 'rawlaw' ),
