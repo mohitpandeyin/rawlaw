@@ -72,7 +72,7 @@ $practice_areas = get_terms( array(
 				<?php rawlaw_icon( 'lock' ); ?>
 				<div>
 					<strong><?php esc_html_e( 'Something’s missing.', 'rawlaw' ); ?></strong>
-					<p><?php esc_html_e( 'Please share your name, a working email, a description of at least 20 characters, and confirm consent.', 'rawlaw' ); ?></p>
+					<p><?php esc_html_e( 'Please share your name, a working email or Indian mobile number, a description of at least 20 characters, and confirm consent.', 'rawlaw' ); ?></p>
 				</div>
 			</div>
 		<?php elseif ( 'error' === $status ) : ?>
@@ -166,13 +166,13 @@ $practice_areas = get_terms( array(
 					</label>
 
 					<label class="req-form__field">
-						<span class="req-form__label"><?php esc_html_e( 'Email', 'rawlaw' ); ?> <em>*</em></span>
-						<input type="email" name="email" required maxlength="120" autocomplete="email">
+						<span class="req-form__label"><?php esc_html_e( 'Email', 'rawlaw' ); ?></span>
+						<input type="email" name="email" maxlength="120" autocomplete="email" placeholder="<?php esc_attr_e( 'Email or phone required', 'rawlaw' ); ?>">
 					</label>
 
 					<label class="req-form__field">
 						<span class="req-form__label"><?php esc_html_e( 'Phone', 'rawlaw' ); ?></span>
-						<input type="tel" name="phone" maxlength="20" autocomplete="tel" placeholder="<?php esc_attr_e( 'Optional', 'rawlaw' ); ?>">
+						<input type="tel" name="phone" maxlength="20" autocomplete="tel" placeholder="<?php esc_attr_e( '10-digit mobile', 'rawlaw' ); ?>">
 					</label>
 				</div>
 

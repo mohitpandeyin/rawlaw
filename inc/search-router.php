@@ -266,10 +266,14 @@ function rawlaw_handle_post_requirement() {
 	$mode    = isset( $_POST['mode'] )    ? sanitize_text_field( wp_unslash( $_POST['mode'] ) )        : '';
 	$urgency = isset( $_POST['urgency'] ) ? sanitize_text_field( wp_unslash( $_POST['urgency'] ) )     : '';
 	$details = isset( $_POST['details'] ) ? sanitize_textarea_field( wp_unslash( $_POST['details'] ) ) : '';
+	$source  = isset( $_POST['source'] )  ? sanitize_key( wp_unslash( $_POST['source'] ) )             : 'post_requirement';
 	$consent = ! empty( $_POST['consent'] );
+	$email_ok = '' === $email || is_email( $email );
+	$phone_ok = '' === $phone || (bool) preg_match( '/^(\+91[\-\s]?)?[6-9]\d{9}$/', $phone );
+	$has_contact = ( $email && is_email( $email ) ) || ( $phone && $phone_ok );
 
 	// Validation — fail-fast with a single status flag back to the form.
-	if ( ! $consent || ! $name || ! is_email( $email ) || strlen( $details ) < 20 ) {
+	if ( ! $consent || ! $name || ! $has_contact || ! $email_ok || ! $phone_ok || strlen( $details ) < 20 ) {
 		$back = add_query_arg(
 			array(
 				'requirement' => 'invalid',
@@ -309,6 +313,7 @@ function rawlaw_handle_post_requirement() {
 		'_rawlaw_req_budget'  => $budget,
 		'_rawlaw_req_mode'    => $mode,
 		'_rawlaw_req_urgency' => $urgency,
+		'_rawlaw_req_source'  => $source,
 		'_rawlaw_req_ip'      => isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '',
 		'_rawlaw_req_ua'      => isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '',
 	);
@@ -330,7 +335,8 @@ function rawlaw_handle_post_requirement() {
 		$name, $email, $phone, $city, $area, $budget, $mode, $urgency, $details,
 		admin_url( 'post.php?post=' . $post_id . '&action=edit' )
 	);
-	wp_mail( $admin_email, $subject, $body, array( 'Reply-To: ' . $email ) );
+	$headers = is_email( $email ) ? array( 'Reply-To: ' . $email ) : array();
+	wp_mail( $admin_email, $subject, $body, $headers );
 
 	do_action( 'rawlaw_requirement_posted', $post_id, $meta );
 

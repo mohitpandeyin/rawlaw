@@ -159,6 +159,120 @@
 			}
 		});
 	});
+
+	/* --- 10. Hero legal-query wizard ------------------------------------ */
+	doc.querySelectorAll('[data-query-wizard]').forEach(function (form) {
+		var steps = Array.prototype.slice.call(form.querySelectorAll('[data-query-step]'));
+		var progress = Array.prototype.slice.call(form.querySelectorAll('[data-wizard-progress]'));
+		var error = form.querySelector('[data-wizard-error]');
+		var current = 0;
+
+		function showError(message) {
+			if (!error) return;
+			error.textContent = message;
+			error.hidden = false;
+		}
+
+		function clearError() {
+			if (!error) return;
+			error.textContent = '';
+			error.hidden = true;
+		}
+
+		function showStep(index) {
+			current = Math.max(0, Math.min(index, steps.length - 1));
+			steps.forEach(function (step, idx) {
+				step.hidden = idx !== current;
+			});
+			progress.forEach(function (item, idx) {
+				item.classList.toggle('is-active', idx === current);
+				item.classList.toggle('is-complete', idx < current);
+			});
+			clearError();
+		}
+
+		function fieldValue(name) {
+			var field = form.querySelector('[name="' + name + '"]');
+			return field ? field.value.trim() : '';
+		}
+
+		function validateStep(index) {
+			if (index === 1 && fieldValue('details').length < 20) {
+				showError('Please describe the issue in at least 20 characters.');
+				var details = form.querySelector('[name="details"]');
+				if (details) details.focus();
+				return false;
+			}
+			if (index === 2) {
+				var name = fieldValue('name');
+				var email = fieldValue('email');
+				var phone = fieldValue('phone');
+				var consent = form.querySelector('[name="consent"]');
+				var emailOk = !email || /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email);
+				var phoneOk = !phone || /^(\+91[\-\s]?)?[6-9]\d{9}$/.test(phone);
+				if (!name) {
+					showError('Please enter your name.');
+					form.querySelector('[name="name"]').focus();
+					return false;
+				}
+				if ((!email && !phone) || !emailOk || !phoneOk) {
+					showError('Please add a valid email or 10-digit Indian mobile number.');
+					(form.querySelector('[name="email"]') || form.querySelector('[name="phone"]')).focus();
+					return false;
+				}
+				if (!consent || !consent.checked) {
+					showError('Please confirm consent before posting the query.');
+					if (consent) consent.focus();
+					return false;
+				}
+			}
+			clearError();
+			return true;
+		}
+
+		form.querySelectorAll('[data-wizard-next]').forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				if (validateStep(current)) showStep(current + 1);
+			});
+		});
+
+		form.querySelectorAll('[data-wizard-back]').forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				showStep(current - 1);
+			});
+		});
+
+		doc.querySelectorAll('[data-query-preset]').forEach(function (btn) {
+			btn.addEventListener('click', function (event) {
+				if (btn.tagName === 'A' && btn.getAttribute('href') && btn.getAttribute('href').indexOf('#rawlaw-hero-query-wizard') !== -1) {
+					event.preventDefault();
+					form.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'center' });
+				}
+				var area = btn.getAttribute('data-preset-area') || '';
+				var details = btn.getAttribute('data-preset-details') || '';
+				var areaField = form.querySelector('[data-wizard-area]');
+				var detailsField = form.querySelector('[data-wizard-details]');
+				if (areaField && area) areaField.value = area;
+				if (detailsField && details && !detailsField.value.trim()) detailsField.value = details;
+				showStep(1);
+				if (detailsField) detailsField.focus();
+			});
+		});
+
+		form.addEventListener('submit', function (event) {
+			showStep(1);
+			if (!validateStep(1)) {
+				event.preventDefault();
+				return;
+			}
+			showStep(2);
+			if (!validateStep(2)) {
+				event.preventDefault();
+			}
+		});
+
+		showStep(0);
+	});
 })();
 
 /* ─── Contact form — validation + AJAX submission ───────────────────────── */

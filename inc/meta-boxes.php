@@ -138,3 +138,77 @@ function rawlaw_top_news_column_content( $column, $post_id ) {
 	}
 }
 add_action( 'manage_post_posts_custom_column', 'rawlaw_top_news_column_content', 10, 2 );
+
+/*--------------------------------------------------------------
+ * Legal requirement admin summary
+ *-------------------------------------------------------------*/
+function rawlaw_requirement_meta_box() {
+	add_meta_box(
+		'rawlaw_requirement_details',
+		__( 'Requirement Details', 'rawlaw' ),
+		'rawlaw_requirement_meta_box_cb',
+		'legal_requirement',
+		'normal',
+		'high'
+	);
+}
+add_action( 'add_meta_boxes', 'rawlaw_requirement_meta_box' );
+
+function rawlaw_requirement_detail_fields() {
+	return array(
+		'_rawlaw_req_name'    => __( 'Name', 'rawlaw' ),
+		'_rawlaw_req_email'   => __( 'Email', 'rawlaw' ),
+		'_rawlaw_req_phone'   => __( 'Phone', 'rawlaw' ),
+		'_rawlaw_req_city'    => __( 'City', 'rawlaw' ),
+		'_rawlaw_req_area'    => __( 'Practice Area', 'rawlaw' ),
+		'_rawlaw_req_urgency' => __( 'Urgency', 'rawlaw' ),
+		'_rawlaw_req_mode'    => __( 'Preferred Mode', 'rawlaw' ),
+		'_rawlaw_req_budget'  => __( 'Budget', 'rawlaw' ),
+		'_rawlaw_req_source'  => __( 'Source', 'rawlaw' ),
+	);
+}
+
+function rawlaw_requirement_meta_box_cb( $post ) {
+	echo '<div class="rawlaw-meta-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;">';
+	foreach ( rawlaw_requirement_detail_fields() as $key => $label ) {
+		$value = get_post_meta( $post->ID, $key, true );
+		echo '<p style="margin:0;display:flex;flex-direction:column;gap:4px;">';
+		echo '<strong>' . esc_html( $label ) . '</strong>';
+		echo '<span>' . esc_html( $value ? $value : '—' ) . '</span>';
+		echo '</p>';
+	}
+	echo '</div>';
+}
+
+function rawlaw_requirement_columns( $columns ) {
+	$new = array();
+	foreach ( $columns as $key => $label ) {
+		$new[ $key ] = $label;
+		if ( 'title' === $key ) {
+			$new['rawlaw_req_contact'] = __( 'Contact', 'rawlaw' );
+			$new['rawlaw_req_city']    = __( 'City', 'rawlaw' );
+			$new['rawlaw_req_urgency'] = __( 'Urgency', 'rawlaw' );
+		}
+	}
+	return $new;
+}
+add_filter( 'manage_legal_requirement_posts_columns', 'rawlaw_requirement_columns' );
+
+function rawlaw_requirement_column_content( $column, $post_id ) {
+	if ( 'rawlaw_req_contact' === $column ) {
+		$name  = get_post_meta( $post_id, '_rawlaw_req_name', true );
+		$email = get_post_meta( $post_id, '_rawlaw_req_email', true );
+		$phone = get_post_meta( $post_id, '_rawlaw_req_phone', true );
+		echo esc_html( trim( $name . ' ' . ( $email ? '(' . $email . ')' : '' ) ) );
+		if ( $phone ) {
+			echo '<br><small>' . esc_html( $phone ) . '</small>';
+		}
+	}
+	if ( 'rawlaw_req_city' === $column ) {
+		echo esc_html( get_post_meta( $post_id, '_rawlaw_req_city', true ) ?: '—' );
+	}
+	if ( 'rawlaw_req_urgency' === $column ) {
+		echo esc_html( get_post_meta( $post_id, '_rawlaw_req_urgency', true ) ?: '—' );
+	}
+}
+add_action( 'manage_legal_requirement_posts_custom_column', 'rawlaw_requirement_column_content', 10, 2 );

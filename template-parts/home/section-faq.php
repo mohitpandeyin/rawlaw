@@ -15,11 +15,11 @@ $faqs = array(
 	),
 	array(
 		'q' => __( 'How are lawyers verified on RawLaw?', 'rawlaw' ),
-		'a' => __( 'Every lawyer on RawLaw is required to submit their Bar Council enrollment number and identity documents. Our team manually verifies each profile before it is listed on the platform.', 'rawlaw' ),
+		'a' => __( 'RawLaw is built around profile checks such as Bar Council enrollment details, identity information, practice areas and city. Verification status should be visible before you contact an advocate.', 'rawlaw' ),
 	),
 	array(
 		'q' => __( 'Can I find a lawyer for a specific city or court?', 'rawlaw' ),
-		'a' => __( 'Yes. You can search for lawyers by city, state, or the court where your matter is filed. RawLaw covers all major High Courts and District Courts across India.', 'rawlaw' ),
+		'a' => __( 'Yes. RawLaw is designed to help you compare lawyers by city, state, court context and practice area as coverage expands across India.', 'rawlaw' ),
 	),
 	array(
 		'q' => __( 'What types of legal matters does RawLaw cover?', 'rawlaw' ),
@@ -31,7 +31,7 @@ $faqs = array(
 	),
 	array(
 		'q' => __( 'Is my legal query and personal data kept confidential?', 'rawlaw' ),
-		'a' => __( 'Absolutely. Your query details are only visible to lawyers on the platform and are never publicly listed. RawLaw follows strict data privacy practices and does not sell or share your personal information.', 'rawlaw' ),
+		'a' => __( 'Legal queries are meant to stay inside the RawLaw workspace instead of being published publicly. Avoid sharing unnecessary sensitive documents until you choose who to engage.', 'rawlaw' ),
 	),
 );
 
@@ -59,6 +59,7 @@ foreach ( $faqs as $faq ) {
 		<header class="section__header section__header--centered">
 			<p class="section__eyebrow"><?php esc_html_e( 'FAQs', 'rawlaw' ); ?></p>
 			<h2 id="faq-heading" class="section__title"><?php esc_html_e( 'Common Questions Answered', 'rawlaw' ); ?></h2>
+			<p class="section__sub"><?php esc_html_e( 'Clear answers on verification, privacy, comparison and posting a legal requirement.', 'rawlaw' ); ?></p>
 		</header>
 
 		<div class="faq-list" data-reveal-stagger>

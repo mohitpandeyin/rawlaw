@@ -1,24 +1,21 @@
 <?php
 /**
- * Homepage — award-winning landing page for India's legal marketplace.
+ * Homepage — startup landing page for India's legal marketplace.
  *
- * Section order (optimized for editorial trust -> legal action):
+ * Section order (optimized for legal intent -> trusted action):
  *   S1  Skip-link / header / utility bar (via get_header)
- *   S2  Hero — headline + search + trust + features bar
- *   S3  Latest Legal News — editorial content and trust driver
- *   S4  Trending Legal Topics — practice-area/service discovery
- *   S5  Know Your Rights — issue-based guidance
- *   S6  How RawLaw.in Works — conversion funnel
- *   S7  Social Proof — trust reinforcement
- *   S8  Featured Lawyers — verified supply preview
- *   S9  Judgment Digest — additional authority layer
- *   S10 FAQ — reassurance before final CTA
- *   S11 Closing CTA — final conversion push
- *   S12 Footer (via get_footer)
+ *   S2  Hero — query wizard + top news + trust strip
+ *   S3  Problem Cards — issue-based guidance
+ *   S4  How Citizens Use RawLaw — conversion funnel
+ *   S5  For Advocates — verified supply acquisition
+ *   S6  News & Judgments — editorial authority
+ *   S7  FAQ — reassurance before final CTA
+ *   S8  Closing CTA — final conversion push
+ *   S9  Footer (via get_footer)
  *
- * Rationale: RawLaw's strongest path is content-led trust. The page should
- * move from news and legal understanding to topic/service discovery, then
- * verified help, consultation, and review loops.
+ * Rationale: RawLaw is early-stage, so the page should make the citizen
+ * action clear first, then recruit advocates without letting news compete
+ * with the primary conversion moment.
  *
  * @package RawLaw
  */
@@ -28,7 +25,7 @@ get_header();
 $displayed_ids = array();
 
 /*--------------------------------------------------------------
- * S2 — Hero: split layout (left: content, right: top news)
+ * S2 — Hero: split layout (left: post-query wizard, right: top news)
  *-------------------------------------------------------------*/
 ?>
 <section class="hero hero--finder" data-reveal>
@@ -45,47 +42,37 @@ $displayed_ids = array();
 
 <?php
 /*--------------------------------------------------------------
- * S3 — Latest Legal News & Insights (editorial trust driver)
- *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-news' );
-
-/*--------------------------------------------------------------
- * S4 — Trending Legal Topics / Popular Legal Services
- *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-practice-areas' );
-
-/*--------------------------------------------------------------
- * S5 — Know Your Rights (issue-based guidance)
+ * S3 — Problem Cards (issue-based guidance)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-know-your-rights' );
 
 /*--------------------------------------------------------------
- * S6 — How RawLaw.in Works (conversion funnel)
+ * S4 — How Citizens Use RawLaw (conversion funnel)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-how-it-works' );
 
 /*--------------------------------------------------------------
- * S7 — Social Proof: stats + testimonials (reinforce trust post-funnel)
+ * S5 — For Advocates (supply acquisition)
  *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-social-proof' );
+get_template_part( 'template-parts/home/section-for-advocates' );
 
 /*--------------------------------------------------------------
- * S8 — Featured Lawyers
+ * S6 — Latest Legal News & Insights (editorial trust driver)
  *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-advocates' );
+get_template_part( 'template-parts/home/section-news' );
 
 /*--------------------------------------------------------------
- * S9 — Judgment Digest
+ * S7 — Judgment Digest
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-judgments' );
 
 /*--------------------------------------------------------------
- * S10 — FAQ (SEO rich results + user reassurance pre-CTA)
+ * S8 — FAQ (SEO rich results + user reassurance pre-CTA)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-faq' );
 
 /*--------------------------------------------------------------
- * S11 — Closing CTA (final conversion push)
+ * S9 — Closing CTA (final conversion push)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-closing-cta' );
 

@@ -12,36 +12,28 @@
 
 $features = array(
 	array(
-		'icon'  => 'search',
-		'title' => __( 'Smart Matching', 'rawlaw' ),
-	),
-	array(
 		'icon'  => 'shield-checkmark',
-		'title' => __( 'Verified Profiles', 'rawlaw' ),
-	),
-	array(
-		'icon'  => 'drafts',
-		'title' => __( 'Drafts & Orders', 'rawlaw' ),
-	),
-	array(
-		'icon'  => 'chat',
-		'title' => __( 'Real-time Chat', 'rawlaw' ),
-	),
-	array(
-		'icon'  => 'news',
-		'title' => __( 'Legal News Feed', 'rawlaw' ),
+		'title' => __( 'Verified profiles', 'rawlaw' ),
 	),
 	array(
 		'icon'  => 'lock',
-		'title' => __( 'Secure & Confidential', 'rawlaw' ),
+		'title' => __( 'Private legal queries', 'rawlaw' ),
+	),
+	array(
+		'icon'  => 'news',
+		'title' => __( 'India-focused guidance', 'rawlaw' ),
+	),
+	array(
+		'icon'  => 'search',
+		'title' => __( 'Compare before consulting', 'rawlaw' ),
+	),
+	array(
+		'icon'  => 'chat',
+		'title' => __( 'Ask without pressure', 'rawlaw' ),
 	),
 	array(
 		'icon'  => 'user',
-		'title' => __( 'Dedicated Experts', 'rawlaw' ),
-	),
-	array(
-		'icon'  => 'clock',
-		'title' => __( 'Quick Responses', 'rawlaw' ),
+		'title' => __( 'Advocate visibility', 'rawlaw' ),
 	),
 );
 ?>
