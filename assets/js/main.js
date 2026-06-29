@@ -160,12 +160,13 @@
 		});
 	});
 
-	/* --- 10. Hero legal-query wizard ------------------------------------ */
+	/* --- 10. Hero legal-query modal ------------------------------------- */
 	doc.querySelectorAll('[data-query-wizard]').forEach(function (form) {
-		var steps = Array.prototype.slice.call(form.querySelectorAll('[data-query-step]'));
-		var progress = Array.prototype.slice.call(form.querySelectorAll('[data-wizard-progress]'));
 		var error = form.querySelector('[data-wizard-error]');
-		var current = 0;
+		var modal = form.closest('[data-query-modal]');
+		var modalPanel = modal ? modal.querySelector('.hero-wizard-modal__panel') : null;
+		var heroTrigger = doc.querySelector('[data-query-modal-trigger]');
+		var heroIntent = doc.querySelector('[data-hero-query-intent]');
 
 		function showError(message) {
 			if (!error) return;
@@ -179,16 +180,27 @@
 			error.hidden = true;
 		}
 
-		function showStep(index) {
-			current = Math.max(0, Math.min(index, steps.length - 1));
-			steps.forEach(function (step, idx) {
-				step.hidden = idx !== current;
-			});
-			progress.forEach(function (item, idx) {
-				item.classList.toggle('is-active', idx === current);
-				item.classList.toggle('is-complete', idx < current);
-			});
+		function openModal(focusTarget) {
+			if (modal) {
+				modal.hidden = false;
+				doc.body.classList.add('is-query-modal-open');
+			}
 			clearError();
+			window.setTimeout(function () {
+				var target = focusTarget || form.querySelector('[data-wizard-details]') || form.querySelector('input, select, textarea, button');
+				if (target) {
+					target.focus();
+				} else if (modalPanel) {
+					modalPanel.focus();
+				}
+			}, 40);
+		}
+
+		function closeModal() {
+			if (!modal) return;
+			modal.hidden = true;
+			doc.body.classList.remove('is-query-modal-open');
+			if (heroIntent) heroIntent.focus();
 		}
 
 		function fieldValue(name) {
@@ -196,57 +208,69 @@
 			return field ? field.value.trim() : '';
 		}
 
-		function validateStep(index) {
-			if (index === 1 && fieldValue('details').length < 20) {
+		function validateForm() {
+			if (fieldValue('details').length < 20) {
 				showError('Please describe the issue in at least 20 characters.');
 				var details = form.querySelector('[name="details"]');
 				if (details) details.focus();
 				return false;
 			}
-			if (index === 2) {
-				var name = fieldValue('name');
-				var email = fieldValue('email');
-				var phone = fieldValue('phone');
-				var consent = form.querySelector('[name="consent"]');
-				var emailOk = !email || /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email);
-				var phoneOk = !phone || /^(\+91[\-\s]?)?[6-9]\d{9}$/.test(phone);
-				if (!name) {
-					showError('Please enter your name.');
-					form.querySelector('[name="name"]').focus();
-					return false;
-				}
-				if ((!email && !phone) || !emailOk || !phoneOk) {
-					showError('Please add a valid email or 10-digit Indian mobile number.');
-					(form.querySelector('[name="email"]') || form.querySelector('[name="phone"]')).focus();
-					return false;
-				}
-				if (!consent || !consent.checked) {
-					showError('Please confirm consent before posting the query.');
-					if (consent) consent.focus();
-					return false;
-				}
+			var name = fieldValue('name');
+			var email = fieldValue('email');
+			var phone = fieldValue('phone');
+			var consent = form.querySelector('[name="consent"]');
+			var emailOk = !email || /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email);
+			var phoneOk = !phone || /^(\+91[\-\s]?)?[6-9]\d{9}$/.test(phone);
+			if (!name) {
+				showError('Please enter your name.');
+				var nameField = form.querySelector('[name="name"]');
+				if (nameField) nameField.focus();
+				return false;
+			}
+			if ((!email && !phone) || !emailOk || !phoneOk) {
+				showError('Please add a valid email or 10-digit Indian mobile number.');
+				(form.querySelector('[name="email"]') || form.querySelector('[name="phone"]')).focus();
+				return false;
+			}
+			if (!consent || !consent.checked) {
+				showError('Please confirm consent before submitting the query.');
+				if (consent) consent.focus();
+				return false;
 			}
 			clearError();
 			return true;
 		}
 
-		form.querySelectorAll('[data-wizard-next]').forEach(function (btn) {
-			btn.addEventListener('click', function () {
-				if (validateStep(current)) showStep(current + 1);
+		if (heroTrigger) {
+			heroTrigger.addEventListener('submit', function (event) {
+				event.preventDefault();
+				var detailsField = form.querySelector('[data-wizard-details]');
+				var value = heroIntent ? heroIntent.value.trim() : '';
+				if (detailsField && value) detailsField.value = value;
+				openModal(detailsField);
+			});
+		}
+
+		doc.querySelectorAll('a[href*="#rawlaw-hero-query-wizard"], a[href*="#rawlaw-query-modal"]').forEach(function (link) {
+			link.addEventListener('click', function (event) {
+				event.preventDefault();
+				openModal();
 			});
 		});
 
-		form.querySelectorAll('[data-wizard-back]').forEach(function (btn) {
-			btn.addEventListener('click', function () {
-				showStep(current - 1);
+		if (modal) {
+			modal.querySelectorAll('[data-query-modal-close]').forEach(function (btn) {
+				btn.addEventListener('click', closeModal);
 			});
-		});
+			doc.addEventListener('keydown', function (event) {
+				if (event.key === 'Escape' && !modal.hidden) closeModal();
+			});
+		}
 
 		doc.querySelectorAll('[data-query-preset]').forEach(function (btn) {
 			btn.addEventListener('click', function (event) {
 				if (btn.tagName === 'A' && btn.getAttribute('href') && btn.getAttribute('href').indexOf('#rawlaw-hero-query-wizard') !== -1) {
 					event.preventDefault();
-					form.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'center' });
 				}
 				var area = btn.getAttribute('data-preset-area') || '';
 				var details = btn.getAttribute('data-preset-details') || '';
@@ -254,24 +278,16 @@
 				var detailsField = form.querySelector('[data-wizard-details]');
 				if (areaField && area) areaField.value = area;
 				if (detailsField && details && !detailsField.value.trim()) detailsField.value = details;
-				showStep(1);
-				if (detailsField) detailsField.focus();
+				if (heroIntent && details) heroIntent.value = details;
+				openModal(detailsField);
 			});
 		});
 
 		form.addEventListener('submit', function (event) {
-			showStep(1);
-			if (!validateStep(1)) {
-				event.preventDefault();
-				return;
-			}
-			showStep(2);
-			if (!validateStep(2)) {
+			if (!validateForm()) {
 				event.preventDefault();
 			}
 		});
-
-		showStep(0);
 	});
 })();
 
