@@ -1,13 +1,14 @@
 <?php
 /**
- * Section — Know Your Rights (issue-based cards).
+ * Section — Know Your Rights (issue-based rotating guidance).
  *
- * Two-column layout: issue cards + onboarding infographic.
+ * Two-column layout: active issue cards + related visual panel.
  *
  * @package RawLaw
  */
 
 $hero_query_url = home_url( '/#rawlaw-hero-query-wizard' );
+$asset_base     = trailingslashit( get_template_directory_uri() ) . 'assets/media/home/';
 
 $issues = array(
 	array(
@@ -18,6 +19,9 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => 'family-law',
 		'details' => __( 'I need advice on divorce, maintenance, custody, or a related family matter.', 'rawlaw' ),
+		'image' => $asset_base . 'kyr-family.svg',
+		'visual_title' => __( 'Family matter intake', 'rawlaw' ),
+		'visual_desc'  => __( 'Turn maintenance, custody, separation or settlement questions into a structured legal request.', 'rawlaw' ),
 	),
 	array(
 		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>',
@@ -27,6 +31,9 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => 'criminal-law',
 		'details' => __( 'I need legal help for bail or an urgent criminal matter.', 'rawlaw' ),
+		'image' => $asset_base . 'kyr-bail.svg',
+		'visual_title' => __( 'Urgent criminal help', 'rawlaw' ),
+		'visual_desc'  => __( 'Capture urgency, court context and city so the matter can be understood quickly.', 'rawlaw' ),
 	),
 	array(
 		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>',
@@ -36,6 +43,9 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => 'property',
 		'details' => __( 'My landlord is threatening eviction and I need to understand my tenancy rights.', 'rawlaw' ),
+		'image' => $asset_base . 'kyr-tenancy.svg',
+		'visual_title' => __( 'Tenancy rights clarity', 'rawlaw' ),
+		'visual_desc'  => __( 'Explain rent, notice, possession and landlord issues in a format advocates can assess.', 'rawlaw' ),
 	),
 	array(
 		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>',
@@ -45,6 +55,9 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => '',
 		'details' => __( 'I received a legal notice and need help understanding the reply and next steps.', 'rawlaw' ),
+		'image' => $asset_base . 'kyr-notice.svg',
+		'visual_title' => __( 'Notice reply planning', 'rawlaw' ),
+		'visual_desc'  => __( 'Summarize deadlines, sender details and response needs before sharing documents after signup.', 'rawlaw' ),
 	),
 	array(
 		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.25-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z"/></svg>',
@@ -54,6 +67,9 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => 'consumer-protection',
 		'details' => __( 'I want to file a consumer complaint and need guidance on the process.', 'rawlaw' ),
+		'image' => $asset_base . 'kyr-consumer.svg',
+		'visual_title' => __( 'Consumer dispute support', 'rawlaw' ),
+		'visual_desc'  => __( 'Organize purchase details, complaint history and requested remedy for a stronger first brief.', 'rawlaw' ),
 	),
 	array(
 		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/></svg>',
@@ -63,27 +79,9 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => 'property',
 		'details' => __( 'I need help with property registration, documents, or next legal steps.', 'rawlaw' ),
-	),
-);
-
-$kyr_steps = array(
-	array(
-		'num'   => '1',
-		'title' => __( 'Describe your issue', 'rawlaw' ),
-		'desc'  => __( 'In plain language — no legal jargon needed.', 'rawlaw' ),
-		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/></svg>',
-	),
-	array(
-		'num'   => '2',
-		'title' => __( 'Browse matched advocates', 'rawlaw' ),
-		'desc'  => __( 'Compare profiles, city, experience and practice area.', 'rawlaw' ),
-		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 9H18.75M15 12H18.75M15 15H18.75M4.5 19.5H19.5C20.743 19.5 21.75 18.493 21.75 17.25V6.75C21.75 5.507 20.743 4.5 19.5 4.5H4.5C3.257 4.5 2.25 5.507 2.25 6.75V17.25C2.25 18.493 3.257 19.5 4.5 19.5ZM10.5 9.375a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-1.169.324A6.721 6.721 0 0 1 8.625 16.5a6.72 6.72 0 0 1-1.169-.324 3.375 3.375 0 0 1 5.438 0Z"/></svg>',
-	),
-	array(
-		'num'   => '3',
-		'title' => __( 'Resolve with clarity', 'rawlaw' ),
-		'desc'  => __( 'Consult privately and take the right step.', 'rawlaw' ),
-		'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>',
+		'image' => $asset_base . 'kyr-property.svg',
+		'visual_title' => __( 'Property document review', 'rawlaw' ),
+		'visual_desc'  => __( 'Clarify registry, title, stamp duty or document questions before moving to a consultation.', 'rawlaw' ),
 	),
 );
 ?>
@@ -97,11 +95,21 @@ $kyr_steps = array(
 
 		<div class="kyr-layout">
 
-			<?php // ── Left column: issue cards ── ?>
+			<?php // Left column: rotating issue cards. ?>
 			<div class="kyr-left" data-reveal-stagger>
-				<div class="grid grid--issues">
-					<?php foreach ( $issues as $issue ) : ?>
-					<a class="issue-card" href="<?php echo esc_url( $issue['url'] ); ?>" data-query-preset data-preset-area="<?php echo esc_attr( $issue['area'] ); ?>" data-preset-details="<?php echo esc_attr( $issue['details'] ); ?>">
+				<div class="grid grid--issues" data-kyr-rotator>
+					<?php foreach ( $issues as $index => $issue ) : ?>
+					<a
+						class="issue-card<?php echo 0 === $index ? ' is-active' : ''; ?>"
+						href="<?php echo esc_url( $issue['url'] ); ?>"
+						data-query-preset
+						data-kyr-item
+						data-kyr-index="<?php echo esc_attr( (string) $index ); ?>"
+						data-preset-area="<?php echo esc_attr( $issue['area'] ); ?>"
+						data-preset-title="<?php echo esc_attr( $issue['title'] ); ?>"
+						data-preset-details="<?php echo esc_attr( $issue['details'] ); ?>"
+						aria-current="<?php echo 0 === $index ? 'true' : 'false'; ?>"
+					>
 						<span class="issue-card__icon issue-card__icon--<?php echo esc_attr( $issue['color'] ); ?>">
 							<?php echo $issue['svg']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						</span>
@@ -114,30 +122,23 @@ $kyr_steps = array(
 				</div>
 			</div>
 
-			<?php // ── Right column: onboarding infographic ── ?>
-			<aside class="kyr-right" aria-label="<?php esc_attr_e( 'How RawLaw works', 'rawlaw' ); ?>">
-				<div class="kyr-infographic">
-					<p class="kyr-infographic__label"><?php esc_html_e( 'How RawLaw works', 'rawlaw' ); ?></p>
-
-					<ol class="kyr-steps" role="list">
-						<?php foreach ( $kyr_steps as $step ) : ?>
-						<li class="kyr-step">
-							<div class="kyr-step__num" aria-hidden="true"><?php echo esc_html( $step['num'] ); ?></div>
-							<div class="kyr-step__icon" aria-hidden="true">
-								<?php echo $step['svg']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-							</div>
-							<div class="kyr-step__body">
-								<strong><?php echo esc_html( $step['title'] ); ?></strong>
-								<span><?php echo esc_html( $step['desc'] ); ?></span>
-							</div>
-						</li>
-						<?php endforeach; ?>
-					</ol>
-
-					<div class="kyr-infographic__trust">
-						<?php rawlaw_icon( 'verified' ); ?>
-						<span><?php esc_html_e( 'Verification, practice area, city, and profile details stay visible before you decide.', 'rawlaw' ); ?></span>
+			<?php // Right column: issue-matched visual panel. ?>
+			<aside class="kyr-visual" aria-label="<?php esc_attr_e( 'Issue guidance preview', 'rawlaw' ); ?>" data-kyr-visuals>
+				<?php foreach ( $issues as $index => $issue ) : ?>
+				<figure class="kyr-visual__item<?php echo 0 === $index ? ' is-active' : ''; ?>" data-kyr-visual="<?php echo esc_attr( (string) $index ); ?>" <?php echo 0 === $index ? '' : 'hidden'; ?>>
+					<div class="kyr-visual__media">
+						<img src="<?php echo esc_url( $issue['image'] ); ?>" alt="" loading="lazy" decoding="async">
 					</div>
+					<figcaption class="kyr-visual__body">
+						<span class="kyr-visual__eyebrow"><?php esc_html_e( 'Guided issue setup', 'rawlaw' ); ?></span>
+						<strong><?php echo esc_html( $issue['visual_title'] ); ?></strong>
+						<p><?php echo esc_html( $issue['visual_desc'] ); ?></p>
+					</figcaption>
+				</figure>
+				<?php endforeach; ?>
+				<div class="kyr-visual__trust">
+					<?php rawlaw_icon( 'verified' ); ?>
+					<span><?php esc_html_e( 'Pick the closest issue and RawLaw carries the context into the query form.', 'rawlaw' ); ?></span>
 				</div>
 			</aside>
 

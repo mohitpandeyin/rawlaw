@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-labelledby="title desc">
+  <title id="title">Bail assistance</title>
+  <desc id="desc">A legal help interface showing urgent case details, court papers and advocate matching.</desc>
+  <rect width="720" height="520" rx="36" fill="#F8FAFC"/>
+  <rect x="74" y="72" width="572" height="376" rx="30" fill="#FFFFFF" stroke="#DCE4EE" stroke-width="3"/>
+  <rect x="112" y="112" width="496" height="68" rx="18" fill="#112E56"/>
+  <rect x="138" y="138" width="142" height="12" rx="6" fill="#FFFFFF" opacity=".96"/>
+  <rect x="468" y="130" width="104" height="30" rx="15" fill="#B23A3A"/>
+  <rect x="112" y="214" width="188" height="174" rx="24" fill="#FFF1E6" stroke="#F1C8A7" stroke-width="3"/>
+  <circle cx="206" cy="276" r="38" fill="#E6A76E"/>
+  <path d="M150 356c14-54 98-54 112 0" fill="#FFFFFF"/>
+  <rect x="340" y="214" width="268" height="38" rx="19" fill="#E9EEF6"/>
+  <rect x="340" y="274" width="210" height="18" rx="9" fill="#DCE4EE"/>
+  <rect x="340" y="310" width="248" height="18" rx="9" fill="#DCE4EE"/>
+  <rect x="340" y="346" width="182" height="18" rx="9" fill="#DCE4EE"/>
+  <circle cx="564" cy="368" r="54" fill="#EAF5EF"/>
+  <path d="M536 368h56M564 340v56" stroke="#2F7A4D" stroke-width="12" stroke-linecap="round"/>
+  <path d="M183 202h70" stroke="#112E56" stroke-width="10" stroke-linecap="round"/>
+  <path d="M218 202v-34c0-33 50-33 50 0v34" fill="none" stroke="#112E56" stroke-width="10" stroke-linecap="round"/>
+</svg>

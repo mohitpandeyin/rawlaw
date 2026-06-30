@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-labelledby="title desc">
+  <title id="title">Tenancy rights</title>
+  <desc id="desc">A home, lease document and shield representing tenancy protection and property law.</desc>
+  <rect width="720" height="520" rx="36" fill="#F6FAF7"/>
+  <circle cx="594" cy="376" r="88" fill="#E6F1FA"/>
+  <rect x="112" y="214" width="248" height="188" rx="22" fill="#FFFFFF" stroke="#CFE1D8" stroke-width="3"/>
+  <path d="M90 238 236 118l146 120" fill="#EAF5EF" stroke="#2F7A4D" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="192" y="304" width="78" height="98" rx="12" fill="#1A3F72"/>
+  <rect x="292" y="284" width="40" height="44" rx="8" fill="#D7E7DE"/>
+  <rect x="136" y="284" width="40" height="44" rx="8" fill="#D7E7DE"/>
+  <rect x="410" y="104" width="184" height="270" rx="24" fill="#FFFFFF" stroke="#DCE4EE" stroke-width="3"/>
+  <rect x="440" y="142" width="104" height="14" rx="7" fill="#112E56"/>
+  <rect x="440" y="184" width="118" height="12" rx="6" fill="#DCE4EE"/>
+  <rect x="440" y="214" width="94" height="12" rx="6" fill="#DCE4EE"/>
+  <rect x="440" y="244" width="124" height="12" rx="6" fill="#DCE4EE"/>
+  <rect x="440" y="298" width="88" height="34" rx="17" fill="#2F7A4D"/>
+  <path d="M584 338c-40-12-70-36-70-84v-28l70-24 70 24v28c0 48-30 72-70 84Z" fill="#FFFFFF" stroke="#1A3F72" stroke-width="10" stroke-linejoin="round"/>
+  <path d="m555 263 22 22 42-52" fill="none" stroke="#2F7A4D" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

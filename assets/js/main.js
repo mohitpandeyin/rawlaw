@@ -160,7 +160,79 @@
 		});
 	});
 
-	/* --- 10. Hero legal-query modal ------------------------------------- */
+	/* --- 10. Know Your Rights rotating visual panel --------------------- */
+	doc.querySelectorAll('[data-kyr-rotator]').forEach(function (rotator) {
+		var items = Array.prototype.slice.call(rotator.querySelectorAll('[data-kyr-item]'));
+		var section = rotator.closest('.section--know-your-rights');
+		var visuals = section ? Array.prototype.slice.call(section.querySelectorAll('[data-kyr-visual]')) : [];
+		var active = 0;
+		var timer = null;
+
+		if (!items.length || !visuals.length) return;
+
+		function setActive(index) {
+			active = (index + items.length) % items.length;
+			items.forEach(function (item, itemIndex) {
+				var isActive = itemIndex === active;
+				item.classList.toggle('is-active', isActive);
+				item.setAttribute('aria-current', isActive ? 'true' : 'false');
+			});
+			visuals.forEach(function (visual, visualIndex) {
+				var isActive = visualIndex === active;
+				visual.classList.toggle('is-active', isActive);
+				visual.hidden = !isActive;
+			});
+		}
+
+		function stopRotation() {
+			if (timer) {
+				window.clearInterval(timer);
+				timer = null;
+			}
+			if (section) section.classList.add('is-kyr-paused');
+		}
+
+		function startRotation() {
+			if (prefersReduced || timer || items.length < 2) return;
+			if (section) section.classList.remove('is-kyr-paused');
+			timer = window.setInterval(function () {
+				setActive(active + 1);
+			}, 4200);
+		}
+
+		items.forEach(function (item, index) {
+			item.addEventListener('mouseenter', function () {
+				setActive(index);
+			});
+			item.addEventListener('focus', function () {
+				setActive(index);
+			});
+			item.addEventListener('click', function () {
+				setActive(index);
+			});
+		});
+
+		rotator.addEventListener('mouseenter', stopRotation);
+		rotator.addEventListener('mouseleave', startRotation);
+		if (section) {
+			var visualPanel = section.querySelector('[data-kyr-visuals]');
+			if (visualPanel) {
+				visualPanel.addEventListener('mouseenter', stopRotation);
+				visualPanel.addEventListener('mouseleave', startRotation);
+			}
+			section.addEventListener('focusin', stopRotation);
+			section.addEventListener('focusout', function () {
+				window.setTimeout(function () {
+					if (!section.contains(doc.activeElement)) startRotation();
+				}, 0);
+			});
+		}
+
+		setActive(0);
+		startRotation();
+	});
+
+	/* --- 11. Hero legal-query modal ------------------------------------- */
 	doc.querySelectorAll('[data-query-wizard]').forEach(function (form) {
 		var error = form.querySelector('[data-wizard-error]');
 		var modal = form.closest('[data-query-modal]');
@@ -333,7 +405,7 @@
 				}
 				var area = btn.getAttribute('data-preset-area') || '';
 				var details = btn.getAttribute('data-preset-details') || '';
-				var title = btn.textContent.trim();
+				var title = btn.getAttribute('data-preset-title') || btn.textContent.trim();
 				var areaField = form.querySelector('[data-wizard-area]');
 				var detailsField = form.querySelector('[data-wizard-details]');
 				var titleField = form.querySelector('[data-wizard-title]');

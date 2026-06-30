@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-labelledby="title desc">
+  <title id="title">Consumer complaint</title>
+  <desc id="desc">A product complaint workflow with receipt, support message and resolution status.</desc>
+  <rect width="720" height="520" rx="36" fill="#FFF9F2"/>
+  <rect x="86" y="94" width="258" height="316" rx="26" fill="#FFFFFF" stroke="#EFD4B9" stroke-width="3"/>
+  <path d="M126 146h178M126 188h134M126 230h168" stroke="#D9B18C" stroke-width="14" stroke-linecap="round"/>
+  <path d="M126 316h80M246 316h42" stroke="#112E56" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="560" cy="162" r="72" fill="#EAF5EF"/>
+  <path d="M520 162h80M560 122v80" stroke="#2F7A4D" stroke-width="14" stroke-linecap="round"/>
+  <rect x="386" y="242" width="236" height="168" rx="26" fill="#FFFFFF" stroke="#DCE4EE" stroke-width="3"/>
+  <rect x="420" y="278" width="146" height="16" rx="8" fill="#112E56"/>
+  <rect x="420" y="318" width="168" height="12" rx="6" fill="#DCE4EE"/>
+  <rect x="420" y="350" width="124" height="12" rx="6" fill="#DCE4EE"/>
+  <path d="M450 110h90c24 0 44 20 44 44v20" fill="none" stroke="#1A3F72" stroke-width="10" stroke-linecap="round"/>
+  <path d="m560 174 24 24 24-24" fill="none" stroke="#1A3F72" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="326" cy="410" r="34" fill="#B23A3A"/>
+  <path d="m312 410 10 10 22-28" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
