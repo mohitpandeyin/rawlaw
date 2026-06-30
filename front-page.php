@@ -39,6 +39,7 @@ $displayed_ids = array();
 	</div>
 	<?php get_template_part( 'template-parts/home/section-features' ); ?>
 </section>
+<?php get_template_part( 'template-parts/home/hero-query-modal' ); ?>
 
 <?php
 /*--------------------------------------------------------------

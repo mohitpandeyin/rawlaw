@@ -165,8 +165,11 @@
 		var error = form.querySelector('[data-wizard-error]');
 		var modal = form.closest('[data-query-modal]');
 		var modalPanel = modal ? modal.querySelector('.hero-wizard-modal__panel') : null;
+		var success = modalPanel ? modalPanel.querySelector('[data-query-success]') : null;
 		var heroTrigger = doc.querySelector('[data-query-modal-trigger]');
 		var heroIntent = doc.querySelector('[data-hero-query-intent]');
+		var cookieName = 'rawlaw_query_draft';
+		var cookieMaxLength = 3500;
 
 		function showError(message) {
 			if (!error) return;
@@ -180,14 +183,20 @@
 			error.hidden = true;
 		}
 
+		function showForm() {
+			form.hidden = false;
+			if (success) success.hidden = true;
+		}
+
 		function openModal(focusTarget) {
 			if (modal) {
 				modal.hidden = false;
 				doc.body.classList.add('is-query-modal-open');
 			}
+			showForm();
 			clearError();
 			window.setTimeout(function () {
-				var target = focusTarget || form.querySelector('[data-wizard-details]') || form.querySelector('input, select, textarea, button');
+				var target = focusTarget || form.querySelector('[data-wizard-title]') || form.querySelector('input, select, textarea, button');
 				if (target) {
 					target.focus();
 				} else if (modalPanel) {
@@ -208,46 +217,96 @@
 			return field ? field.value.trim() : '';
 		}
 
+		function focusField(name) {
+			var field = form.querySelector('[name="' + name + '"]');
+			if (field) field.focus();
+		}
+
 		function validateForm() {
-			if (fieldValue('details').length < 20) {
-				showError('Please describe the issue in at least 20 characters.');
-				var details = form.querySelector('[name="details"]');
-				if (details) details.focus();
+			if (!fieldValue('title')) {
+				showError('Please add a query or case title.');
+				focusField('title');
 				return false;
 			}
-			var name = fieldValue('name');
-			var email = fieldValue('email');
-			var phone = fieldValue('phone');
-			var consent = form.querySelector('[name="consent"]');
-			var emailOk = !email || /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email);
-			var phoneOk = !phone || /^(\+91[\-\s]?)?[6-9]\d{9}$/.test(phone);
-			if (!name) {
-				showError('Please enter your name.');
-				var nameField = form.querySelector('[name="name"]');
-				if (nameField) nameField.focus();
+			if (!fieldValue('category')) {
+				showError('Please select the legal domain or category.');
+				focusField('category');
 				return false;
 			}
-			if ((!email && !phone) || !emailOk || !phoneOk) {
-				showError('Please add a valid email or 10-digit Indian mobile number.');
-				(form.querySelector('[name="email"]') || form.querySelector('[name="phone"]')).focus();
+			if (!fieldValue('urgency')) {
+				showError('Please select an urgency level.');
+				focusField('urgency');
 				return false;
 			}
-			if (!consent || !consent.checked) {
-				showError('Please confirm consent before submitting the query.');
-				if (consent) consent.focus();
+			if (fieldValue('description').length < 40) {
+				showError('Please describe the legal issue in at least 40 characters.');
+				focusField('description');
+				return false;
+			}
+			if (!fieldValue('state')) {
+				showError('Please add the state jurisdiction.');
+				focusField('state');
+				return false;
+			}
+			if (!fieldValue('city')) {
+				showError('Please add the city jurisdiction.');
+				focusField('city');
 				return false;
 			}
 			clearError();
 			return true;
 		}
 
+		function buildPayload() {
+			return {
+				title: fieldValue('title'),
+				category: fieldValue('category'),
+				urgency: fieldValue('urgency'),
+				description: fieldValue('description'),
+				state: fieldValue('state'),
+				city: fieldValue('city'),
+				language: fieldValue('language') || 'English',
+				budget: fieldValue('budget'),
+				source: 'homepage_hero',
+				createdAt: new Date().toISOString()
+			};
+		}
+
+		function cookieDomain() {
+			var host = window.location.hostname.toLowerCase();
+			if (host === 'rawlaw.in' || host.slice(-10) === '.rawlaw.in') {
+				return '; Domain=.rawlaw.in';
+			}
+			return '';
+		}
+
+		function saveQueryCookie(payload) {
+			var encoded = encodeURIComponent(JSON.stringify(payload));
+			if (encoded.length > cookieMaxLength) {
+				return false;
+			}
+			var expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
+			var secure = window.location.protocol === 'https:' ? '; Secure' : '';
+			doc.cookie = cookieName + '=' + encoded + '; expires=' + expires + '; path=/; SameSite=Lax' + cookieDomain() + secure;
+			return doc.cookie.indexOf(cookieName + '=') !== -1;
+		}
+
+		function showSuccess() {
+			form.hidden = true;
+			clearError();
+			if (!success) return;
+			success.hidden = false;
+			var cta = success.querySelector('a, button');
+			if (cta) cta.focus();
+		}
+
 		if (heroTrigger) {
 			heroTrigger.addEventListener('submit', function (event) {
 				event.preventDefault();
-				var detailsField = form.querySelector('[data-wizard-details]');
+				var titleField = form.querySelector('[data-wizard-title]');
 				var value = heroIntent ? heroIntent.value.trim() : '';
-				if (detailsField && value) detailsField.value = value;
-				openModal(detailsField);
+				if (titleField && value) titleField.value = value;
+				openModal(titleField);
 			});
 		}
 
@@ -274,19 +333,29 @@
 				}
 				var area = btn.getAttribute('data-preset-area') || '';
 				var details = btn.getAttribute('data-preset-details') || '';
+				var title = btn.textContent.trim();
 				var areaField = form.querySelector('[data-wizard-area]');
 				var detailsField = form.querySelector('[data-wizard-details]');
-				if (areaField && area) areaField.value = area;
+				var titleField = form.querySelector('[data-wizard-title]');
+				if (areaField && area && areaField.querySelector('option[value="' + area + '"]')) areaField.value = area;
+				if (titleField && title && !titleField.value.trim()) titleField.value = title;
 				if (detailsField && details && !detailsField.value.trim()) detailsField.value = details;
-				if (heroIntent && details) heroIntent.value = details;
-				openModal(detailsField);
+				if (heroIntent && title) heroIntent.value = title;
+				openModal(titleField || detailsField);
 			});
 		});
 
 		form.addEventListener('submit', function (event) {
+			event.preventDefault();
 			if (!validateForm()) {
-				event.preventDefault();
+				return;
 			}
+			if (!saveQueryCookie(buildPayload())) {
+				showError('Your description is too long to continue. Please shorten it slightly and submit again.');
+				focusField('description');
+				return;
+			}
+			showSuccess();
 		});
 	});
 })();

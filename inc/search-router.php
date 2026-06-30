@@ -268,12 +268,11 @@ function rawlaw_handle_post_requirement() {
 	$details = isset( $_POST['details'] ) ? sanitize_textarea_field( wp_unslash( $_POST['details'] ) ) : '';
 	$source  = isset( $_POST['source'] )  ? sanitize_key( wp_unslash( $_POST['source'] ) )             : 'post_requirement';
 	$consent = ! empty( $_POST['consent'] );
-	$email_ok = '' === $email || is_email( $email );
-	$phone_ok = '' === $phone || (bool) preg_match( '/^(\+91[\-\s]?)?[6-9]\d{9}$/', $phone );
-	$has_contact = ( $email && is_email( $email ) ) || ( $phone && $phone_ok );
+	$email_ok = (bool) is_email( $email );
+	$phone_ok = (bool) preg_match( '/^(\+91[\-\s]?)?[6-9]\d{9}$/', $phone );
 
 	// Validation — fail-fast with a single status flag back to the form.
-	if ( ! $consent || ! $name || ! $has_contact || ! $email_ok || ! $phone_ok || strlen( $details ) < 20 ) {
+	if ( ! $consent || ! $name || ! $email_ok || ! $phone_ok || strlen( $details ) < 20 ) {
 		$back = add_query_arg(
 			array(
 				'requirement' => 'invalid',
