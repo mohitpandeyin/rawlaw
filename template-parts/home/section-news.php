@@ -141,7 +141,7 @@ if ( $news_q->have_posts() ) :
 			<a class="btn btn--ghost btn--lg" href="<?php echo esc_url( home_url( '/#rawlaw-hero-query-wizard' ) ); ?>">
 				<?php esc_html_e( 'Post a Legal Query', 'rawlaw' ); ?>
 			</a>
-			<p class="section__cta-note"><?php esc_html_e( 'Not sure whether you need a lawyer? Start with the issue; RawLaw connects it to services, lawyers, and next steps.', 'rawlaw' ); ?></p>
+			<p class="section__cta-note"><?php esc_html_e( 'Not sure what to do next? Start with the issue; RawLaw keeps the context structured for your next step.', 'rawlaw' ); ?></p>
 		</div>
 	</div>
 </section>

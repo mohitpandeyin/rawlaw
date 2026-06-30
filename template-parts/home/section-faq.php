@@ -14,12 +14,12 @@ $faqs = array(
 		'a' => __( 'Yes. Posting a query on RawLaw is free. You describe your issue and can review responses from verified advocates before deciding whether to book a consultation.', 'rawlaw' ),
 	),
 	array(
-		'q' => __( 'How are lawyers verified on RawLaw?', 'rawlaw' ),
+		'q' => __( 'How are advocates verified on RawLaw?', 'rawlaw' ),
 		'a' => __( 'RawLaw is built around profile checks such as Bar Council enrollment details, identity information, practice areas and city. Verification status should be visible before you contact an advocate.', 'rawlaw' ),
 	),
 	array(
-		'q' => __( 'Can I find a lawyer for a specific city or court?', 'rawlaw' ),
-		'a' => __( 'Yes. RawLaw is designed to help you compare lawyers by city, state, court context and practice area as coverage expands across India.', 'rawlaw' ),
+		'q' => __( 'What happens after I post a query?', 'rawlaw' ),
+		'a' => __( 'RawLaw keeps your issue structured so you can complete signup, track updates, and continue the matter inside the platform.', 'rawlaw' ),
 	),
 	array(
 		'q' => __( 'What types of legal matters does RawLaw cover?', 'rawlaw' ),
@@ -59,7 +59,7 @@ foreach ( $faqs as $faq ) {
 		<header class="section__header section__header--centered">
 			<p class="section__eyebrow"><?php esc_html_e( 'FAQs', 'rawlaw' ); ?></p>
 			<h2 id="faq-heading" class="section__title"><?php esc_html_e( 'Common Questions Answered', 'rawlaw' ); ?></h2>
-			<p class="section__sub"><?php esc_html_e( 'Clear answers on verification, privacy, comparison and posting a legal requirement.', 'rawlaw' ); ?></p>
+			<p class="section__sub"><?php esc_html_e( 'Clear answers on verification, privacy, query intake and next steps.', 'rawlaw' ); ?></p>
 		</header>
 
 		<div class="faq-list" data-reveal-stagger>

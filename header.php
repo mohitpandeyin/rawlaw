@@ -39,12 +39,10 @@
 				if ( is_front_page() ) :
 					$rawlaw_posts_page  = (int) get_option( 'page_for_posts' );
 					$rawlaw_news_url    = esc_url( $rawlaw_posts_page ? get_permalink( $rawlaw_posts_page ) : home_url( '/news/' ) );
-					$rawlaw_lawyers_url = esc_url( get_post_type_archive_link( 'lawyer' ) ?: home_url( '/find-a-lawyer/' ) );
 					$rawlaw_query_url   = esc_url( home_url( '/#rawlaw-hero-query-wizard' ) );
 					?>
 					<ul class="menu menu--primary menu--startup">
 						<li><a href="<?php echo $rawlaw_news_url; ?>"><?php esc_html_e( 'News', 'rawlaw' ); ?></a></li>
-						<li><a href="<?php echo $rawlaw_lawyers_url; ?>"><?php esc_html_e( 'Find Lawyers', 'rawlaw' ); ?></a></li>
 						<li><a href="<?php echo $rawlaw_query_url; ?>"><?php esc_html_e( 'Post Query', 'rawlaw' ); ?></a></li>
 						<li><a href="<?php echo esc_url( home_url( '/#for-advocates' ) ); ?>"><?php esc_html_e( 'For Advocates', 'rawlaw' ); ?></a></li>
 					</ul>
@@ -66,9 +64,9 @@
 					<?php rawlaw_icon( 'search' ); ?>
 					<span class="screen-reader-text"><?php esc_html_e( 'Search', 'rawlaw' ); ?></span>
 				</button>
-				<a class="btn btn--primary" href="<?php echo esc_url( is_front_page() ? home_url( '/#rawlaw-hero-query-wizard' ) : rawlaw_get_post_requirement_url() ); ?>" aria-label="<?php esc_attr_e( 'Get legal help', 'rawlaw' ); ?>">
+				<a class="btn btn--primary" href="https://app.rawlaw.in/login" aria-label="<?php esc_attr_e( 'Login to RawLaw', 'rawlaw' ); ?>">
 					<?php rawlaw_icon( 'user' ); ?>
-					<?php esc_html_e( 'Get Legal Help', 'rawlaw' ); ?>
+					<?php esc_html_e( 'Login', 'rawlaw' ); ?>
 				</a>
 			</div>
 		</div>
@@ -87,7 +85,6 @@ if ( ! function_exists( 'rawlaw_default_menu' ) ) {
 		echo '<ul class="menu menu--primary">';
 		echo '<li><a href="' . esc_url( home_url( '/news/' ) ) . '">' . esc_html__( 'Legal News', 'rawlaw' ) . '</a></li>';
 		echo '<li><a href="' . esc_url( home_url( '/practice-areas/' ) ) . '">' . esc_html__( 'Practice Areas', 'rawlaw' ) . '</a></li>';
-		echo '<li><a href="' . esc_url( get_post_type_archive_link( 'lawyer' ) ?: home_url( '/find-a-lawyer/' ) ) . '">' . esc_html__( 'Find a Lawyer', 'rawlaw' ) . '</a></li>';
 		echo '<li><a href="' . esc_url( get_post_type_archive_link( 'judgment' ) ?: home_url( '/judgments/' ) ) . '">' . esc_html__( 'Judgments', 'rawlaw' ) . '</a></li>';
 		echo '<li><a href="' . esc_url( home_url( '/about/' ) ) . '">' . esc_html__( 'About', 'rawlaw' ) . '</a></li>';
 		echo '</ul>';
