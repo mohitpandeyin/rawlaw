@@ -5,10 +5,10 @@
  * Section order (optimized for legal intent -> trusted action):
  *   S1  Skip-link / header / utility bar (via get_header)
  *   S2  Hero — query wizard + top news + trust strip
- *   S3  News & Judgments — editorial authority
- *   S4  Know Your Rights — issue-based guidance
- *   S5  How Citizens Use RawLaw — conversion funnel
- *   S6  For Advocates — verified supply acquisition
+ *   S3  Know Your Rights — issue-based guidance
+ *   S4  News & Judgments — editorial authority
+ *   S5  For Advocates — verified supply acquisition
+ *   S6  How Citizens Use RawLaw — conversion funnel
  *   S7  FAQ — reassurance before final CTA
  *   S8  Closing CTA — final conversion push
  *   S9  Footer (via get_footer)
@@ -43,37 +43,32 @@ $displayed_ids = array();
 
 <?php
 /*--------------------------------------------------------------
- * S3 — Latest Legal News & Insights (editorial trust driver)
- *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-news' );
-
-/*--------------------------------------------------------------
- * S4 — Know Your Rights (issue-based guidance)
+ * S3 — Know Your Rights (issue-based guidance)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-know-your-rights' );
 
 /*--------------------------------------------------------------
- * S5 — How Citizens Use RawLaw (conversion funnel)
+ * S4 — Latest Legal News & Insights (editorial trust driver)
  *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-how-it-works' );
+get_template_part( 'template-parts/home/section-news' );
 
 /*--------------------------------------------------------------
- * S6 — For Advocates (supply acquisition)
+ * S5 — For Advocates (supply acquisition)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-for-advocates' );
 
 /*--------------------------------------------------------------
- * S7 — Judgment Digest
+ * S6 — How Citizens Use RawLaw (conversion funnel)
  *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-judgments' );
+get_template_part( 'template-parts/home/section-how-it-works' );
 
 /*--------------------------------------------------------------
- * S8 — FAQ (SEO rich results + user reassurance pre-CTA)
+ * S7 — FAQ (SEO rich results + user reassurance pre-CTA)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-faq' );
 
 /*--------------------------------------------------------------
- * S9 — Closing CTA (final conversion push)
+ * S8 — Closing CTA (final conversion push)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-closing-cta' );
 
