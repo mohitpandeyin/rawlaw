@@ -7,20 +7,41 @@
 
 $app_signup_url = esc_url( 'https://app.rawlaw.in/register/client' );
 
-$practice_areas = get_terms( array(
-	'taxonomy'   => 'practice_area',
-	'hide_empty' => false,
-	'number'     => 50,
-	'orderby'    => 'name',
-) );
+$legal_categories = array(
+	'constitutional-law'     => __( 'Constitutional Law', 'rawlaw' ),
+	'criminal-law'           => __( 'Criminal Law', 'rawlaw' ),
+	'civil-law'              => __( 'Civil Law', 'rawlaw' ),
+	'family-law'             => __( 'Family & Matrimonial Law', 'rawlaw' ),
+	'corporate-law'          => __( 'Corporate & Business Law', 'rawlaw' ),
+	'labour-law'             => __( 'Labour & Employment Law', 'rawlaw' ),
+	'intellectual-property'  => __( 'Intellectual Property (IP)', 'rawlaw' ),
+	'taxation'               => __( 'Taxation Law', 'rawlaw' ),
+	'environmental'          => __( 'Environmental Law', 'rawlaw' ),
+	'cyber-law'              => __( 'Cyber & Technology Law', 'rawlaw' ),
+	'other'                  => __( 'Other General Legal Issues', 'rawlaw' ),
+);
 
-$fallback_areas = array(
-	'banking-finance'     => __( 'Banking / Finance', 'rawlaw' ),
-	'family-law'          => __( 'Family Law', 'rawlaw' ),
-	'criminal-law'        => __( 'Criminal Law', 'rawlaw' ),
-	'property'            => __( 'Property', 'rawlaw' ),
-	'consumer-protection' => __( 'Consumer Protection', 'rawlaw' ),
-	'corporate'           => __( 'Business / Contracts', 'rawlaw' ),
+$urgency_levels = array(
+	'low'    => __( 'Low (Consultation)', 'rawlaw' ),
+	'normal' => __( 'Normal (Standard case)', 'rawlaw' ),
+	'high'   => __( 'High (Response due soon)', 'rawlaw' ),
+	'urgent' => __( 'Urgent (Emergency/Arrest/Injunction)', 'rawlaw' ),
+);
+
+$consultation_languages = array(
+	'English',
+	'Hindi',
+	'Bengali',
+	'Tamil',
+	'Telugu',
+	'Marathi',
+	'Gujarati',
+	'Kannada',
+	'Malayalam',
+	'Punjabi',
+	'Odia',
+	'Urdu',
+	'Assamese',
 );
 
 $popular = rawlaw_home_get( 'hero.popular', array() );
@@ -64,24 +85,17 @@ $popular = rawlaw_home_get( 'hero.popular', array() );
 						<span><?php esc_html_e( 'Legal Domain / Category *', 'rawlaw' ); ?></span>
 						<select name="category" required data-wizard-area>
 							<option value=""><?php esc_html_e( 'Select legal domain', 'rawlaw' ); ?></option>
-							<?php if ( ! empty( $practice_areas ) && ! is_wp_error( $practice_areas ) ) : ?>
-								<?php foreach ( $practice_areas as $pa ) : ?>
-									<option value="<?php echo esc_attr( $pa->slug ); ?>"><?php echo esc_html( $pa->name ); ?></option>
-								<?php endforeach; ?>
-							<?php else : ?>
-								<?php foreach ( $fallback_areas as $slug => $label ) : ?>
-									<option value="<?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $label ); ?></option>
-								<?php endforeach; ?>
-							<?php endif; ?>
+							<?php foreach ( $legal_categories as $slug => $label ) : ?>
+								<option value="<?php echo esc_attr( $slug ); ?>"><?php echo esc_html( $label ); ?></option>
+							<?php endforeach; ?>
 						</select>
 					</label>
 					<label class="hero-wizard__compact-field">
 						<span><?php esc_html_e( 'Urgency Level *', 'rawlaw' ); ?></span>
 						<select name="urgency" required>
-							<option value="normal"><?php esc_html_e( 'Normal (Standard case)', 'rawlaw' ); ?></option>
-							<option value="immediate"><?php esc_html_e( 'Immediate (within 24h)', 'rawlaw' ); ?></option>
-							<option value="week"><?php esc_html_e( 'This week', 'rawlaw' ); ?></option>
-							<option value="planning"><?php esc_html_e( 'Just planning', 'rawlaw' ); ?></option>
+							<?php foreach ( $urgency_levels as $value => $label ) : ?>
+								<option value="<?php echo esc_attr( $value ); ?>" <?php selected( 'normal', $value ); ?>><?php echo esc_html( $label ); ?></option>
+							<?php endforeach; ?>
 						</select>
 					</label>
 				</div>
@@ -94,26 +108,28 @@ $popular = rawlaw_home_get( 'hero.popular', array() );
 			</div>
 
 			<div class="hero-wizard__section">
-				<h3 class="hero-wizard__section-title"><?php esc_html_e( 'Location & Language Preferences', 'rawlaw' ); ?></h3>
-				<div class="hero-wizard__modal-grid">
-					<label class="hero-wizard__compact-field">
-						<span><?php esc_html_e( 'State Jurisdiction *', 'rawlaw' ); ?></span>
-						<input type="text" name="state" maxlength="80" required placeholder="<?php esc_attr_e( 'e.g., Maharashtra', 'rawlaw' ); ?>">
+				<div class="hero-wizard__section-heading-row">
+					<h3 class="hero-wizard__section-title"><?php esc_html_e( 'Location & Language Preferences', 'rawlaw' ); ?></h3>
+					<label class="hero-wizard__remote">
+						<input type="checkbox" name="remoteConsultation" value="1" data-remote-consultation>
+						<span><?php esc_html_e( 'Remote Consultation / Case Handling', 'rawlaw' ); ?></span>
 					</label>
-					<label class="hero-wizard__compact-field">
+				</div>
+				<div class="hero-wizard__modal-grid">
+					<label class="hero-wizard__compact-field" data-location-field>
+						<span><?php esc_html_e( 'State Jurisdiction *', 'rawlaw' ); ?></span>
+						<input type="text" name="state" maxlength="80" required data-state-field placeholder="<?php esc_attr_e( 'e.g., Maharashtra', 'rawlaw' ); ?>">
+					</label>
+					<label class="hero-wizard__compact-field" data-location-field>
 						<span><?php esc_html_e( 'City Jurisdiction *', 'rawlaw' ); ?></span>
-						<input type="text" name="city" maxlength="80" required placeholder="<?php esc_attr_e( 'e.g., Mumbai', 'rawlaw' ); ?>">
+						<input type="text" name="city" maxlength="80" required data-city-field placeholder="<?php esc_attr_e( 'e.g., Mumbai', 'rawlaw' ); ?>">
 					</label>
 					<label class="hero-wizard__compact-field">
 						<span><?php esc_html_e( 'Consultation Language', 'rawlaw' ); ?></span>
 						<select name="language">
-							<option value="English"><?php esc_html_e( 'English', 'rawlaw' ); ?></option>
-							<option value="Hindi"><?php esc_html_e( 'Hindi', 'rawlaw' ); ?></option>
-							<option value="Marathi"><?php esc_html_e( 'Marathi', 'rawlaw' ); ?></option>
-							<option value="Tamil"><?php esc_html_e( 'Tamil', 'rawlaw' ); ?></option>
-							<option value="Telugu"><?php esc_html_e( 'Telugu', 'rawlaw' ); ?></option>
-							<option value="Kannada"><?php esc_html_e( 'Kannada', 'rawlaw' ); ?></option>
-							<option value="Bengali"><?php esc_html_e( 'Bengali', 'rawlaw' ); ?></option>
+							<?php foreach ( $consultation_languages as $language ) : ?>
+								<option value="<?php echo esc_attr( $language ); ?>"><?php echo esc_html( $language ); ?></option>
+							<?php endforeach; ?>
 						</select>
 					</label>
 				</div>

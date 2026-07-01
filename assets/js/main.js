@@ -240,6 +240,10 @@
 		var success = modalPanel ? modalPanel.querySelector('[data-query-success]') : null;
 		var heroTrigger = doc.querySelector('[data-query-modal-trigger]');
 		var heroIntent = doc.querySelector('[data-hero-query-intent]');
+		var remoteToggle = form.querySelector('[data-remote-consultation]');
+		var stateField = form.querySelector('[data-state-field]');
+		var cityField = form.querySelector('[data-city-field]');
+		var locationLabels = Array.prototype.slice.call(form.querySelectorAll('[data-location-field]'));
 		var cookieName = 'rawlaw_query_draft';
 		var cookieMaxLength = 3500;
 
@@ -289,9 +293,39 @@
 			return field ? field.value.trim() : '';
 		}
 
+		function isRemoteConsultation() {
+			return !!(remoteToggle && remoteToggle.checked);
+		}
+
+		function syncRemoteFields() {
+			var isRemote = isRemoteConsultation();
+			[stateField, cityField].forEach(function (field) {
+				if (!field) return;
+				field.disabled = isRemote;
+				field.required = !isRemote;
+				if (isRemote) field.value = '';
+			});
+			locationLabels.forEach(function (label) {
+				label.classList.toggle('is-disabled', isRemote);
+			});
+		}
+
 		function focusField(name) {
 			var field = form.querySelector('[name="' + name + '"]');
 			if (field) field.focus();
+		}
+
+		function normalizeCategory(value) {
+			var map = {
+				'property': 'civil-law',
+				'consumer-protection': 'other',
+				'corporate': 'corporate-law',
+				'business-contracts': 'corporate-law',
+				'labour': 'labour-law',
+				'employment': 'labour-law',
+				'banking-finance': 'civil-law'
+			};
+			return map[value] || value;
 		}
 
 		function validateForm() {
@@ -315,12 +349,12 @@
 				focusField('description');
 				return false;
 			}
-			if (!fieldValue('state')) {
+			if (!isRemoteConsultation() && !fieldValue('state')) {
 				showError('Please add the state jurisdiction.');
 				focusField('state');
 				return false;
 			}
-			if (!fieldValue('city')) {
+			if (!isRemoteConsultation() && !fieldValue('city')) {
 				showError('Please add the city jurisdiction.');
 				focusField('city');
 				return false;
@@ -339,6 +373,7 @@
 				city: fieldValue('city'),
 				language: fieldValue('language') || 'English',
 				budget: fieldValue('budget'),
+				remoteConsultation: isRemoteConsultation(),
 				source: 'homepage_hero',
 				createdAt: new Date().toISOString()
 			};
@@ -398,12 +433,17 @@
 			});
 		}
 
+		if (remoteToggle) {
+			remoteToggle.addEventListener('change', syncRemoteFields);
+			syncRemoteFields();
+		}
+
 		doc.querySelectorAll('[data-query-preset]').forEach(function (btn) {
 			btn.addEventListener('click', function (event) {
 				if (btn.tagName === 'A' && btn.getAttribute('href') && btn.getAttribute('href').indexOf('#rawlaw-hero-query-wizard') !== -1) {
 					event.preventDefault();
 				}
-				var area = btn.getAttribute('data-preset-area') || '';
+				var area = normalizeCategory(btn.getAttribute('data-preset-area') || '');
 				var details = btn.getAttribute('data-preset-details') || '';
 				var title = btn.getAttribute('data-preset-title') || btn.textContent.trim();
 				var areaField = form.querySelector('[data-wizard-area]');
