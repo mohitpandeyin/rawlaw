@@ -23,6 +23,7 @@ require RAWLAW_DIR . 'inc/schema.php';
 require RAWLAW_DIR . 'inc/cpt.php';
 require RAWLAW_DIR . 'inc/taxonomies.php';
 require RAWLAW_DIR . 'inc/customizer.php';
+require RAWLAW_DIR . 'inc/homepage-settings.php';
 require RAWLAW_DIR . 'inc/meta-boxes.php';
 require RAWLAW_DIR . 'inc/marketplace.php';
 require RAWLAW_DIR . 'inc/search-router.php';

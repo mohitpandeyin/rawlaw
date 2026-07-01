@@ -84,13 +84,25 @@ $issues = array(
 		'visual_desc'  => __( 'Clarify registry, title, stamp duty or document questions before moving to a consultation.', 'rawlaw' ),
 	),
 );
+
+$editable_issues = rawlaw_home_get( 'kyr.issues', array() );
+foreach ( $issues as $index => $issue ) {
+	if ( empty( $editable_issues[ $index ] ) || ! is_array( $editable_issues[ $index ] ) ) {
+		continue;
+	}
+	foreach ( array( 'title', 'sub', 'area', 'details', 'image', 'visual_title', 'visual_desc' ) as $key ) {
+		if ( isset( $editable_issues[ $index ][ $key ] ) && '' !== $editable_issues[ $index ][ $key ] ) {
+			$issues[ $index ][ $key ] = $editable_issues[ $index ][ $key ];
+		}
+	}
+}
 ?>
 <section class="section section--alt section--know-your-rights" aria-labelledby="kyr-heading" data-reveal>
 	<div class="container">
 		<header class="kyr-header">
-			<p class="section__eyebrow"><?php esc_html_e( 'Know your rights', 'rawlaw' ); ?></p>
-			<h2 id="kyr-heading" class="section__title"><?php esc_html_e( 'Not sure what your legal issue is called?', 'rawlaw' ); ?></h2>
-			<p class="section__sub"><?php esc_html_e( 'Choose the situation closest to yours. RawLaw pre-fills the query wizard so you can explain the matter faster.', 'rawlaw' ); ?></p>
+			<p class="section__eyebrow"><?php echo esc_html( rawlaw_home_get( 'kyr.eyebrow' ) ); ?></p>
+			<h2 id="kyr-heading" class="section__title"><?php echo esc_html( rawlaw_home_get( 'kyr.title' ) ); ?></h2>
+			<p class="section__sub"><?php echo esc_html( rawlaw_home_get( 'kyr.subtitle' ) ); ?></p>
 		</header>
 
 		<div class="kyr-layout">
@@ -130,7 +142,7 @@ $issues = array(
 						<img src="<?php echo esc_url( $issue['image'] ); ?>" alt="" loading="lazy" decoding="async">
 					</div>
 					<figcaption class="kyr-visual__body">
-						<span class="kyr-visual__eyebrow"><?php esc_html_e( 'Guided issue setup', 'rawlaw' ); ?></span>
+						<span class="kyr-visual__eyebrow"><?php echo esc_html( rawlaw_home_get( 'kyr.visual_eyebrow' ) ); ?></span>
 						<strong><?php echo esc_html( $issue['visual_title'] ); ?></strong>
 						<p><?php echo esc_html( $issue['visual_desc'] ); ?></p>
 					</figcaption>
@@ -138,7 +150,7 @@ $issues = array(
 				<?php endforeach; ?>
 				<div class="kyr-visual__trust">
 					<?php rawlaw_icon( 'verified' ); ?>
-					<span><?php esc_html_e( 'Pick the closest issue and RawLaw carries the context into the query form.', 'rawlaw' ); ?></span>
+					<span><?php echo esc_html( rawlaw_home_get( 'kyr.trust' ) ); ?></span>
 				</div>
 			</aside>
 

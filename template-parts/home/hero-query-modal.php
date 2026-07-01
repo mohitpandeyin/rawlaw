@@ -23,33 +23,7 @@ $fallback_areas = array(
 	'corporate'           => __( 'Business / Contracts', 'rawlaw' ),
 );
 
-$popular = array(
-	array(
-		'label'   => __( 'Bail', 'rawlaw' ),
-		'area'    => 'criminal-law',
-		'details' => __( 'I need legal help for bail or an urgent criminal matter.', 'rawlaw' ),
-	),
-	array(
-		'label'   => __( 'Divorce', 'rawlaw' ),
-		'area'    => 'family-law',
-		'details' => __( 'I need advice on divorce, maintenance, custody, or a related family matter.', 'rawlaw' ),
-	),
-	array(
-		'label'   => __( 'RERA', 'rawlaw' ),
-		'area'    => 'property',
-		'details' => __( 'I need help with a builder delay, RERA complaint, or property dispute.', 'rawlaw' ),
-	),
-	array(
-		'label'   => __( 'Cheque Bounce', 'rawlaw' ),
-		'area'    => 'criminal-law',
-		'details' => __( 'I need help with a cheque bounce notice or Section 138 matter.', 'rawlaw' ),
-	),
-	array(
-		'label'   => __( 'Consumer Complaint', 'rawlaw' ),
-		'area'    => 'consumer-protection',
-		'details' => __( 'I want to file or respond to a consumer complaint.', 'rawlaw' ),
-	),
-);
+$popular = rawlaw_home_get( 'hero.popular', array() );
 ?>
 
 <div class="hero-wizard-modal" id="rawlaw-query-modal" data-query-modal hidden>
@@ -70,7 +44,7 @@ $popular = array(
 			<p class="hero-wizard__error" data-wizard-error hidden></p>
 
 			<div class="hero-wizard__presets" aria-label="<?php esc_attr_e( 'Popular legal issues', 'rawlaw' ); ?>">
-				<span class="hero__chips-label"><?php esc_html_e( 'Popular:', 'rawlaw' ); ?></span>
+				<span class="hero__chips-label"><?php echo esc_html( rawlaw_home_get( 'hero.popular_label' ) ); ?></span>
 				<?php foreach ( $popular as $item ) : ?>
 					<button class="hero__chip" type="button" data-query-preset data-preset-area="<?php echo esc_attr( $item['area'] ); ?>" data-preset-details="<?php echo esc_attr( $item['details'] ); ?>">
 						<?php echo esc_html( $item['label'] ); ?>

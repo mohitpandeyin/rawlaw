@@ -8,32 +8,8 @@
  * @package RawLaw
  */
 
-$faqs = array(
-	array(
-		'q' => __( 'Is it free to post a legal query on RawLaw?', 'rawlaw' ),
-		'a' => __( 'Yes. Posting a query on RawLaw is free. You describe your issue and can review responses from verified advocates before deciding whether to book a consultation.', 'rawlaw' ),
-	),
-	array(
-		'q' => __( 'How are advocates verified on RawLaw?', 'rawlaw' ),
-		'a' => __( 'RawLaw is built around profile checks such as Bar Council enrollment details, identity information, practice areas and city. Verification status should be visible before you contact an advocate.', 'rawlaw' ),
-	),
-	array(
-		'q' => __( 'What happens after I post a query?', 'rawlaw' ),
-		'a' => __( 'RawLaw keeps your issue structured so you can complete signup, track updates, and continue the matter inside the platform.', 'rawlaw' ),
-	),
-	array(
-		'q' => __( 'What types of legal matters does RawLaw cover?', 'rawlaw' ),
-		'a' => __( 'RawLaw covers a wide range of legal services including property disputes, family law, criminal cases, consumer complaints, labour matters, civil litigation, corporate law, GST, cheque bounce, and more.', 'rawlaw' ),
-	),
-	array(
-		'q' => __( 'How quickly will I hear from a lawyer after posting a query?', 'rawlaw' ),
-		'a' => __( 'Response time depends on the issue, city, urgency and lawyer availability. Urgent matters should be marked clearly so relevant advocates can prioritize them.', 'rawlaw' ),
-	),
-	array(
-		'q' => __( 'Is my legal query and personal data kept confidential?', 'rawlaw' ),
-		'a' => __( 'Legal queries are meant to stay inside the RawLaw workspace instead of being published publicly. Avoid sharing unnecessary sensitive documents until you choose who to engage.', 'rawlaw' ),
-	),
-);
+$faq_content = rawlaw_home_get( 'faq', array() );
+$faqs        = isset( $faq_content['items'] ) && is_array( $faq_content['items'] ) ? $faq_content['items'] : array();
 
 // Output FAQPage JSON-LD schema.
 $faq_schema = array(
@@ -57,9 +33,9 @@ foreach ( $faqs as $faq ) {
 <section class="section section--faq" aria-labelledby="faq-heading" data-reveal>
 	<div class="container">
 		<header class="section__header section__header--centered">
-			<p class="section__eyebrow"><?php esc_html_e( 'FAQs', 'rawlaw' ); ?></p>
-			<h2 id="faq-heading" class="section__title"><?php esc_html_e( 'Common Questions Answered', 'rawlaw' ); ?></h2>
-			<p class="section__sub"><?php esc_html_e( 'Clear answers on verification, privacy, query intake and next steps.', 'rawlaw' ); ?></p>
+			<p class="section__eyebrow"><?php echo esc_html( $faq_content['eyebrow'] ); ?></p>
+			<h2 id="faq-heading" class="section__title"><?php echo esc_html( $faq_content['title'] ); ?></h2>
+			<p class="section__sub"><?php echo esc_html( $faq_content['subtitle'] ); ?></p>
 		</header>
 
 		<div class="faq-list" data-reveal-stagger>

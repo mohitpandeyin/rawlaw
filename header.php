@@ -36,26 +36,13 @@
 
 			<nav class="site-nav" id="primary-menu" aria-label="<?php esc_attr_e( 'Primary', 'rawlaw' ); ?>">
 				<?php
-				if ( is_front_page() ) :
-					$rawlaw_posts_page  = (int) get_option( 'page_for_posts' );
-					$rawlaw_news_url    = esc_url( $rawlaw_posts_page ? get_permalink( $rawlaw_posts_page ) : home_url( '/news/' ) );
-					$rawlaw_query_url   = esc_url( home_url( '/#rawlaw-hero-query-wizard' ) );
-					?>
-					<ul class="menu menu--primary menu--startup">
-						<li><a href="<?php echo $rawlaw_news_url; ?>"><?php esc_html_e( 'News', 'rawlaw' ); ?></a></li>
-						<li><a href="<?php echo $rawlaw_query_url; ?>"><?php esc_html_e( 'Post Query', 'rawlaw' ); ?></a></li>
-						<li><a href="<?php echo esc_url( home_url( '/#for-advocates' ) ); ?>"><?php esc_html_e( 'For Advocates', 'rawlaw' ); ?></a></li>
-					</ul>
-					<?php
-				else :
-					wp_nav_menu( array(
-						'theme_location' => 'primary',
-						'container'      => false,
-						'menu_class'     => 'menu menu--primary',
-						'fallback_cb'    => 'rawlaw_default_menu',
-						'depth'          => 2,
-					) );
-				endif;
+				wp_nav_menu( array(
+					'theme_location' => 'primary',
+					'container'      => false,
+					'menu_class'     => 'menu menu--primary',
+					'fallback_cb'    => 'rawlaw_default_menu',
+					'depth'          => 2,
+				) );
 				?>
 			</nav>
 

@@ -1348,6 +1348,35 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 .site-footer__brand { display: grid; gap: var(--s-4); align-content: start; }
 .site-footer__about { color: rgba(255,255,255,.66); margin: 0; max-width: 36ch; line-height: 1.65; }
 
+.site-footer__trust {
+	list-style: none;
+	padding: 0;
+	margin: var(--s-2) 0 0;
+	display: grid;
+	gap: 10px;
+}
+.site-footer__trust-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+	color: rgba(255,255,255,.72);
+}
+.site-footer__trust-item svg {
+	width: 14px;
+	height: 14px;
+	color: #8CB4FF;
+	flex-shrink: 0;
+}
+.site-footer__fine-print {
+	margin: var(--s-2) 0 0;
+	padding-top: var(--s-3);
+	border-top: 1px solid rgba(255,255,255,.12);
+	font-size: 12px;
+	color: rgba(255,255,255,.38);
+	max-width: 34ch;
+}
+
 .site-footer__links {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));

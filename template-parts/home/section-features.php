@@ -10,32 +10,7 @@
  * @package RawLaw
  */
 
-$features = array(
-	array(
-		'icon'  => 'shield-checkmark',
-		'title' => __( 'Verified profiles', 'rawlaw' ),
-	),
-	array(
-		'icon'  => 'lock',
-		'title' => __( 'Private legal queries', 'rawlaw' ),
-	),
-	array(
-		'icon'  => 'news',
-		'title' => __( 'India-focused guidance', 'rawlaw' ),
-	),
-	array(
-		'icon'  => 'search',
-		'title' => __( 'Compare before consulting', 'rawlaw' ),
-	),
-	array(
-		'icon'  => 'chat',
-		'title' => __( 'Ask without pressure', 'rawlaw' ),
-	),
-	array(
-		'icon'  => 'user',
-		'title' => __( 'Advocate visibility', 'rawlaw' ),
-	),
-);
+$features = rawlaw_home_get( 'features', array() );
 ?>
 <section class="features-bar" aria-label="<?php esc_attr_e( 'Platform highlights', 'rawlaw' ); ?>">
 	<div class="features-bar__track" role="list">

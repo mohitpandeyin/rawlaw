@@ -16,6 +16,7 @@ if ( ! isset( $displayed_ids ) ) {
 
 $rawlaw_posts_page = (int) get_option( 'page_for_posts' );
 $rawlaw_news_url   = esc_url( $rawlaw_posts_page ? get_permalink( $rawlaw_posts_page ) : home_url( '/news/' ) );
+$news_content      = rawlaw_home_get( 'news', array() );
 
 $rawlaw_home_news_thumb = static function ( $post_id, $size = 'rawlaw-card' ) {
 	$thumb_id = get_post_thumbnail_id( $post_id );
@@ -64,11 +65,11 @@ if ( $news_q->have_posts() ) :
 	<div class="container">
 		<header class="section__header section__header--newspaper">
 			<div>
-				<p class="section__eyebrow"><?php esc_html_e( 'Legal news first', 'rawlaw' ); ?></p>
-				<h2 id="news-heading" class="section__title section__title--newspaper"><?php esc_html_e( 'News & Judgments', 'rawlaw' ); ?></h2>
-				<p class="section__sub section__sub--newspaper"><?php esc_html_e( 'Follow legal developments, court updates and practical explainers, then take the right next step when an issue affects you.', 'rawlaw' ); ?></p>
+				<p class="section__eyebrow"><?php echo esc_html( $news_content['eyebrow'] ); ?></p>
+				<h2 id="news-heading" class="section__title section__title--newspaper"><?php echo esc_html( $news_content['title'] ); ?></h2>
+				<p class="section__sub section__sub--newspaper"><?php echo esc_html( $news_content['subtitle'] ); ?></p>
 			</div>
-			<a class="link-arrow" href="<?php echo $rawlaw_news_url; ?>"><?php esc_html_e( 'View all', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span></a>
+			<a class="link-arrow" href="<?php echo $rawlaw_news_url; ?>"><?php echo esc_html( $news_content['view_all'] ); ?> <span aria-hidden="true">&rarr;</span></a>
 		</header>
 
 		<?php // — Screenshot-style mosaic: 2 large stories + spotlight + compact rows — ?>
@@ -136,12 +137,12 @@ if ( $news_q->have_posts() ) :
 
 		<div class="section__cta section__cta--bridge">
 			<a class="btn btn--primary btn--lg" href="<?php echo $rawlaw_news_url; ?>">
-				<?php esc_html_e( 'Read More News', 'rawlaw' ); ?>
+				<?php echo esc_html( $news_content['primary_cta'] ); ?>
 			</a>
 			<a class="btn btn--ghost btn--lg" href="<?php echo esc_url( home_url( '/#rawlaw-hero-query-wizard' ) ); ?>">
-				<?php esc_html_e( 'Post a Legal Query', 'rawlaw' ); ?>
+				<?php echo esc_html( $news_content['query_cta'] ); ?>
 			</a>
-			<p class="section__cta-note"><?php esc_html_e( 'Not sure what to do next? Start with the issue; RawLaw keeps the context structured for your next step.', 'rawlaw' ); ?></p>
+			<p class="section__cta-note"><?php echo esc_html( $news_content['cta_note'] ); ?></p>
 		</div>
 	</div>
 </section>
