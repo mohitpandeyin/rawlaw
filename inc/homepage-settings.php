@@ -206,82 +206,234 @@ function rawlaw_homepage_register_settings() {
 }
 add_action( 'admin_init', 'rawlaw_homepage_register_settings' );
 
-function rawlaw_homepage_field( $path, $label, $type = 'text' ) {
+function rawlaw_homepage_admin_assets( $hook_suffix ) {
+	if ( false === strpos( $hook_suffix, 'rawlaw-homepage' ) ) {
+		return;
+	}
+
+	wp_enqueue_media();
+	wp_enqueue_style(
+		'rawlaw-admin-homepage',
+		RAWLAW_URI . 'assets/css/admin-homepage.css',
+		array(),
+		RAWLAW_VERSION
+	);
+	wp_enqueue_script(
+		'rawlaw-admin-homepage',
+		RAWLAW_URI . 'assets/js/admin-homepage.js',
+		array(),
+		RAWLAW_VERSION,
+		true
+	);
+}
+add_action( 'admin_enqueue_scripts', 'rawlaw_homepage_admin_assets' );
+
+function rawlaw_homepage_category_options() {
+	return array(
+		''                      => __( 'Select category', 'rawlaw' ),
+		'constitutional-law'    => __( 'Constitutional Law', 'rawlaw' ),
+		'criminal-law'          => __( 'Criminal Law', 'rawlaw' ),
+		'civil-law'             => __( 'Civil Law', 'rawlaw' ),
+		'family-law'            => __( 'Family & Matrimonial Law', 'rawlaw' ),
+		'corporate-law'         => __( 'Corporate & Business Law', 'rawlaw' ),
+		'labour-law'            => __( 'Labour & Employment Law', 'rawlaw' ),
+		'intellectual-property' => __( 'Intellectual Property (IP)', 'rawlaw' ),
+		'taxation'              => __( 'Taxation Law', 'rawlaw' ),
+		'environmental'         => __( 'Environmental Law', 'rawlaw' ),
+		'cyber-law'             => __( 'Cyber & Technology Law', 'rawlaw' ),
+		'other'                 => __( 'Other General Legal Issues', 'rawlaw' ),
+	);
+}
+
+function rawlaw_homepage_field( $path, $label, $type = 'text', $args = array() ) {
+	$args = wp_parse_args( $args, array(
+		'description' => '',
+		'options'     => array(),
+		'rows'        => 3,
+		'maxlength'   => 0,
+		'placeholder' => '',
+	) );
 	$value = rawlaw_home_get( $path );
 	$name  = 'rawlaw_homepage_content[' . implode( '][', array_map( 'esc_attr', explode( '.', $path ) ) ) . ']';
 	$id    = 'rawlaw-home-' . sanitize_html_class( str_replace( '.', '-', $path ) );
 	?>
-	<p class="rawlaw-home-field">
-		<label for="<?php echo esc_attr( $id ); ?>"><strong><?php echo esc_html( $label ); ?></strong></label>
+	<div class="rawlaw-home-field">
+		<label class="rawlaw-home-field__label" for="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $label ); ?></label>
 		<?php if ( 'textarea' === $type ) : ?>
-			<textarea id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" rows="3" class="large-text"><?php echo esc_textarea( $value ); ?></textarea>
+			<textarea id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" rows="<?php echo esc_attr( $args['rows'] ); ?>" class="large-text rawlaw-home-field__control" <?php echo $args['maxlength'] ? 'maxlength="' . esc_attr( $args['maxlength'] ) . '" data-count-field' : ''; ?> placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>"><?php echo esc_textarea( $value ); ?></textarea>
+		<?php elseif ( 'select' === $type ) : ?>
+			<select id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" class="rawlaw-home-field__control">
+				<?php foreach ( $args['options'] as $option_value => $option_label ) : ?>
+					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $value, $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
+				<?php endforeach; ?>
+			</select>
+		<?php elseif ( 'media' === $type ) : ?>
+			<div class="rawlaw-home-media">
+				<input id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" type="url" value="<?php echo esc_attr( $value ); ?>" class="regular-text rawlaw-home-field__control rawlaw-home-media__input" placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>">
+				<button type="button" class="button rawlaw-home-media__button" data-media-target="<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'rawlaw' ); ?></button>
+			</div>
+			<div class="rawlaw-home-media-preview" data-media-preview="<?php echo esc_attr( $id ); ?>" <?php echo $value ? '' : 'hidden'; ?>>
+				<img src="<?php echo esc_url( $value ); ?>" alt="">
+			</div>
 		<?php else : ?>
-			<input id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" type="<?php echo esc_attr( $type ); ?>" value="<?php echo esc_attr( $value ); ?>" class="regular-text">
+			<input id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" type="<?php echo esc_attr( $type ); ?>" value="<?php echo esc_attr( $value ); ?>" class="regular-text rawlaw-home-field__control" <?php echo $args['maxlength'] ? 'maxlength="' . esc_attr( $args['maxlength'] ) . '" data-count-field' : ''; ?> placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>">
 		<?php endif; ?>
-	</p>
+		<?php if ( $args['maxlength'] ) : ?>
+			<span class="rawlaw-home-field__count" data-count-for="<?php echo esc_attr( $id ); ?>"></span>
+		<?php endif; ?>
+		<?php if ( $args['description'] ) : ?>
+			<span class="rawlaw-home-field__description"><?php echo esc_html( $args['description'] ); ?></span>
+		<?php endif; ?>
+	</div>
 	<?php
+}
+
+function rawlaw_homepage_panel_open( $id, $title, $description = '' ) {
+	?>
+	<section id="<?php echo esc_attr( $id ); ?>" class="rawlaw-home-panel" data-home-panel>
+		<header class="rawlaw-home-panel__header">
+			<div>
+				<h2><?php echo esc_html( $title ); ?></h2>
+				<?php if ( $description ) : ?>
+					<p><?php echo esc_html( $description ); ?></p>
+				<?php endif; ?>
+			</div>
+		</header>
+	<?php
+}
+
+function rawlaw_homepage_panel_close() {
+	echo '</section>';
+}
+
+function rawlaw_homepage_card_open( $title, $description = '' ) {
+	?>
+	<div class="rawlaw-home-card">
+		<div class="rawlaw-home-card__header">
+			<h3><?php echo esc_html( $title ); ?></h3>
+			<?php if ( $description ) : ?>
+				<p><?php echo esc_html( $description ); ?></p>
+			<?php endif; ?>
+		</div>
+	<?php
+}
+
+function rawlaw_homepage_card_close() {
+	echo '</div>';
 }
 
 function rawlaw_homepage_settings_page() {
 	if ( ! current_user_can( 'edit_theme_options' ) ) {
 		return;
 	}
-	$content = rawlaw_home_content();
+	$content          = rawlaw_home_content();
+	$category_options = rawlaw_homepage_category_options();
+	$tabs             = array(
+		'hero'      => __( 'Hero', 'rawlaw' ),
+		'kyr'       => __( 'Know Rights', 'rawlaw' ),
+		'news'      => __( 'News', 'rawlaw' ),
+		'advocates' => __( 'Advocates', 'rawlaw' ),
+		'how'       => __( 'How It Works', 'rawlaw' ),
+		'faq'       => __( 'FAQ', 'rawlaw' ),
+		'footer'    => __( 'CTA & Footer', 'rawlaw' ),
+	);
 	?>
 	<div class="wrap rawlaw-home-settings">
-		<h1><?php esc_html_e( 'RawLaw Homepage Content', 'rawlaw' ); ?></h1>
-		<p><?php esc_html_e( 'Edit homepage copy and content only. Layout, section order and responsive design remain controlled by the theme.', 'rawlaw' ); ?></p>
+		<div class="rawlaw-home-shell">
+			<header class="rawlaw-home-hero">
+				<div>
+					<p class="rawlaw-home-kicker"><?php esc_html_e( 'Homepage CMS', 'rawlaw' ); ?></p>
+					<h1><?php esc_html_e( 'RawLaw Homepage Content', 'rawlaw' ); ?></h1>
+					<p><?php esc_html_e( 'Edit copy, cards, FAQs, CTAs and visuals while the theme keeps layout, spacing and responsive behavior locked.', 'rawlaw' ); ?></p>
+				</div>
+				<div class="rawlaw-home-hero__actions">
+					<a class="button button-secondary" href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Preview Homepage', 'rawlaw' ); ?></a>
+				</div>
+			</header>
+
 		<form method="post" action="options.php">
 			<?php settings_fields( 'rawlaw_homepage_settings' ); ?>
 
-			<h2><?php esc_html_e( 'Hero', 'rawlaw' ); ?></h2>
+				<div class="rawlaw-home-layout">
+					<nav class="rawlaw-home-tabs" aria-label="<?php esc_attr_e( 'Homepage content sections', 'rawlaw' ); ?>">
+						<?php foreach ( $tabs as $id => $label ) : ?>
+							<a href="#rawlaw-panel-<?php echo esc_attr( $id ); ?>" class="rawlaw-home-tabs__item" data-home-tab>
+								<span><?php echo esc_html( $label ); ?></span>
+							</a>
+						<?php endforeach; ?>
+					</nav>
+
+					<div class="rawlaw-home-main">
+						<?php rawlaw_homepage_panel_open( 'rawlaw-panel-hero', __( 'Hero & Query Entry', 'rawlaw' ), __( 'Controls the first viewport copy, main action, lawyer prompt and popular issue chips.', 'rawlaw' ) ); ?>
+			<?php rawlaw_homepage_card_open( __( 'Hero Copy', 'rawlaw' ), __( 'Keep this short. The frontend layout is intentionally minimal.', 'rawlaw' ) ); ?>
 			<?php
-			rawlaw_homepage_field( 'hero.headline_line', __( 'Headline line 1', 'rawlaw' ) );
-			rawlaw_homepage_field( 'hero.headline_accent', __( 'Headline line 2', 'rawlaw' ) );
-			rawlaw_homepage_field( 'hero.subtitle', __( 'Subtitle', 'rawlaw' ), 'textarea' );
-			rawlaw_homepage_field( 'hero.placeholder', __( 'Input placeholder', 'rawlaw' ) );
-			rawlaw_homepage_field( 'hero.button', __( 'Button text', 'rawlaw' ) );
+			rawlaw_homepage_field( 'hero.headline_line', __( 'Headline line 1', 'rawlaw' ), 'text', array( 'maxlength' => 56 ) );
+			rawlaw_homepage_field( 'hero.headline_accent', __( 'Headline line 2', 'rawlaw' ), 'text', array( 'maxlength' => 64 ) );
+			rawlaw_homepage_field( 'hero.subtitle', __( 'Subtitle', 'rawlaw' ), 'textarea', array( 'maxlength' => 180 ) );
+			rawlaw_homepage_field( 'hero.placeholder', __( 'Input placeholder', 'rawlaw' ), 'text', array( 'maxlength' => 90 ) );
+			rawlaw_homepage_field( 'hero.button', __( 'Button text', 'rawlaw' ), 'text', array( 'maxlength' => 28 ) );
+			rawlaw_homepage_card_close();
+
+			rawlaw_homepage_card_open( __( 'Advocate Prompt', 'rawlaw' ), __( 'Small secondary path below the hero query action.', 'rawlaw' ) );
 			rawlaw_homepage_field( 'hero.lawyer_prompt', __( 'Advocate prompt', 'rawlaw' ) );
 			rawlaw_homepage_field( 'hero.lawyer_link_text', __( 'Advocate link text', 'rawlaw' ) );
 			rawlaw_homepage_field( 'hero.lawyer_link_url', __( 'Advocate link URL', 'rawlaw' ), 'url' );
+			rawlaw_homepage_card_close();
 			?>
-			<h3><?php esc_html_e( 'Popular Chips', 'rawlaw' ); ?></h3>
+			<div class="rawlaw-home-repeater">
+				<div class="rawlaw-home-card__header">
+					<h3><?php esc_html_e( 'Popular Chips', 'rawlaw' ); ?></h3>
+					<p><?php esc_html_e( 'These chips prefill the query modal. Category values match the app handoff contract.', 'rawlaw' ); ?></p>
+				</div>
 			<?php foreach ( $content['hero']['popular'] as $i => $item ) : ?>
-				<h4><?php printf( esc_html__( 'Chip %d', 'rawlaw' ), $i + 1 ); ?></h4>
+				<div class="rawlaw-home-item-card">
+					<div class="rawlaw-home-item-card__title"><?php printf( esc_html__( 'Chip %d', 'rawlaw' ), $i + 1 ); ?></div>
 				<?php
 				rawlaw_homepage_field( "hero.popular.$i.label", __( 'Label', 'rawlaw' ) );
-				rawlaw_homepage_field( "hero.popular.$i.area", __( 'Legal category slug', 'rawlaw' ) );
+					rawlaw_homepage_field( "hero.popular.$i.area", __( 'Legal category', 'rawlaw' ), 'select', array( 'options' => $category_options ) );
 				rawlaw_homepage_field( "hero.popular.$i.details", __( 'Prefill details', 'rawlaw' ), 'textarea' );
 				?>
+				</div>
 			<?php endforeach; ?>
+			</div>
+			<?php rawlaw_homepage_panel_close(); ?>
 
-			<h2><?php esc_html_e( 'Feature Strip', 'rawlaw' ); ?></h2>
-			<?php foreach ( $content['features'] as $i => $feature ) : ?>
-				<?php rawlaw_homepage_field( "features.$i.title", sprintf( esc_html__( 'Feature %d title', 'rawlaw' ), $i + 1 ) ); ?>
-			<?php endforeach; ?>
-
-			<h2><?php esc_html_e( 'Know Your Rights', 'rawlaw' ); ?></h2>
+						<?php rawlaw_homepage_panel_open( 'rawlaw-panel-kyr', __( 'Know Your Rights', 'rawlaw' ), __( 'Issue cards and rotating right-side visuals. Editors can change content and image URLs, not the animation layout.', 'rawlaw' ) ); ?>
+			<?php rawlaw_homepage_card_open( __( 'Section Header', 'rawlaw' ) ); ?>
 			<?php
 			rawlaw_homepage_field( 'kyr.eyebrow', __( 'Eyebrow', 'rawlaw' ) );
-			rawlaw_homepage_field( 'kyr.title', __( 'Title', 'rawlaw' ) );
-			rawlaw_homepage_field( 'kyr.subtitle', __( 'Subtitle', 'rawlaw' ), 'textarea' );
+			rawlaw_homepage_field( 'kyr.title', __( 'Title', 'rawlaw' ), 'text', array( 'maxlength' => 80 ) );
+			rawlaw_homepage_field( 'kyr.subtitle', __( 'Subtitle', 'rawlaw' ), 'textarea', array( 'maxlength' => 200 ) );
 			rawlaw_homepage_field( 'kyr.visual_eyebrow', __( 'Visual eyebrow', 'rawlaw' ) );
-			rawlaw_homepage_field( 'kyr.trust', __( 'Trust note', 'rawlaw' ), 'textarea' );
+			rawlaw_homepage_field( 'kyr.trust', __( 'Trust note', 'rawlaw' ), 'textarea', array( 'maxlength' => 180 ) );
+			rawlaw_homepage_card_close();
+			?>
+			<div class="rawlaw-home-repeater">
+				<div class="rawlaw-home-card__header">
+					<h3><?php esc_html_e( 'Issue Cards', 'rawlaw' ); ?></h3>
+					<p><?php esc_html_e( 'Each item controls one left-side issue card and its matching visual panel.', 'rawlaw' ); ?></p>
+				</div>
+			<?php
 			foreach ( $content['kyr']['issues'] as $i => $issue ) :
 				?>
-				<h3><?php printf( esc_html__( 'Know Your Rights Item %d', 'rawlaw' ), $i + 1 ); ?></h3>
-				<?php
-				rawlaw_homepage_field( "kyr.issues.$i.title", __( 'Card title', 'rawlaw' ) );
-				rawlaw_homepage_field( "kyr.issues.$i.sub", __( 'Card subtitle', 'rawlaw' ) );
-				rawlaw_homepage_field( "kyr.issues.$i.area", __( 'Legal category slug', 'rawlaw' ) );
-				rawlaw_homepage_field( "kyr.issues.$i.details", __( 'Prefill details', 'rawlaw' ), 'textarea' );
-				rawlaw_homepage_field( "kyr.issues.$i.image", __( 'Visual image URL', 'rawlaw' ), 'url' );
-				rawlaw_homepage_field( "kyr.issues.$i.visual_title", __( 'Visual title', 'rawlaw' ) );
-				rawlaw_homepage_field( "kyr.issues.$i.visual_desc", __( 'Visual description', 'rawlaw' ), 'textarea' );
-			endforeach;
-			?>
+				<div class="rawlaw-home-item-card rawlaw-home-item-card--media">
+					<div class="rawlaw-home-item-card__title"><?php printf( esc_html__( 'Know Your Rights Item %d', 'rawlaw' ), $i + 1 ); ?></div>
+					<?php
+					rawlaw_homepage_field( "kyr.issues.$i.title", __( 'Card title', 'rawlaw' ) );
+					rawlaw_homepage_field( "kyr.issues.$i.sub", __( 'Card subtitle', 'rawlaw' ) );
+					rawlaw_homepage_field( "kyr.issues.$i.area", __( 'Legal category', 'rawlaw' ), 'select', array( 'options' => $category_options ) );
+					rawlaw_homepage_field( "kyr.issues.$i.details", __( 'Prefill details', 'rawlaw' ), 'textarea' );
+					rawlaw_homepage_field( "kyr.issues.$i.image", __( 'Visual image', 'rawlaw' ), 'media' );
+					rawlaw_homepage_field( "kyr.issues.$i.visual_title", __( 'Visual title', 'rawlaw' ) );
+					rawlaw_homepage_field( "kyr.issues.$i.visual_desc", __( 'Visual description', 'rawlaw' ), 'textarea' );
+					?>
+				</div>
+			<?php endforeach; ?>
+			</div>
+			<?php rawlaw_homepage_panel_close(); ?>
 
-			<h2><?php esc_html_e( 'News Section', 'rawlaw' ); ?></h2>
+						<?php rawlaw_homepage_panel_open( 'rawlaw-panel-news', __( 'News Section', 'rawlaw' ), __( 'Controls the editorial section framing. Actual posts still come from WordPress posts.', 'rawlaw' ) ); ?>
+			<?php rawlaw_homepage_card_open( __( 'News Copy & CTAs', 'rawlaw' ) ); ?>
 			<?php
 			rawlaw_homepage_field( 'news.eyebrow', __( 'Eyebrow', 'rawlaw' ) );
 			rawlaw_homepage_field( 'news.title', __( 'Title', 'rawlaw' ) );
@@ -290,9 +442,17 @@ function rawlaw_homepage_settings_page() {
 			rawlaw_homepage_field( 'news.primary_cta', __( 'Primary CTA', 'rawlaw' ) );
 			rawlaw_homepage_field( 'news.query_cta', __( 'Query CTA', 'rawlaw' ) );
 			rawlaw_homepage_field( 'news.cta_note', __( 'CTA note', 'rawlaw' ), 'textarea' );
+			rawlaw_homepage_card_close();
 			?>
+			<?php rawlaw_homepage_card_open( __( 'Feature Strip', 'rawlaw' ), __( 'Thin trust strip directly under the hero.', 'rawlaw' ) ); ?>
+			<?php foreach ( $content['features'] as $i => $feature ) : ?>
+				<?php rawlaw_homepage_field( "features.$i.title", sprintf( esc_html__( 'Feature %d title', 'rawlaw' ), $i + 1 ) ); ?>
+			<?php endforeach; ?>
+			<?php rawlaw_homepage_card_close(); ?>
+			<?php rawlaw_homepage_panel_close(); ?>
 
-			<h2><?php esc_html_e( 'For Advocates', 'rawlaw' ); ?></h2>
+						<?php rawlaw_homepage_panel_open( 'rawlaw-panel-advocates', __( 'For Advocates', 'rawlaw' ), __( 'Supply-side acquisition copy and benefit bullets.', 'rawlaw' ) ); ?>
+			<?php rawlaw_homepage_card_open( __( 'Advocate Section Copy', 'rawlaw' ) ); ?>
 			<?php
 			rawlaw_homepage_field( 'advocates.eyebrow', __( 'Eyebrow', 'rawlaw' ) );
 			rawlaw_homepage_field( 'advocates.title', __( 'Title', 'rawlaw' ) );
@@ -300,50 +460,92 @@ function rawlaw_homepage_settings_page() {
 			rawlaw_homepage_field( 'advocates.primary_cta', __( 'Primary CTA', 'rawlaw' ) );
 			rawlaw_homepage_field( 'advocates.primary_url', __( 'Primary URL', 'rawlaw' ), 'url' );
 			rawlaw_homepage_field( 'advocates.secondary_cta', __( 'Secondary CTA', 'rawlaw' ) );
+			rawlaw_homepage_card_close();
+			?>
+			<div class="rawlaw-home-repeater rawlaw-home-repeater--two">
+				<div class="rawlaw-home-card__header">
+					<h3><?php esc_html_e( 'Benefit Cards', 'rawlaw' ); ?></h3>
+				</div>
+			<?php
 			foreach ( $content['advocates']['benefits'] as $i => $benefit ) :
+				echo '<div class="rawlaw-home-item-card">';
 				rawlaw_homepage_field( "advocates.benefits.$i.title", sprintf( esc_html__( 'Benefit %d title', 'rawlaw' ), $i + 1 ) );
 				rawlaw_homepage_field( "advocates.benefits.$i.text", sprintf( esc_html__( 'Benefit %d text', 'rawlaw' ), $i + 1 ), 'textarea' );
+				echo '</div>';
 			endforeach;
 			?>
+			</div>
+			<?php rawlaw_homepage_panel_close(); ?>
 
-			<h2><?php esc_html_e( 'How It Works', 'rawlaw' ); ?></h2>
+						<?php rawlaw_homepage_panel_open( 'rawlaw-panel-how', __( 'How It Works', 'rawlaw' ), __( 'Four fixed steps. Edit copy only; step icons and layout stay theme-controlled.', 'rawlaw' ) ); ?>
+			<?php rawlaw_homepage_card_open( __( 'Section Header', 'rawlaw' ) ); ?>
 			<?php
 			rawlaw_homepage_field( 'how.eyebrow', __( 'Eyebrow', 'rawlaw' ) );
 			rawlaw_homepage_field( 'how.title', __( 'Title', 'rawlaw' ) );
 			rawlaw_homepage_field( 'how.subtitle', __( 'Subtitle', 'rawlaw' ), 'textarea' );
 			rawlaw_homepage_field( 'how.cta', __( 'CTA text', 'rawlaw' ) );
+			rawlaw_homepage_card_close();
+			?>
+			<div class="rawlaw-home-repeater rawlaw-home-repeater--two">
+			<?php
 			foreach ( $content['how']['steps'] as $i => $step ) :
+				echo '<div class="rawlaw-home-item-card">';
 				rawlaw_homepage_field( "how.steps.$i.title", sprintf( esc_html__( 'Step %d title', 'rawlaw' ), $i + 1 ) );
 				rawlaw_homepage_field( "how.steps.$i.desc", sprintf( esc_html__( 'Step %d description', 'rawlaw' ), $i + 1 ), 'textarea' );
+				echo '</div>';
 			endforeach;
 			?>
+			</div>
+			<?php rawlaw_homepage_panel_close(); ?>
 
-			<h2><?php esc_html_e( 'FAQ', 'rawlaw' ); ?></h2>
+						<?php rawlaw_homepage_panel_open( 'rawlaw-panel-faq', __( 'FAQ', 'rawlaw' ), __( 'Questions and answers also feed the homepage FAQPage JSON-LD schema.', 'rawlaw' ) ); ?>
+			<?php rawlaw_homepage_card_open( __( 'FAQ Header', 'rawlaw' ) ); ?>
 			<?php
 			rawlaw_homepage_field( 'faq.eyebrow', __( 'Eyebrow', 'rawlaw' ) );
 			rawlaw_homepage_field( 'faq.title', __( 'Title', 'rawlaw' ) );
 			rawlaw_homepage_field( 'faq.subtitle', __( 'Subtitle', 'rawlaw' ), 'textarea' );
+			rawlaw_homepage_card_close();
+			?>
+			<div class="rawlaw-home-repeater">
+			<?php
 			foreach ( $content['faq']['items'] as $i => $faq ) :
+				echo '<div class="rawlaw-home-item-card">';
 				rawlaw_homepage_field( "faq.items.$i.q", sprintf( esc_html__( 'Question %d', 'rawlaw' ), $i + 1 ), 'textarea' );
 				rawlaw_homepage_field( "faq.items.$i.a", sprintf( esc_html__( 'Answer %d', 'rawlaw' ), $i + 1 ), 'textarea' );
+				echo '</div>';
 			endforeach;
 			?>
+			</div>
+			<?php rawlaw_homepage_panel_close(); ?>
 
-			<h2><?php esc_html_e( 'Closing CTA & Footer Copy', 'rawlaw' ); ?></h2>
+						<?php rawlaw_homepage_panel_open( 'rawlaw-panel-footer', __( 'Closing CTA & Footer', 'rawlaw' ), __( 'Final conversion copy and compact footer trust messaging.', 'rawlaw' ) ); ?>
+			<?php rawlaw_homepage_card_open( __( 'Closing CTA', 'rawlaw' ) ); ?>
 			<?php
 			rawlaw_homepage_field( 'closing.title', __( 'Closing title', 'rawlaw' ) );
 			rawlaw_homepage_field( 'closing.text', __( 'Closing text', 'rawlaw' ), 'textarea' );
 			rawlaw_homepage_field( 'closing.primary_cta', __( 'Primary CTA', 'rawlaw' ) );
 			rawlaw_homepage_field( 'closing.secondary_cta', __( 'Secondary CTA', 'rawlaw' ) );
 			rawlaw_homepage_field( 'closing.secondary_url', __( 'Secondary URL', 'rawlaw' ), 'url' );
+			rawlaw_homepage_card_close();
+
+			rawlaw_homepage_card_open( __( 'Footer Copy', 'rawlaw' ) );
 			rawlaw_homepage_field( 'footer.about', __( 'Footer about', 'rawlaw' ), 'textarea' );
 			rawlaw_homepage_field( 'footer.trust_1', __( 'Footer trust item 1', 'rawlaw' ) );
 			rawlaw_homepage_field( 'footer.trust_2', __( 'Footer trust item 2', 'rawlaw' ) );
 			rawlaw_homepage_field( 'footer.fine_print', __( 'Footer fine print', 'rawlaw' ) );
 			rawlaw_homepage_field( 'footer.copy', __( 'Footer copyright sentence', 'rawlaw' ) );
-			submit_button();
+			rawlaw_homepage_card_close();
+			rawlaw_homepage_panel_close();
 			?>
+					</div>
+				</div>
+
+				<div class="rawlaw-home-savebar">
+					<span><?php esc_html_e( 'Content changes are saved to the RawLaw homepage option. Layout remains locked.', 'rawlaw' ); ?></span>
+					<?php submit_button( __( 'Save Homepage Content', 'rawlaw' ), 'primary', 'submit', false ); ?>
+				</div>
 		</form>
+		</div>
 	</div>
 	<?php
 }
