@@ -12,7 +12,7 @@ function rawlaw_home_default_content() {
 
 	return array(
 		'hero'      => array(
-			'headline_line' => __( 'Understand the law.', 'rawlaw' ),
+			'headline_line' => __( 'Legal Help Should Begin With Clarity', 'rawlaw' ),
 			'headline_accent' => __( 'Find verified legal help.', 'rawlaw' ),
 			'subtitle' => __( 'Tell us what happened. We will ask for a few details next so relevant verified advocates can respond.', 'rawlaw' ),
 			'placeholder' => __( 'e.g. Builder delayed possession, need legal notice...', 'rawlaw' ),
@@ -77,14 +77,14 @@ function rawlaw_home_default_content() {
 		),
 		'how'       => array(
 			'eyebrow' => __( 'How it works', 'rawlaw' ),
-			'title' => __( 'From query to qualified legal help', 'rawlaw' ),
-			'subtitle' => __( 'A structured intake flow gives citizens clarity and gives advocates the context they need before responding.', 'rawlaw' ),
+			'title' => __( 'Post Your Query. Compare Advocates. Choose With Confidence.', 'rawlaw' ),
+			'subtitle' => __( 'Share your legal issue in simple words. Advocates relevant to your matter can respond with suggestions, proposed fees and their approach.', 'rawlaw' ),
 			'cta' => __( 'Start with your query — it\'s free', 'rawlaw' ),
 			'steps' => array(
-				array( 'title' => __( 'Post the issue', 'rawlaw' ), 'desc' => __( 'Start with a one-line issue, then share the matter, city, urgency, and preferred contact route.', 'rawlaw' ) ),
-				array( 'title' => __( 'RawLaw captures context', 'rawlaw' ), 'desc' => __( 'Your details stay structured and private so the matter can be routed with the right context.', 'rawlaw' ) ),
-				array( 'title' => __( 'Match to verified advocates', 'rawlaw' ), 'desc' => __( 'Review verified profiles by city, practice area, experience, and relevance before engaging.', 'rawlaw' ) ),
-				array( 'title' => __( 'Move only when ready', 'rawlaw' ), 'desc' => __( 'Compare options, ask follow-up questions, then decide whether to consult.', 'rawlaw' ) ),
+				array( 'title' => __( 'Post Your Legal Query', 'rawlaw' ), 'desc' => __( 'Describe your issue, location and the assistance you need.', 'rawlaw' ) ),
+				array( 'title' => __( 'Receive Responses and Fee Quotes', 'rawlaw' ), 'desc' => __( 'Get replies, suggestions and professional fee proposals from interested advocates.', 'rawlaw' ) ),
+				array( 'title' => __( 'Review and Compare Profiles', 'rawlaw' ), 'desc' => __( 'Check their experience, practice areas, court appearances, similar matters handled and professional portfolio. Compare the proposals and fees received.', 'rawlaw' ) ),
+				array( 'title' => __( 'Communicate and Decide', 'rawlaw' ), 'desc' => __( 'Speak directly with the advocates, ask questions and engage the one you consider most suitable.', 'rawlaw' ) ),
 			),
 		),
 		'faq'       => array(
