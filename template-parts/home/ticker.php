@@ -52,6 +52,7 @@ if ( ! $ticker_q->have_posts() ) {
 			</a>
 			<?php endwhile; ?>
 		</div>
+		<?php $ticker_q->rewind_posts(); ?>
 		<div class="ticker__marquee" aria-hidden="true">
 			<?php while ( $ticker_q->have_posts() ) : $ticker_q->the_post(); ?>
 			<a class="ticker__item" href="<?php the_permalink(); ?>" tabindex="-1">

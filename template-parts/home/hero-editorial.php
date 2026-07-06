@@ -66,8 +66,11 @@ $popular = rawlaw_home_get( 'hero.popular', array() );
 		</div>
 	</div>
 
-	<!-- Right: Top News -->
-	<div class="hero__right">
-		<?php get_template_part( 'template-parts/home/hero-top-news' ); ?>
-	</div>
+	<?php
+	/*
+	 * Right: Top News.
+	 * Temporarily disabled so the hero can focus on the centered legal-query intake.
+	 */
+	// get_template_part( 'template-parts/home/hero-top-news' );
+	?>
 </div>

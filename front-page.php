@@ -34,6 +34,9 @@ $displayed_ids = array();
 		<span class="hero__decor-orb hero__decor-orb--b"></span>
 		<span class="hero__decor-grid"></span>
 	</div>
+	<div class="hero__ticker">
+		<?php get_template_part( 'template-parts/home/ticker', null, array( 'count' => 6 ) ); ?>
+	</div>
 	<div class="container">
 		<?php get_template_part( 'template-parts/home/hero-editorial' ); ?>
 	</div>

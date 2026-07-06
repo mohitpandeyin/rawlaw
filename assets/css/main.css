@@ -273,7 +273,7 @@ a.eyebrow:hover { color: var(--navy-700); }
 	.ticker__thumb { display: none; }
 }
 
-/* ---------- 9. Hero (front) — two-column: content left, top news right ---------- */
+/* ---------- 9. Hero (front) — centered query intake ---------- */
 .hero {
 	position: relative;
 	padding: 0;
@@ -286,23 +286,32 @@ a.eyebrow:hover { color: var(--navy-700); }
 .hero .container {
 	position: relative;
 	z-index: 1;
-	padding-top: clamp(56px, 6vw, 96px);
-	padding-bottom: clamp(48px, 5.5vw, 88px);
+	padding-top: clamp(48px, 5.5vw, 88px);
+	padding-bottom: clamp(56px, 6vw, 96px);
+}
+.hero__ticker {
+	width: min(1192px, 100%);
+	margin: 28px auto;
 }
 
 .hero__inner {
 	display: grid;
-	grid-template-columns: minmax(0, 1.55fr) minmax(320px, .9fr);
-	gap: clamp(28px, 4vw, 60px);
-	align-items: flex-start;
+	grid-template-columns: minmax(0, 1fr);
+	justify-items: center;
+	gap: clamp(24px, 4vw, 52px);
+	align-items: center;
+	text-align: center;
 }
 
-/* Left column */
+/* Centered content */
 .hero__left {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	gap: var(--s-4);
-	max-width: 760px;
+	width: min(860px, 100%);
+	max-width: 860px;
+	margin: 0 auto;
 	align-self: center;
 }
 
@@ -331,13 +340,14 @@ a.eyebrow:hover { color: var(--navy-700); }
 	font-size: clamp(17px, 1.15vw, 18px);
 	color: var(--muted);
 	line-height: 1.5;
-	margin: 4px 0 0;
+	margin: 4px auto 0;
 	max-width: 52ch;
 }
 
 /* Single input search */
 .hero__finder {
 	display: flex; flex-direction: column; gap: var(--s-2);
+	width: min(760px, 100%);
 }
 .hero__finder-row {
 	display: grid; grid-template-columns: 1fr auto; gap: 0;
@@ -401,6 +411,7 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 .hero__quick-actions {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	gap: 9px;
 	margin-top: -4px;
 }
@@ -413,6 +424,7 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 /* Popular chips */
 .hero__chips {
 	display: flex; flex-wrap: wrap;
+	justify-content: center;
 	gap: 6px; align-items: center;
 	margin-top: 2px;
 }
@@ -823,6 +835,7 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 .hero__alt {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	flex-wrap: wrap;
 	gap: 6px;
 	margin: 2px 0 0;
