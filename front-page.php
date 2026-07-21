@@ -5,10 +5,10 @@
  * Section order (optimized for legal intent -> trusted action):
  *   S1  Skip-link / header / utility bar (via get_header)
  *   S2  Hero — query wizard + top news + trust strip
- *   S3  Know Your Rights — issue-based guidance
- *   S4  News & Judgments — editorial authority
- *   S5  For Advocates — verified supply acquisition
- *   S6  How Citizens Use RawLaw — conversion funnel
+ *   S3  How Citizens Use RawLaw — conversion funnel
+ *   S4  Know Your Rights — issue-based guidance
+ *   S5  News & Judgments — editorial authority
+ *   S6  For Advocates — verified supply acquisition
  *   S7  FAQ — reassurance before final CTA
  *   S8  Closing CTA — final conversion push
  *   S9  Footer (via get_footer)
@@ -46,24 +46,24 @@ $displayed_ids = array();
 
 <?php
 /*--------------------------------------------------------------
- * S3 — Know Your Rights (issue-based guidance)
+ * S3 — How Citizens Use RawLaw (conversion funnel)
+ *-------------------------------------------------------------*/
+get_template_part( 'template-parts/home/section-how-it-works' );
+
+/*--------------------------------------------------------------
+ * S4 — Know Your Rights (issue-based guidance)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-know-your-rights' );
 
 /*--------------------------------------------------------------
- * S4 — Latest Legal News & Insights (editorial trust driver)
+ * S5 — Latest Legal News & Insights (editorial trust driver)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-news' );
 
 /*--------------------------------------------------------------
- * S5 — For Advocates (supply acquisition)
+ * S6 — For Advocates (supply acquisition)
  *-------------------------------------------------------------*/
 get_template_part( 'template-parts/home/section-for-advocates' );
-
-/*--------------------------------------------------------------
- * S6 — How Citizens Use RawLaw (conversion funnel)
- *-------------------------------------------------------------*/
-get_template_part( 'template-parts/home/section-how-it-works' );
 
 /*--------------------------------------------------------------
  * S7 — FAQ (SEO rich results + user reassurance pre-CTA)
