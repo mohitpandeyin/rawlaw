@@ -2338,7 +2338,7 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 }
 .kyr-visual__item[hidden] { display: none; }
 .kyr-visual__media {
-	aspect-ratio: 1.28;
+	aspect-ratio: 4 / 3;
 	display: grid;
 	place-items: center;
 	overflow: hidden;
@@ -2349,7 +2349,7 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 .kyr-visual__media img {
 	width: 100%;
 	height: 100%;
-	object-fit: contain;
+	object-fit: cover;
 }
 .kyr-visual__body {
 	padding: var(--s-4) var(--s-1) 0;
@@ -2458,7 +2458,6 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 .section--how-it-works .how-it-works__cta {
 	margin-top: 32px;
 	padding-top: 24px;
-	border-top: 1px solid var(--border);
 }
 .section--know-your-rights .issue-card {
 	border-radius: var(--r-lg);
