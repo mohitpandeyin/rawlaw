@@ -8,7 +8,7 @@ if ( post_password_required() ) { return; }
 ?>
 <section id="comments" class="comments" aria-labelledby="comments-title">
 	<?php if ( have_comments() ) : ?>
-		<h2 id="comments-title" class="section__title">
+		<h2 id="comments-title" class="comments__title">
 			<?php
 			$count = get_comments_number();
 			printf( esc_html( _n( '%s comment', '%s comments', $count, 'rawlaw' ) ), number_format_i18n( $count ) );
