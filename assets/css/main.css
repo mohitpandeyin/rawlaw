@@ -1731,8 +1731,15 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 	margin-top: var(--s-7); padding: var(--s-6);
 	background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--r-lg);
 }
-.comments__reply-title { font-family: var(--font-display); font-size: var(--fs-md); font-weight: 700; color: var(--ink); margin: 0 0 var(--s-5); }
-#cancel-comment-reply-link { margin-left: 10px; font-size: var(--fs-xs); font-weight: 500; color: var(--muted); text-decoration: underline; }
+.comments__reply-title {
+	display: flex; align-items: center; justify-content: space-between; gap: var(--s-3);
+	font-family: var(--font-display); font-size: var(--fs-md); font-weight: 700; color: var(--ink); margin: 0 0 var(--s-5);
+}
+#cancel-comment-reply-link {
+	display: inline-flex; align-items: center; gap: 4px;
+	font-size: var(--fs-xs); font-weight: 600; color: var(--danger); text-decoration: underline;
+}
+#cancel-comment-reply-link::before { content: '\2715'; text-decoration: none; }
 .comment-notes, .logged-in-as { margin: 0 0 var(--s-4); font-size: var(--fs-sm); color: var(--muted); }
 .logged-in-as a { color: var(--navy); }
 .must-log-in a { color: var(--navy); }
