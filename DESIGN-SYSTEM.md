@@ -1,7 +1,7 @@
 # RawLaw Design System
 
 > Premium editorial theme for an Indian legal marketplace.  
-> PHP 8.1+ · Vanilla CSS (custom properties) · AMP-compatible · Inter typeface
+> PHP 8.1+ · Vanilla CSS (custom properties) · Inter typeface
 
 ---
 
@@ -141,8 +141,8 @@ Buttons use `border-radius: 999px` (pill shape).
 | `--dur-mid`  | `280ms`                           | Expand, slide            |
 | `--dur-slow` | `520ms`                           | Image zoom, scroll fx    |
 
-### AMP Compatibility
-No inline JavaScript. Use CSS-only animations and `data-reveal` / `data-reveal-stagger` attributes for scroll animations.
+### Scroll Reveals
+Use `data-reveal` / `data-reveal-stagger` attributes for scroll-triggered animations, respecting `prefers-reduced-motion`.
 
 ---
 
@@ -325,10 +325,8 @@ Editor parity: `assets/css/editor.css`
 | `rawlaw_category_eyebrow()`    | Category label above articles                |
 | `rawlaw_article_meta($args)`   | Post meta (date, reading time, author)       |
 | `rawlaw_reading_time()`        | Estimated reading time                       |
-| `rawlaw_is_amp()`              | Check if current request is AMP              |
 | `rawlaw_breadcrumbs()`         | Structured breadcrumb navigation             |
 | `rawlaw_verified_badge($id)`   | Verified lawyer badge with icon              |
-| `rawlaw_lawyer_rating($id)`    | Average review rating                        |
 
 ---
 
@@ -340,11 +338,10 @@ Editor parity: `assets/css/editor.css`
 4. **Accessibility** — semantic HTML, 4.5:1 contrast minimum, `aria-hidden="true"` on decorative elements, `:focus-visible` support.
 5. **Typography hierarchy** — uppercase eyebrows (11-12px, letter-spacing .12em+), display headings use serif, body uses Inter.
 6. **Illustrations** — CSS-only decorative elements (gradients, pseudo-elements). No external images for decoration.
-7. **AMP-compatible** — no inline JavaScript. CSS-only animations.
-8. **Buttons are pills** — `border-radius: 999px` on all button variants.
-9. **Editorial images** — no border-radius (squared crops for newspaper feel).
-10. **Column rules** — vertical `1px solid var(--border)` between adjacent editorial columns (newspaper grid convention).
-11. **Editorial-first conversion** — every major page can expose legal action, but content clarity and trust come before marketplace pressure.
+7. **Buttons are pills** — `border-radius: 999px` on all button variants.
+8. **Editorial images** — no border-radius (squared crops for newspaper feel).
+9. **Column rules** — vertical `1px solid var(--border)` between adjacent editorial columns (newspaper grid convention).
+10. **Editorial-first conversion** — every major page can expose legal action, but content clarity and trust come before marketplace pressure.
 12. **Mobile-first trust** — verification, location, practice area, reviews, fees, and response cues must remain visible on compact screens.
 
 ---
@@ -383,7 +380,6 @@ rawlaw/
 │       ├── rawlaw-logo.svg
 │       └── rawlaw-logo-mono.svg
 ├── inc/
-│   ├── amp.php               ← AMP compatibility layer
 │   ├── breadcrumbs.php
 │   ├── cpt.php               ← Custom post types (lawyer, etc.)
 │   ├── customizer.php

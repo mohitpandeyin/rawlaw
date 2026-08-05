@@ -23,7 +23,12 @@ function rawlaw_lawyer_fields() {
 		'_rawlaw_phone'          => array( 'label' => __( 'Phone (contact, masked until shared)', 'rawlaw' ), 'type' => 'text' ),
 		'_rawlaw_website'        => array( 'label' => __( 'Website', 'rawlaw' ),             'type' => 'url' ),
 		'_rawlaw_consultation'   => array( 'label' => __( 'Consultation fee (₹)', 'rawlaw' ),'type' => 'number' ),
-		'_rawlaw_verified'       => array( 'label' => __( 'Verified by RawLaw', 'rawlaw' ),  'type' => 'checkbox' ),
+		'_rawlaw_kyc_status'     => array( 'label' => __( 'KYC status', 'rawlaw' ), 'type' => 'select', 'options' => array(
+			'pending'   => __( 'Pending', 'rawlaw' ),
+			'verified'  => __( 'Verified', 'rawlaw' ),
+			'rejected'  => __( 'Rejected', 'rawlaw' ),
+			'suspended' => __( 'Suspended', 'rawlaw' ),
+		) ),
 		'_rawlaw_accepting'      => array( 'label' => __( 'Accepting new clients', 'rawlaw' ),'type' => 'checkbox' ),
 		'_rawlaw_share_contact'  => array( 'label' => __( 'Share phone, email & Bar ID publicly (otherwise only visible to logged-in users)', 'rawlaw' ), 'type' => 'checkbox' ),
 	);
@@ -38,6 +43,13 @@ function rawlaw_lawyer_meta_box_cb( $post ) {
 		echo '<label for="' . esc_attr( $key ) . '"><strong>' . esc_html( $field['label'] ) . '</strong></label>';
 		if ( 'checkbox' === $field['type'] ) {
 			echo '<label><input type="checkbox" id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" value="1" ' . checked( $val, '1', false ) . '> ' . esc_html__( 'Yes', 'rawlaw' ) . '</label>';
+		} elseif ( 'select' === $field['type'] ) {
+			$val = $val ?: 'pending';
+			echo '<select id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" class="widefat">';
+			foreach ( $field['options'] as $opt_value => $opt_label ) {
+				echo '<option value="' . esc_attr( $opt_value ) . '" ' . selected( $val, $opt_value, false ) . '>' . esc_html( $opt_label ) . '</option>';
+			}
+			echo '</select>';
 		} else {
 			$ph = isset( $field['placeholder'] ) ? $field['placeholder'] : '';
 			printf(
@@ -70,10 +82,16 @@ function rawlaw_lawyer_meta_save( $post_id ) {
 			case 'email':  $val = sanitize_email( $raw ); break;
 			case 'url':    $val = esc_url_raw( $raw );    break;
 			case 'number': $val = is_numeric( $raw ) ? $raw : ''; break;
+			case 'select': $val = array_key_exists( $raw, $field['options'] ) ? $raw : 'pending'; break;
 			default:       $val = sanitize_text_field( $raw );
 		}
 		update_post_meta( $post_id, $key, $val );
 	}
+
+	// `_rawlaw_verified` stays as a derived legacy boolean so the 8 existing
+	// call sites (schema, sitemap, marketplace filters, badges) keep working
+	// unchanged — `_rawlaw_kyc_status` is now the single source of truth.
+	update_post_meta( $post_id, '_rawlaw_verified', 'verified' === get_post_meta( $post_id, '_rawlaw_kyc_status', true ) ? '1' : '' );
 }
 add_action( 'save_post_lawyer', 'rawlaw_lawyer_meta_save' );
 
