@@ -16,6 +16,7 @@ define( 'RAWLAW_URI', trailingslashit( get_template_directory_uri() ) );
 require RAWLAW_DIR . 'inc/setup.php';
 require RAWLAW_DIR . 'inc/enqueue.php';
 require RAWLAW_DIR . 'inc/security.php';
+require RAWLAW_DIR . 'inc/comment-antispam.php';
 require RAWLAW_DIR . 'inc/widgets.php';
 require RAWLAW_DIR . 'inc/template-tags.php';
 require RAWLAW_DIR . 'inc/breadcrumbs.php';
