@@ -23,24 +23,21 @@ if ( false === $stats ) {
 	set_transient( 'rawlaw_trust_stats', $stats, HOUR_IN_SECONDS );
 }
 
-$lawyers  = $stats['lawyers']  > 10  ? number_format_i18n( $stats['lawyers'] )  . '+' : '10,000+';
-$cities   = $stats['cities']   > 5   ? number_format_i18n( $stats['cities'] )   . '+' : '500+';
-
 $items = array(
-	array( 'icon' => 'user',     'num' => $lawyers,       'label' => __( 'Verified Lawyers', 'rawlaw' ) ),
-	array( 'icon' => 'verified', 'num' => '2,00,000+',    'label' => __( 'Happy Clients', 'rawlaw' ) ),
-	array( 'icon' => 'pin',      'num' => $cities,         'label' => __( 'Cities Covered', 'rawlaw' ) ),
-	array( 'icon' => 'globe',    'num' => '4.8/5',         'label' => __( 'Average Rating', 'rawlaw' ) ),
-	array( 'icon' => 'clock',    'num' => '24/7',          'label' => __( 'Support Available', 'rawlaw' ) ),
+	array( 'icon' => 'user',     'count' => $stats['lawyers'],  'label' => __( 'Verified Lawyers', 'rawlaw' ) ),
+	array( 'icon' => 'verified', 'count' => $stats['areas'],    'label' => __( 'Practice Areas Covered', 'rawlaw' ) ),
+	array( 'icon' => 'pin',      'count' => $stats['cities'],   'label' => __( 'Cities Covered', 'rawlaw' ) ),
+	array( 'icon' => 'globe',    'count' => $stats['articles'], 'label' => __( 'Articles Published', 'rawlaw' ) ),
 );
 ?>
 <div class="stats-strip" data-reveal>
 	<div class="container stats-strip__inner">
 		<?php foreach ( $items as $item ) : ?>
+			<?php if ( $item['count'] < 1 ) { continue; } ?>
 			<div class="stats-strip__item">
 				<span class="stats-strip__icon"><?php rawlaw_icon( $item['icon'] ); ?></span>
 				<div class="stats-strip__text">
-					<span class="stats-strip__num"><?php echo esc_html( $item['num'] ); ?></span>
+					<span class="stats-strip__num"><?php echo esc_html( number_format_i18n( $item['count'] ) . '+' ); ?></span>
 					<span class="stats-strip__label"><?php echo esc_html( $item['label'] ); ?></span>
 				</div>
 			</div>

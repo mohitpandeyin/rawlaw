@@ -19,12 +19,13 @@ function rawlaw_lawyer_fields() {
 		'_rawlaw_experience'     => array( 'label' => __( 'Years of experience', 'rawlaw' ), 'type' => 'number' ),
 		'_rawlaw_bar_id'         => array( 'label' => __( 'Bar Council ID', 'rawlaw' ),      'type' => 'text' ),
 		'_rawlaw_languages'      => array( 'label' => __( 'Languages (comma separated)', 'rawlaw' ), 'type' => 'text' ),
-		'_rawlaw_email'          => array( 'label' => __( 'Public email', 'rawlaw' ),        'type' => 'email' ),
-		'_rawlaw_phone'          => array( 'label' => __( 'Public phone', 'rawlaw' ),        'type' => 'text' ),
+		'_rawlaw_email'          => array( 'label' => __( 'Email (contact, masked until shared)', 'rawlaw' ), 'type' => 'email' ),
+		'_rawlaw_phone'          => array( 'label' => __( 'Phone (contact, masked until shared)', 'rawlaw' ), 'type' => 'text' ),
 		'_rawlaw_website'        => array( 'label' => __( 'Website', 'rawlaw' ),             'type' => 'url' ),
 		'_rawlaw_consultation'   => array( 'label' => __( 'Consultation fee (₹)', 'rawlaw' ),'type' => 'number' ),
 		'_rawlaw_verified'       => array( 'label' => __( 'Verified by RawLaw', 'rawlaw' ),  'type' => 'checkbox' ),
 		'_rawlaw_accepting'      => array( 'label' => __( 'Accepting new clients', 'rawlaw' ),'type' => 'checkbox' ),
+		'_rawlaw_share_contact'  => array( 'label' => __( 'Share phone, email & Bar ID publicly (otherwise only visible to logged-in users)', 'rawlaw' ), 'type' => 'checkbox' ),
 	);
 }
 

@@ -12,7 +12,6 @@ $consultation = get_post_meta( $id, '_rawlaw_consultation', true );
 $languages    = get_post_meta( $id, '_rawlaw_languages', true );
 $practice     = get_the_terms( $id, 'practice_area' );
 $location     = get_the_terms( $id, 'lawyer_location' );
-$rating       = rawlaw_lawyer_rating( $id );
 ?>
 <article id="lawyer-<?php echo (int) $id; ?>" <?php post_class( 'lawyer-card' ); ?> data-reveal>
 	<header class="lawyer-card__head">
@@ -33,13 +32,6 @@ $rating       = rawlaw_lawyer_rating( $id );
 			<?php if ( $designation || $firm ) : ?>
 				<p class="lawyer-card__role">
 					<?php echo esc_html( trim( $designation . ( $firm ? ' · ' . $firm : '' ), ' ·' ) ); ?>
-				</p>
-			<?php endif; ?>
-			<?php if ( $rating ) : ?>
-				<p class="lawyer-card__rating" aria-label="<?php echo esc_attr( sprintf( __( 'Rated %1$s out of 5 from %2$d reviews', 'rawlaw' ), $rating['avg'], $rating['count'] ) ); ?>">
-					<span class="stars" style="--r:<?php echo esc_attr( $rating['avg'] ); ?>" aria-hidden="true">★★★★★</span>
-					<strong><?php echo esc_html( $rating['avg'] ); ?></strong>
-					<span class="muted">(<?php echo (int) $rating['count']; ?>)</span>
 				</p>
 			<?php endif; ?>
 		</div>
@@ -70,6 +62,6 @@ $rating       = rawlaw_lawyer_rating( $id );
 
 	<div class="lawyer-card__cta">
 		<a class="btn btn--primary btn--sm" href="<?php the_permalink(); ?>"><?php esc_html_e( 'View profile', 'rawlaw' ); ?></a>
-		<a class="btn btn--ghost btn--sm" href="<?php echo esc_url( add_query_arg( 'consult', $id, get_permalink() ) ); ?>#consult"><?php esc_html_e( 'Request consultation', 'rawlaw' ); ?></a>
+		<a class="btn btn--ghost btn--sm" href="<?php echo esc_url( get_permalink() ); ?>#consult"><?php esc_html_e( 'Request consultation', 'rawlaw' ); ?></a>
 	</div>
 </article>

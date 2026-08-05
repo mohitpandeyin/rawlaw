@@ -470,6 +470,13 @@
 			showSuccess();
 		});
 	});
+
+	/* --- 12. Marketplace sort — auto-submit on change ------------------- */
+	doc.querySelectorAll('[data-sort-autosubmit]').forEach(function (select) {
+		select.addEventListener('change', function () {
+			select.form.submit();
+		});
+	});
 })();
 
 /* ─── Contact form — validation + AJAX submission ───────────────────────── */
@@ -604,13 +611,28 @@
 		.then(function (res) { return res.json(); })
 		.then(function (res) {
 			if (res.success) {
-				/* Replace form with success message */
-				form.parentNode.innerHTML =
-					'<div class="contact-success" role="status">' +
-					'<div class="contact-success__icon" aria-hidden="true">&#10003;</div>' +
-					'<h2>Message sent!</h2>' +
-					'<p>' + res.data.message + '</p>' +
-					'</div>';
+				/* Replace form with success message — built via safe DOM methods,
+				   not innerHTML, since res.data.message is server-controlled. */
+				var wrap = document.createElement('div');
+				wrap.className = 'contact-success';
+				wrap.setAttribute('role', 'status');
+
+				var icon = document.createElement('div');
+				icon.className = 'contact-success__icon';
+				icon.setAttribute('aria-hidden', 'true');
+				icon.textContent = '✓';
+
+				var heading = document.createElement('h2');
+				heading.textContent = 'Message sent!';
+
+				var message = document.createElement('p');
+				message.textContent = res.data.message;
+
+				wrap.appendChild(icon);
+				wrap.appendChild(heading);
+				wrap.appendChild(message);
+
+				form.parentNode.replaceChildren(wrap);
 			} else {
 				/* Show global error */
 				if (globalErr) {

@@ -1141,6 +1141,7 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 .marketplace__empty .empty { padding: 0; margin: 0 0 var(--s-4); font-size: var(--fs-md); color: var(--ink); }
 .marketplace__empty .btn svg { transition: transform var(--dur-fast) var(--ease-soft); }
 .marketplace__empty .btn:hover svg { transform: translateX(3px); }
+.marketplace__empty-note { margin-top: 8px; font-size: 13px; }
 
 /* ---------- 9. Sections — generous spacing for premium feel ---------- */
 .section__eyebrow {

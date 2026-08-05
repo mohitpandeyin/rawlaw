@@ -19,7 +19,7 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => 'family-law',
 		'details' => __( 'I need advice on divorce, maintenance, custody, or a related family matter.', 'rawlaw' ),
-		'image' => $asset_base . 'divorce-mediation.png',
+		'image' => $asset_base . 'divorce-mediation.webp',
 		'visual_title' => __( 'Family matter intake', 'rawlaw' ),
 		'visual_desc'  => __( 'Turn maintenance, custody, separation or settlement questions into a structured legal request.', 'rawlaw' ),
 	),
@@ -31,7 +31,7 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => 'criminal-law',
 		'details' => __( 'I need legal help for bail or an urgent criminal matter.', 'rawlaw' ),
-		'image' => $asset_base . 'bail-application.png',
+		'image' => $asset_base . 'bail-application.webp',
 		'visual_title' => __( 'Urgent criminal help', 'rawlaw' ),
 		'visual_desc'  => __( 'Capture urgency, court context and city so the matter can be understood quickly.', 'rawlaw' ),
 	),
@@ -43,7 +43,7 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => 'civil-law',
 		'details' => __( 'My landlord is threatening eviction and I need to understand my tenancy rights.', 'rawlaw' ),
-		'image' => $asset_base . 'landlord-eviction-notice.png',
+		'image' => $asset_base . 'landlord-eviction-notice.webp',
 		'visual_title' => __( 'Tenancy rights clarity', 'rawlaw' ),
 		'visual_desc'  => __( 'Explain rent, notice, possession and landlord issues in a format advocates can assess.', 'rawlaw' ),
 	),
@@ -55,7 +55,7 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => '',
 		'details' => __( 'I received a legal notice and need help understanding the reply and next steps.', 'rawlaw' ),
-		'image' => $asset_base . 'legal-notice.png',
+		'image' => $asset_base . 'legal-notice.webp',
 		'visual_title' => __( 'Notice reply planning', 'rawlaw' ),
 		'visual_desc'  => __( 'Summarize deadlines, sender details and response needs before sharing documents after signup.', 'rawlaw' ),
 	),
@@ -67,7 +67,7 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => 'other',
 		'details' => __( 'I want to file a consumer complaint and need guidance on the process.', 'rawlaw' ),
-		'image' => $asset_base . 'consumer-complaint.png',
+		'image' => $asset_base . 'consumer-complaint.webp',
 		'visual_title' => __( 'Consumer dispute support', 'rawlaw' ),
 		'visual_desc'  => __( 'Organize purchase details, complaint history and requested remedy for a stronger first brief.', 'rawlaw' ),
 	),
@@ -79,7 +79,7 @@ $issues = array(
 		'url'   => $hero_query_url,
 		'area'  => 'civil-law',
 		'details' => __( 'I need help with property registration, documents, or next legal steps.', 'rawlaw' ),
-		'image' => $asset_base . 'property-registration.png',
+		'image' => $asset_base . 'property-registration.webp',
 		'visual_title' => __( 'Property document review', 'rawlaw' ),
 		'visual_desc'  => __( 'Clarify registry, title, stamp duty or document questions before moving to a consultation.', 'rawlaw' ),
 	),
@@ -139,7 +139,7 @@ foreach ( $issues as $index => $issue ) {
 				<?php foreach ( $issues as $index => $issue ) : ?>
 				<figure class="kyr-visual__item<?php echo 0 === $index ? ' is-active' : ''; ?>" data-kyr-visual="<?php echo esc_attr( (string) $index ); ?>" <?php echo 0 === $index ? '' : 'hidden'; ?>>
 					<div class="kyr-visual__media">
-						<img src="<?php echo esc_url( $issue['image'] ); ?>" alt="" loading="lazy" decoding="async">
+						<img src="<?php echo esc_url( $issue['image'] ); ?>" width="1000" height="750" alt="<?php echo esc_attr( $issue['visual_title'] ); ?>" loading="lazy" decoding="async">
 					</div>
 					<figcaption class="kyr-visual__body">
 						<span class="kyr-visual__eyebrow"><?php echo esc_html( rawlaw_home_get( 'kyr.visual_eyebrow' ) ); ?></span>

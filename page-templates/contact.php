@@ -42,8 +42,11 @@ $subjects = array(
 					<h2 class="contact-card__heading"><?php esc_html_e( 'Send us a message', 'rawlaw' ); ?></h2>
 
 					<div id="contact-global-error" class="contact-form__global-error" role="alert" hidden></div>
+					<noscript><p class="contact-form__global-error"><?php esc_html_e( 'JavaScript is disabled — the form will still submit, but you will see a plain confirmation page instead of an inline message.', 'rawlaw' ); ?></p></noscript>
 
-					<form id="rawlaw-contact-form" class="contact-form" novalidate autocomplete="on">
+					<form id="rawlaw-contact-form" class="contact-form" method="post" action="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>" novalidate autocomplete="on">
+						<input type="hidden" name="action" value="rawlaw_contact_submit">
+						<?php wp_nonce_field( 'rawlaw_contact_nonce', 'nonce', false ); ?>
 
 						<!-- Name ─────────────────────────────────────── -->
 						<div class="contact-form__field">

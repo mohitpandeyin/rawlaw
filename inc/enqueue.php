@@ -30,8 +30,8 @@ function rawlaw_enqueue_assets() {
 	wp_enqueue_script( 'rawlaw-main', RAWLAW_URI . 'assets/js/main.js', array(), $ver_js, true );
 	wp_script_add_data( 'rawlaw-main', 'defer', true );
 
-	// Scroll-driven marquee (homepage features-bar) — skip on AMP.
-	if ( is_front_page() && ! rawlaw_is_amp() ) {
+	// Scroll-driven marquee (homepage features-bar).
+	if ( is_front_page() ) {
 		$ver_marquee = file_exists( RAWLAW_DIR . 'assets/js/marquee.js' )
 			? filemtime( RAWLAW_DIR . 'assets/js/marquee.js' ) : RAWLAW_VERSION;
 
@@ -58,18 +58,6 @@ function rawlaw_enqueue_assets() {
 		);
 	}
 
-	wp_localize_script( 'rawlaw-main', 'RawLawData', array(
-		'ajaxUrl'    => admin_url( 'admin-ajax.php' ),
-		'restRoot'   => esc_url_raw( rest_url() ),
-		'searchUrl'  => esc_url_raw( home_url( '/?s=' ) ),
-		'i18n'       => array(
-			'menu'      => __( 'Menu', 'rawlaw' ),
-			'close'     => __( 'Close', 'rawlaw' ),
-			'search'    => __( 'Search', 'rawlaw' ),
-			'loadMore'  => __( 'Load more', 'rawlaw' ),
-		),
-	) );
-
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -88,17 +76,3 @@ function rawlaw_resource_hints( $hints, $relation ) {
 }
 add_filter( 'wp_resource_hints', 'rawlaw_resource_hints', 10, 2 );
 
-/**
- * Critical CSS — inline a tiny above-the-fold chunk for fast first paint.
- * Skipped when main.css is enqueued (it contains the full superset).
- */
-function rawlaw_inline_critical_css() {
-	if ( wp_style_is( 'rawlaw-main', 'enqueued' ) ) {
-		return;
-	}
-	$css = file_get_contents( RAWLAW_DIR . 'assets/css/critical.css' );
-	if ( $css ) {
-		echo "<style id=\"rawlaw-critical\">{$css}</style>\n"; // phpcs:ignore
-	}
-}
-add_action( 'wp_head', 'rawlaw_inline_critical_css', 1 );

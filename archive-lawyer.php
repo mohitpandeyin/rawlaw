@@ -6,11 +6,15 @@
  */
 get_header();
 $total = $GLOBALS['wp_query']->found_posts;
+$archive_url = get_post_type_archive_link( 'lawyer' );
 
 // Smart-search handoff from the homepage hero.
-$q_context = isset( $_GET['q'] )    ? sanitize_text_field( wp_unslash( $_GET['q'] ) )    : '';
-$practice  = isset( $_GET['practice'] ) ? sanitize_title( wp_unslash( $_GET['practice'] ) ) : '';
-$city_ctx  = isset( $_GET['city'] ) ? sanitize_text_field( wp_unslash( $_GET['city'] ) ) : '';
+// These read the singular ?q=/?practice=/?city= hero handoff, distinct from
+// the filter sidebar's practice[]/location[] arrays — guard against the
+// array shape so applying a sidebar filter can never fatal this lookup.
+$q_context = ( isset( $_GET['q'] ) && is_string( $_GET['q'] ) )               ? sanitize_text_field( wp_unslash( $_GET['q'] ) )    : '';
+$practice  = ( isset( $_GET['practice'] ) && is_string( $_GET['practice'] ) ) ? sanitize_title( wp_unslash( $_GET['practice'] ) ) : '';
+$city_ctx  = ( isset( $_GET['city'] ) && is_string( $_GET['city'] ) )         ? sanitize_text_field( wp_unslash( $_GET['city'] ) ) : '';
 $practice_term = $practice ? get_term_by( 'slug', $practice, 'practice_area' ) : null;
 $post_req_url  = function_exists( 'rawlaw_get_post_requirement_url' ) ? rawlaw_get_post_requirement_url() : home_url( '/post-a-requirement/' );
 ?>
@@ -57,17 +61,24 @@ $post_req_url  = function_exists( 'rawlaw_get_post_requirement_url' ) ? rawlaw_g
 			<div class="marketplace__results">
 				<div class="marketplace__results-head">
 					<p class="muted"><?php printf( esc_html( _n( '%s lawyer', '%s lawyers', $total, 'rawlaw' ) ), number_format_i18n( $total ) ); ?></p>
-					<form id="sort-form" method="get" class="sort">
-						<?php foreach ( $_GET as $k => $v ) :
-							if ( 'sort' === $k ) continue;
-							if ( is_array( $v ) ) {
-								foreach ( $v as $vv ) printf( '<input type="hidden" name="%s[]" value="%s">', esc_attr( $k ), esc_attr( $vv ) );
-							} else {
-								printf( '<input type="hidden" name="%s" value="%s">', esc_attr( $k ), esc_attr( $v ) );
-							}
-						endforeach; ?>
+					<form id="sort-form" method="get" class="sort" action="<?php echo esc_url( $archive_url ); ?>">
+						<?php
+						// Allow-listed passthrough only — never reflect arbitrary $_GET keys.
+						foreach ( (array) ( $_GET['practice'] ?? array() ) as $v ) {
+							printf( '<input type="hidden" name="practice[]" value="%s">', esc_attr( sanitize_title( wp_unslash( $v ) ) ) );
+						}
+						foreach ( (array) ( $_GET['location'] ?? array() ) as $v ) {
+							printf( '<input type="hidden" name="location[]" value="%s">', esc_attr( sanitize_title( wp_unslash( $v ) ) ) );
+						}
+						if ( isset( $_GET['min_exp'] ) ) {
+							printf( '<input type="hidden" name="min_exp" value="%d">', (int) $_GET['min_exp'] );
+						}
+						if ( ! empty( $_GET['verified'] ) ) {
+							echo '<input type="hidden" name="verified" value="1">';
+						}
+						?>
 						<label for="sort-by"><?php esc_html_e( 'Sort by', 'rawlaw' ); ?></label>
-						<select id="sort-by" name="sort" <?php echo rawlaw_is_amp() ? 'on="change:sort-form.submit"' : 'onchange="this.form.submit()"'; ?>>
+						<select id="sort-by" name="sort" data-sort-autosubmit>
 							<option value=""><?php esc_html_e( 'Most recent', 'rawlaw' ); ?></option>
 							<option value="experience" <?php selected( ( $_GET['sort'] ?? '' ), 'experience' ); ?>><?php esc_html_e( 'Most experienced', 'rawlaw' ); ?></option>
 						</select>
@@ -86,7 +97,7 @@ $post_req_url  = function_exists( 'rawlaw_get_post_requirement_url' ) ? rawlaw_g
 							<?php esc_html_e( 'Post your requirement instead', 'rawlaw' ); ?>
 							<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
 						</a>
-						<p class="muted" style="margin-top:8px;font-size:13px;"><?php esc_html_e( 'Verified advocates will respond within 24 hours.', 'rawlaw' ); ?></p>
+						<p class="muted marketplace__empty-note"><?php esc_html_e( 'Verified advocates will respond within 24 hours.', 'rawlaw' ); ?></p>
 					</div>
 				<?php endif; ?>
 			</div>

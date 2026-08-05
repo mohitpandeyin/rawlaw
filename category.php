@@ -33,7 +33,7 @@ $children = get_terms( array( 'taxonomy' => 'category', 'parent' => $cat->term_i
 				$count = 0;
 				while ( have_posts() ) : the_post();
 					if ( $count < 2 ) {
-						get_template_part( 'template-parts/article/card-featured' );
+						get_template_part( 'template-parts/article/card-featured', null, array( 'priority' => 0 === $count ) );
 						$count++;
 						if ( $count === 2 ) {
 							echo '</div><div class="cat-archive__rest grid grid--3">';

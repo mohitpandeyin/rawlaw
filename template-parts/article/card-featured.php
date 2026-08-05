@@ -6,9 +6,19 @@
  */
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'card card--featured' ); ?> data-reveal>
+	<?php
+	$is_priority = ! empty( $args['priority'] );
+	?>
 	<?php if ( has_post_thumbnail() ) : ?>
 		<a class="card__media" href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
-			<?php the_post_thumbnail( 'rawlaw-hero', array( 'loading' => 'eager', 'fetchpriority' => 'high', 'decoding' => 'async', 'alt' => '' ) ); ?>
+			<?php
+			the_post_thumbnail(
+				'rawlaw-hero',
+				$is_priority
+					? array( 'loading' => 'eager', 'fetchpriority' => 'high', 'decoding' => 'async', 'alt' => '' )
+					: array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => '' )
+			);
+			?>
 		</a>
 	<?php endif; ?>
 	<div class="card__body">

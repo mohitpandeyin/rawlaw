@@ -40,7 +40,7 @@ if ( ! $news_q->have_posts() ) {
 		<?php endwhile; ?>
 	</ul>
 
-	<a class="hero-news__see-more" href="<?php echo esc_url( home_url( '/news/' ) ); ?>">
+	<a class="hero-news__see-more" href="<?php echo esc_url( rawlaw_news_url() ); ?>">
 		<?php esc_html_e( 'View all news', 'rawlaw' ); ?>
 		<span aria-hidden="true">→</span>
 	</a>

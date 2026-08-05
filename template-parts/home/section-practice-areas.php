@@ -27,13 +27,13 @@ $services = array(
 				<h2 id="services-heading" class="section__title"><?php esc_html_e( 'Find the issue you need help with', 'rawlaw' ); ?></h2>
 				<p class="section__sub"><?php esc_html_e( 'Start from a topic, read plain-language guidance, then compare verified lawyers when you are ready.', 'rawlaw' ); ?></p>
 			</div>
-			<a class="link-arrow" href="<?php echo esc_url( home_url( '/practice-areas/' ) ); ?>"><?php esc_html_e( 'Browse practice areas', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span></a>
+			<a class="link-arrow" href="<?php echo esc_url( home_url( '/practice-area/' ) ); ?>"><?php esc_html_e( 'Browse practice areas', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span></a>
 		</header>
 
 		<div class="services-grid" data-reveal-stagger>
 			<?php foreach ( $services as $svc ) :
 				$term        = get_term_by( 'slug', $svc['slug'], 'practice_area' );
-				$link        = $term ? get_term_link( $term ) : home_url( '/practice-areas/' . $svc['slug'] . '/' );
+				$link        = $term ? get_term_link( $term ) : home_url( '/practice-area/' . $svc['slug'] . '/' );
 				$post_count  = $term ? (int) $term->count : 0;
 				$lawyer_q    = new WP_Query( array(
 					'post_type'      => 'lawyer',

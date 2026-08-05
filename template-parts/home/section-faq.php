@@ -43,8 +43,7 @@ foreach ( $faqs as $faq ) {
 				$item_id = 'faq-answer-' . ( $i + 1 );
 			?>
 			<div class="faq-item">
-				<button class="faq-item__question" aria-expanded="false" aria-controls="<?php echo esc_attr( $item_id ); ?>"
-					<?php if ( ! rawlaw_is_amp() ) : ?>data-faq-toggle<?php endif; ?>>
+				<button class="faq-item__question" aria-expanded="false" aria-controls="<?php echo esc_attr( $item_id ); ?>" data-faq-toggle>
 					<span><?php echo esc_html( $faq['q'] ); ?></span>
 					<span class="faq-item__chevron" aria-hidden="true">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>

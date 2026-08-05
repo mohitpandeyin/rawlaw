@@ -272,7 +272,8 @@ function rawlaw_handle_post_requirement() {
 	$phone_ok = (bool) preg_match( '/^(\+91[\-\s]?)?[6-9]\d{9}$/', $phone );
 
 	// Validation — fail-fast with a single status flag back to the form.
-	if ( ! $consent || ! $name || ! $email_ok || ! $phone_ok || strlen( $details ) < 20 ) {
+	// Email OR phone, matching the form's own "Email or phone required" copy.
+	if ( ! $consent || ! $name || ( ! $email_ok && ! $phone_ok ) || strlen( $details ) < 20 ) {
 		$back = add_query_arg(
 			array(
 				'requirement' => 'invalid',

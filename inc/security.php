@@ -20,16 +20,6 @@ remove_action( 'wp_head', 'feed_links_extra', 3 );
 // Disable XML-RPC entirely (RawLaw doesn't use it).
 add_filter( 'xmlrpc_enabled', '__return_false' );
 
-// Strip ?ver= from static assets to avoid leaking version.
-function rawlaw_remove_ver( $src ) {
-	if ( ! is_admin() && $src && strpos( $src, 'ver=' ) ) {
-		$src = remove_query_arg( 'ver', $src );
-	}
-	return $src;
-}
-add_filter( 'style_loader_src', 'rawlaw_remove_ver', 9999 );
-add_filter( 'script_loader_src', 'rawlaw_remove_ver', 9999 );
-
 // Disable file editing in admin.
 if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
 	define( 'DISALLOW_FILE_EDIT', true );

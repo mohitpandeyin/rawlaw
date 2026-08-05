@@ -9,8 +9,8 @@ $current_location = isset( $_GET['location'] ) ? (array) $_GET['location'] : arr
 $current_min_exp  = isset( $_GET['min_exp'] ) ? (int) $_GET['min_exp'] : 0;
 $current_verified = ! empty( $_GET['verified'] );
 
-$practice_areas = get_terms( array( 'taxonomy' => 'practice_area', 'hide_empty' => false ) );
-$locations      = get_terms( array( 'taxonomy' => 'lawyer_location', 'hide_empty' => false ) );
+$practice_areas = get_terms( array( 'taxonomy' => 'practice_area', 'hide_empty' => true ) );
+$locations      = get_terms( array( 'taxonomy' => 'lawyer_location', 'hide_empty' => true ) );
 $action         = get_post_type_archive_link( 'lawyer' );
 ?>
 <aside class="filters" aria-label="<?php esc_attr_e( 'Filter lawyers', 'rawlaw' ); ?>">

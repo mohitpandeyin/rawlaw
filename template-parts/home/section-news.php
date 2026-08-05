@@ -14,8 +14,7 @@ if ( ! isset( $displayed_ids ) ) {
 	$displayed_ids = array();
 }
 
-$rawlaw_posts_page = (int) get_option( 'page_for_posts' );
-$rawlaw_news_url   = esc_url( $rawlaw_posts_page ? get_permalink( $rawlaw_posts_page ) : home_url( '/news/' ) );
+$rawlaw_news_url   = esc_url( rawlaw_news_url() );
 $news_content      = rawlaw_home_get( 'news', array() );
 
 $rawlaw_home_news_thumb = static function ( $post_id, $size = 'rawlaw-card' ) {

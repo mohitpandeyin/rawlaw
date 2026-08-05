@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0B1220">
 <link rel="profile" href="https://gmpg.org/xfn/11">
-<?php if ( ! rawlaw_is_amp() ) : ?><script>document.documentElement.classList.remove('no-js')</script><?php endif; ?>
+<script>document.documentElement.classList.remove('no-js')</script>
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -23,7 +23,7 @@
 	<div class="site-header__bar">
 		<div class="container site-header__inner">
 
-			<button class="site-header__menu-toggle" aria-expanded="false" aria-controls="primary-menu" <?php echo rawlaw_is_amp() ? 'on="tap:amp-sidebar.open"' : 'data-menu-toggle'; ?>>
+			<button class="site-header__menu-toggle" aria-expanded="false" aria-controls="primary-menu" data-menu-toggle>
 				<span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
 				<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'rawlaw' ); ?></span>
 			</button>
@@ -47,7 +47,7 @@
 			</nav>
 
 			<div class="site-header__actions">
-				<button class="icon-btn" <?php echo rawlaw_is_amp() ? 'on="tap:amp-search-lightbox.open"' : 'data-search-toggle'; ?> aria-expanded="false" aria-controls="site-search">
+				<button class="icon-btn" data-search-toggle aria-expanded="false" aria-controls="site-search">
 					<?php rawlaw_icon( 'search' ); ?>
 					<span class="screen-reader-text"><?php esc_html_e( 'Search', 'rawlaw' ); ?></span>
 				</button>
@@ -70,8 +70,8 @@
 if ( ! function_exists( 'rawlaw_default_menu' ) ) {
 	function rawlaw_default_menu() {
 		echo '<ul class="menu menu--primary">';
-		echo '<li><a href="' . esc_url( home_url( '/news/' ) ) . '">' . esc_html__( 'Legal News', 'rawlaw' ) . '</a></li>';
-		echo '<li><a href="' . esc_url( home_url( '/practice-areas/' ) ) . '">' . esc_html__( 'Practice Areas', 'rawlaw' ) . '</a></li>';
+		echo '<li><a href="' . esc_url( rawlaw_news_url() ) . '">' . esc_html__( 'Legal News', 'rawlaw' ) . '</a></li>';
+		echo '<li><a href="' . esc_url( home_url( '/practice-area/' ) ) . '">' . esc_html__( 'Practice Areas', 'rawlaw' ) . '</a></li>';
 		echo '<li><a href="' . esc_url( get_post_type_archive_link( 'judgment' ) ?: home_url( '/judgments/' ) ) . '">' . esc_html__( 'Judgments', 'rawlaw' ) . '</a></li>';
 		echo '<li><a href="' . esc_url( home_url( '/about/' ) ) . '">' . esc_html__( 'About', 'rawlaw' ) . '</a></li>';
 		echo '</ul>';

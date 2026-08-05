@@ -8,7 +8,6 @@
  * @package RawLaw
  */
 
-$fallback_action = esc_url( 'https://app.rawlaw.in/register/client' );
 $popular = rawlaw_home_get( 'hero.popular', array() );
 
 ?>
@@ -26,7 +25,8 @@ $popular = rawlaw_home_get( 'hero.popular', array() );
 			</p>
 		</header>
 
-		<form class="hero__finder hero-intake" action="<?php echo $fallback_action; ?>" method="get" data-query-modal-trigger>
+		<form class="hero__finder hero-intake" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="get" data-query-modal-trigger>
+			<input type="hidden" name="rl_lookup" value="1">
 			<div class="hero__finder-row">
 				<label class="hero__finder-field">
 					<span class="hero__finder-icon" aria-hidden="true"><?php rawlaw_icon( 'chat' ); ?></span>
@@ -34,7 +34,7 @@ $popular = rawlaw_home_get( 'hero.popular', array() );
 					<input
 						class="hero__finder-input"
 						type="text"
-						name="intent"
+						name="rl_q"
 						data-hero-query-intent
 						placeholder="<?php echo esc_attr( rawlaw_home_get( 'hero.placeholder' ) ); ?>"
 						autocomplete="off"

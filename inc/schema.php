@@ -99,10 +99,10 @@ function rawlaw_schema_jsonld() {
 
 	if ( is_singular( 'lawyer' ) ) {
 		$id = get_the_ID();
-		$rating = rawlaw_lawyer_rating( $id );
 		$practice = get_the_terms( $id, 'practice_area' );
 		$location = get_the_terms( $id, 'lawyer_location' );
 
+		// No AggregateRating — RawLaw does not rate or rank advocates (roadmap 0.11).
 		$node = array(
 			'@type'       => 'Attorney',
 			'@id'         => get_permalink() . '#lawyer',
@@ -113,15 +113,6 @@ function rawlaw_schema_jsonld() {
 			'knowsAbout'  => $practice ? wp_list_pluck( $practice, 'name' ) : null,
 			'areaServed'  => $location ? wp_list_pluck( $location, 'name' ) : null,
 		);
-		if ( $rating ) {
-			$node['aggregateRating'] = array(
-				'@type'       => 'AggregateRating',
-				'ratingValue' => $rating['avg'],
-				'reviewCount' => $rating['count'],
-				'bestRating'  => 5,
-				'worstRating' => 1,
-			);
-		}
 		$nodes[] = $node;
 	}
 

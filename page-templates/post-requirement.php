@@ -183,7 +183,7 @@ $practice_areas = get_terms( array(
 							/* translators: 1: terms link, 2: privacy link */
 							esc_html__( 'I agree to RawLaw’s %1$s and %2$s. I understand that my requirement may be shared with verified advocates so they can respond.', 'rawlaw' ),
 							'<a href="' . esc_url( home_url( '/terms/' ) ) . '">' . esc_html__( 'Terms', 'rawlaw' ) . '</a>',
-							'<a href="' . esc_url( home_url( '/privacy/' ) ) . '">' . esc_html__( 'Privacy Policy', 'rawlaw' ) . '</a>'
+							'<a href="' . esc_url( home_url( '/privacy-policy/' ) ) . '">' . esc_html__( 'Privacy Policy', 'rawlaw' ) . '</a>'
 						); ?>
 					</span>
 				</label>

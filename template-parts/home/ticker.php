@@ -57,7 +57,7 @@ if ( ! $ticker_q->have_posts() ) {
 			<?php while ( $ticker_q->have_posts() ) : $ticker_q->the_post(); ?>
 			<a class="ticker__item" href="<?php the_permalink(); ?>" tabindex="-1">
 				<?php if ( has_post_thumbnail() ) : ?>
-					<span class="ticker__thumb"><?php the_post_thumbnail( 'thumbnail' ); ?></span>
+					<span class="ticker__thumb"><?php the_post_thumbnail( 'thumbnail', array( 'loading' => 'lazy' ) ); ?></span>
 				<?php endif; ?>
 				<span class="ticker__headline"><?php echo esc_html( wp_trim_words( get_the_title(), 10, '&hellip;' ) ); ?></span>
 				<span class="ticker__date">&bull; <?php echo esc_html( get_the_date() ); ?></span>

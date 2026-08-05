@@ -18,7 +18,6 @@ get_header(); while ( have_posts() ) : the_post();
 	$accepting    = get_post_meta( $id, '_rawlaw_accepting', true );
 	$practice     = get_the_terms( $id, 'practice_area' );
 	$location     = get_the_terms( $id, 'lawyer_location' );
-	$rating       = rawlaw_lawyer_rating( $id );
 ?>
 
 <article id="lawyer-<?php echo (int) $id; ?>" <?php post_class( 'lawyer-profile' ); ?>>
@@ -26,7 +25,7 @@ get_header(); while ( have_posts() ) : the_post();
 	<header class="lawyer-profile__hero">
 		<div class="container lawyer-profile__hero-inner">
 			<div class="lawyer-profile__photo">
-				<?php if ( has_post_thumbnail() ) : the_post_thumbnail( 'rawlaw-square', array( 'fetchpriority' => 'high', 'decoding' => 'async', 'alt' => '' ) );
+				<?php if ( has_post_thumbnail() ) : the_post_thumbnail( 'rawlaw-square', array( 'fetchpriority' => 'high', 'decoding' => 'async', 'alt' => get_the_title() ) );
 				else : ?>
 					<span class="lawyer-card__initials lawyer-card__initials--lg" aria-hidden="true"><?php echo esc_html( mb_substr( get_the_title(), 0, 1 ) ); ?></span>
 				<?php endif; ?>
@@ -52,13 +51,6 @@ get_header(); while ( have_posts() ) : the_post();
 					<?php if ( $languages ) : ?>
 						<li><?php rawlaw_icon( 'globe' ); ?> <?php echo esc_html( $languages ); ?></li>
 					<?php endif; ?>
-					<?php if ( $rating ) : ?>
-						<li>
-							<span class="stars" style="--r:<?php echo esc_attr( $rating['avg'] ); ?>" aria-hidden="true">★★★★★</span>
-							<strong><?php echo esc_html( $rating['avg'] ); ?></strong>
-							<a href="#reviews" class="muted">(<?php printf( esc_html( _n( '%d review', '%d reviews', $rating['count'], 'rawlaw' ) ), $rating['count'] ); ?>)</a>
-						</li>
-					<?php endif; ?>
 				</ul>
 
 				<?php if ( $practice && ! is_wp_error( $practice ) ) : ?>
@@ -80,7 +72,7 @@ get_header(); while ( have_posts() ) : the_post();
 					<p class="badge badge--muted"><?php esc_html_e( 'Limited availability', 'rawlaw' ); ?></p>
 				<?php endif; ?>
 				<a class="btn btn--primary btn--block" href="#consult"><?php esc_html_e( 'Request consultation', 'rawlaw' ); ?></a>
-				<?php if ( $phone ) : ?>
+				<?php if ( $phone && rawlaw_contact_visible( $id ) ) : ?>
 					<a class="btn btn--ghost btn--block" href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php esc_html_e( 'Call', 'rawlaw' ); ?> <?php echo esc_html( $phone ); ?></a>
 				<?php endif; ?>
 				<p class="muted xs"><?php esc_html_e( 'Your enquiry is shared only with this lawyer.', 'rawlaw' ); ?></p>
@@ -109,10 +101,13 @@ get_header(); while ( have_posts() ) : the_post();
 			<section id="consult" class="lawyer-profile__section consult">
 				<h2 class="section__title"><?php esc_html_e( 'Request a consultation', 'rawlaw' ); ?></h2>
 				<p class="muted"><?php esc_html_e( 'Share a brief description of your matter. The lawyer will respond within 48 hours.', 'rawlaw' ); ?></p>
-				<form class="consult__form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" <?php if ( rawlaw_is_amp() ) { echo 'action-xhr="' . esc_url( admin_url( 'admin-post.php' ) ) . '" target="_top"'; } ?>>
+				<form class="consult__form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 					<?php wp_nonce_field( 'rawlaw_consult', 'rawlaw_consult_nonce' ); ?>
 					<input type="hidden" name="action" value="rawlaw_consult">
 					<input type="hidden" name="lawyer_id" value="<?php echo (int) $id; ?>">
+					<div class="req-form__honeypot" aria-hidden="true">
+						<label><?php esc_html_e( 'Website', 'rawlaw' ); ?> <input type="text" name="rl_website" tabindex="-1" autocomplete="off"></label>
+					</div>
 
 					<div class="form-grid">
 						<label><span><?php esc_html_e( 'Your name', 'rawlaw' ); ?></span><input type="text" name="name" required></label>
@@ -136,9 +131,13 @@ get_header(); while ( have_posts() ) : the_post();
 			<section class="card-info">
 				<h3><?php esc_html_e( 'Credentials', 'rawlaw' ); ?></h3>
 				<dl>
-					<?php if ( $bar_id ) : ?><div><dt><?php esc_html_e( 'Bar Council ID', 'rawlaw' ); ?></dt><dd><?php echo esc_html( $bar_id ); ?></dd></div><?php endif; ?>
 					<?php if ( $experience ) : ?><div><dt><?php esc_html_e( 'Experience', 'rawlaw' ); ?></dt><dd><?php printf( esc_html( _n( '%d year', '%d years', $experience, 'rawlaw' ) ), $experience ); ?></dd></div><?php endif; ?>
-					<?php if ( $email ) : ?><div><dt><?php esc_html_e( 'Email', 'rawlaw' ); ?></dt><dd><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></dd></div><?php endif; ?>
+					<?php if ( rawlaw_contact_visible( $id ) ) : ?>
+						<?php if ( $bar_id ) : ?><div><dt><?php esc_html_e( 'Bar Council ID', 'rawlaw' ); ?></dt><dd><?php echo esc_html( $bar_id ); ?></dd></div><?php endif; ?>
+						<?php if ( $email ) : ?><div><dt><?php esc_html_e( 'Email', 'rawlaw' ); ?></dt><dd><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></dd></div><?php endif; ?>
+					<?php elseif ( $bar_id || $email || $phone ) : ?>
+						<div><dt><?php esc_html_e( 'Bar Council ID & contact', 'rawlaw' ); ?></dt><dd><a href="https://app.rawlaw.in/login"><?php esc_html_e( 'Login to view', 'rawlaw' ); ?></a></dd></div>
+					<?php endif; ?>
 					<?php if ( $website ) : ?><div><dt><?php esc_html_e( 'Website', 'rawlaw' ); ?></dt><dd><a href="<?php echo esc_url( $website ); ?>" rel="noopener" target="_blank"><?php echo esc_html( wp_parse_url( $website, PHP_URL_HOST ) ); ?></a></dd></div><?php endif; ?>
 				</dl>
 			</section>

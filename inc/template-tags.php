@@ -37,6 +37,25 @@ function rawlaw_ticker_shortcode( $atts ) {
 add_shortcode( 'rawlaw_ticker', 'rawlaw_ticker_shortcode' );
 
 /**
+ * Resolve the "News" link (spec 16 §0.13 / §1.9) — there is no dedicated
+ * "posts page" (`page_for_posts` is unset) and no page with the slug
+ * `news`, but a "News" category already exists, so that is the real
+ * destination. A hardcoded `/news/` 404s under this site's permalink
+ * structure since categories resolve at `/category/news/`.
+ */
+function rawlaw_news_url() {
+	$page_for_posts = (int) get_option( 'page_for_posts' );
+	if ( $page_for_posts ) {
+		return get_permalink( $page_for_posts );
+	}
+	$term = get_term_by( 'slug', 'news', 'category' );
+	if ( $term && ! is_wp_error( $term ) ) {
+		return get_category_link( $term );
+	}
+	return home_url( '/news/' );
+}
+
+/**
  * Estimated reading time.
  */
 function rawlaw_reading_time( $post_id = null ) {
@@ -142,21 +161,15 @@ function rawlaw_verified_badge( $lawyer_id ) {
 }
 
 /**
- * Average rating helper for lawyer reviews (stored as comments).
+ * Whether a lawyer's phone/email/Bar Council ID may be shown to the
+ * current visitor (roadmap 0.12). Masked by default; visible only if
+ * the lawyer opted to share publicly, or the visitor is logged in.
  */
-function rawlaw_lawyer_rating( $post_id ) {
-	$comments = get_comments( array(
-		'post_id' => $post_id,
-		'status'  => 'approve',
-		'type'    => 'review',
-	) );
-	if ( empty( $comments ) ) { return null; }
-	$total = 0;
-	foreach ( $comments as $c ) {
-		$total += (float) get_comment_meta( $c->comment_ID, 'rating', true );
+function rawlaw_contact_visible( $lawyer_id ) {
+	if ( get_post_meta( $lawyer_id, '_rawlaw_share_contact', true ) ) {
+		return true;
 	}
-	$avg = $total / count( $comments );
-	return array( 'avg' => round( $avg, 1 ), 'count' => count( $comments ) );
+	return is_user_logged_in();
 }
 
 /**

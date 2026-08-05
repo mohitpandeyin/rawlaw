@@ -8,8 +8,7 @@
 </main>
 
 <?php
-$footer_posts_page  = (int) get_option( 'page_for_posts' );
-$footer_news_url    = esc_url( $footer_posts_page ? get_permalink( $footer_posts_page ) : home_url( '/news/' ) );
+$footer_news_url    = esc_url( rawlaw_news_url() );
 $footer_content     = rawlaw_home_get( 'footer', array() );
 ?>
 
@@ -19,7 +18,7 @@ $footer_content     = rawlaw_home_get( 'footer', array() );
 		<div class="site-footer__top">
 			<div class="site-footer__brand">
 				<a class="site-footer__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'RawLaw.in — Home', 'rawlaw' ); ?>">
-					<img class="site-logo site-logo--mono" src="<?php echo esc_url( RAWLAW_URI . 'assets/media/rawlaw-logo-mono.svg' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="332" height="84">
+					<img class="site-logo site-logo--mono" src="<?php echo esc_url( RAWLAW_URI . 'assets/media/rawlaw-logo-mono.svg' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="332" height="84" loading="lazy">
 				</a>
 				<p class="site-footer__about"><?php echo esc_html( $footer_content['about'] ); ?></p>
 

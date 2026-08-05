@@ -14,12 +14,14 @@ function rawlaw_customize_register( $wp_customize ) {
 		'priority' => 30,
 	) );
 
+	// Translated at definition (literal strings) so i18n tooling can extract
+	// them — __( $variable ) is not extractable.
 	$socials = array(
-		'twitter'  => 'X / Twitter URL',
-		'linkedin' => 'LinkedIn URL',
-		'facebook' => 'Facebook URL',
-		'youtube'  => 'YouTube URL',
-		'instagram'=> 'Instagram URL',
+		'twitter'   => __( 'X / Twitter URL', 'rawlaw' ),
+		'linkedin'  => __( 'LinkedIn URL', 'rawlaw' ),
+		'facebook'  => __( 'Facebook URL', 'rawlaw' ),
+		'youtube'   => __( 'YouTube URL', 'rawlaw' ),
+		'instagram' => __( 'Instagram URL', 'rawlaw' ),
 	);
 	foreach ( $socials as $key => $label ) {
 		$id = 'rawlaw_social_' . $key;
@@ -29,7 +31,7 @@ function rawlaw_customize_register( $wp_customize ) {
 			'transport'         => 'refresh',
 		) );
 		$wp_customize->add_control( $id, array(
-			'label'   => __( $label, 'rawlaw' ),
+			'label'   => $label,
 			'section' => 'rawlaw_brand',
 			'type'    => 'url',
 		) );

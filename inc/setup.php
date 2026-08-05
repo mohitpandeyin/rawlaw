@@ -45,6 +45,7 @@ if ( ! function_exists( 'rawlaw_setup' ) ) :
 		add_image_size( 'rawlaw-card',      720, 480, true );
 		add_image_size( 'rawlaw-compact',   320, 240, true );
 		add_image_size( 'rawlaw-square',    480, 480, true );
+		add_image_size( 'rawlaw-og',       1200, 630, true );
 
 		// Editor palette mirrors the theme tokens.
 		add_theme_support( 'editor-color-palette', array(

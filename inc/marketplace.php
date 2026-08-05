@@ -33,9 +33,10 @@ function rawlaw_filter_lawyer_archive( $query ) {
 			'terms'    => array_map( 'sanitize_title', (array) $_GET['location'] ),
 		);
 	}
-	// `city` is the free-text equivalent of `location` — used by the homepage router.
-	// We resolve it to a lawyer_location term by name match, falling back to
-	// a meta lookup against `_rawlaw_city` so old data still works.
+	// `city` is the free-text equivalent of `location` — used by the homepage
+	// router. Resolved against the lawyer_location taxonomy only; the old
+	// `_rawlaw_city` meta fallback was dead code (never registered in any
+	// UI, so never written) and is retired per spec 15 §5.2.
 	if ( ! empty( $_GET['city'] ) ) {
 		$city = sanitize_text_field( wp_unslash( $_GET['city'] ) );
 		$term = get_term_by( 'name', $city, 'lawyer_location' );
@@ -45,12 +46,6 @@ function rawlaw_filter_lawyer_archive( $query ) {
 				'field'    => 'slug',
 				'terms'    => array( $term->slug ),
 			);
-		} else {
-			$meta_query[] = array(
-				'key'     => '_rawlaw_city',
-				'value'   => $city,
-				'compare' => 'LIKE',
-			);
 		}
 	}
 	// Free-text `q` from the homepage smart-search — wires into WP_Query `s`.
@@ -58,7 +53,10 @@ function rawlaw_filter_lawyer_archive( $query ) {
 		$query->set( 's', sanitize_text_field( wp_unslash( $_GET['q'] ) ) );
 	}
 	if ( ! empty( $_GET['min_exp'] ) ) {
-		$meta_query[] = array(
+		// Named clause so a simultaneous ?sort=experience can order by this
+		// exact clause instead of adding a second meta_key/orderby pair on
+		// the same key, which would JOIN wp_postmeta twice (spec register T-19).
+		$meta_query['experience'] = array(
 			'key'     => '_rawlaw_experience',
 			'value'   => (int) $_GET['min_exp'],
 			'compare' => '>=',
@@ -69,35 +67,31 @@ function rawlaw_filter_lawyer_archive( $query ) {
 		$meta_query[] = array( 'key' => '_rawlaw_verified', 'value' => '1' );
 	}
 
-	if ( $tax_query )  { $query->set( 'tax_query',  $tax_query ); }
-	if ( $meta_query ) { $query->set( 'meta_query', $meta_query ); }
+	if ( $tax_query ) { $query->set( 'tax_query', $tax_query ); }
 
 	if ( ! empty( $_GET['sort'] ) && 'experience' === $_GET['sort'] ) {
-		$query->set( 'meta_key', '_rawlaw_experience' );
-		$query->set( 'orderby', 'meta_value_num' );
-		$query->set( 'order', 'DESC' );
+		if ( ! isset( $meta_query['experience'] ) ) {
+			$meta_query['experience'] = array(
+				'key'     => '_rawlaw_experience',
+				'compare' => 'EXISTS',
+				'type'    => 'NUMERIC',
+			);
+		}
+		$query->set( 'orderby', array( 'experience' => 'DESC' ) );
 	}
+
+	if ( $meta_query ) { $query->set( 'meta_query', $meta_query ); }
 }
 add_action( 'pre_get_posts', 'rawlaw_filter_lawyer_archive' );
 
 /**
- * Lawyer reviews — register a "review" comment type.
+ * Text reviews (no star rating — see spec 15 §3.5 / roadmap 0.11) are
+ * still supported via the standard comment form on lawyer profiles.
  */
 function rawlaw_review_post_supports() {
 	add_post_type_support( 'lawyer', 'comments' );
 }
 add_action( 'init', 'rawlaw_review_post_supports' );
-
-/**
- * Save a star rating with comments on lawyer profiles.
- */
-function rawlaw_save_review_rating( $comment_id ) {
-	if ( isset( $_POST['rawlaw_rating'] ) ) {
-		$rating = max( 1, min( 5, (int) $_POST['rawlaw_rating'] ) );
-		add_comment_meta( $comment_id, 'rating', $rating, true );
-	}
-}
-add_action( 'comment_post', 'rawlaw_save_review_rating' );
 
 /**
  * Handle consultation enquiry form submissions from lawyer profiles.
@@ -106,9 +100,25 @@ add_action( 'comment_post', 'rawlaw_save_review_rating' );
  * Provides a baseline. Site owners can integrate CRMs by hooking `rawlaw_consult_after`.
  */
 function rawlaw_handle_consultation() {
+	// Honeypot — bots fill hidden fields; humans don't. Matches the
+	// rl_website convention already used in inc/search-router.php.
+	if ( ! empty( $_POST['rl_website'] ) ) {
+		wp_safe_redirect( add_query_arg( 'consult', 'sent', wp_get_referer() ?: home_url( '/' ) ) );
+		exit;
+	}
+
 	if ( ! isset( $_POST['rawlaw_consult_nonce'] ) || ! wp_verify_nonce( $_POST['rawlaw_consult_nonce'], 'rawlaw_consult' ) ) {
 		wp_die( esc_html__( 'Invalid request.', 'rawlaw' ), 400 );
 	}
+
+	// Rate limit — max 3 submissions per IP per hour, matching contact-form.php.
+	$ip       = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'unknown';
+	$rate_key = 'rawlaw_consult_rl_' . md5( $ip . wp_salt( 'auth' ) );
+	$attempts = (int) get_transient( $rate_key );
+	if ( $attempts >= 3 ) {
+		wp_die( esc_html__( 'Too many submissions. Please try again in an hour.', 'rawlaw' ), 429 );
+	}
+	set_transient( $rate_key, $attempts + 1, HOUR_IN_SECONDS );
 
 	$lawyer_id = isset( $_POST['lawyer_id'] ) ? (int) $_POST['lawyer_id'] : 0;
 	if ( ! $lawyer_id || 'lawyer' !== get_post_type( $lawyer_id ) ) {

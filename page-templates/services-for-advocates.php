@@ -54,23 +54,23 @@ $contact_url = esc_url( home_url( '/contact/' ) );
 	<div class="container">
 		<div class="sfa-trustbar__inner">
 			<div class="sfa-trustbar__item">
-				<strong>500+</strong>
+				<strong><?php esc_html_e( 'Court-Ready', 'rawlaw' ); ?></strong>
 				<span><?php esc_html_e( 'Drafts Delivered', 'rawlaw' ); ?></span>
 			</div>
 			<div class="sfa-trustbar__sep" aria-hidden="true"></div>
 			<div class="sfa-trustbar__item">
-				<strong>100+</strong>
+				<strong><?php esc_html_e( 'Confidential', 'rawlaw' ); ?></strong>
 				<span><?php esc_html_e( 'Advocates Served', 'rawlaw' ); ?></span>
 			</div>
 			<div class="sfa-trustbar__sep" aria-hidden="true"></div>
 			<div class="sfa-trustbar__item">
-				<strong>15+</strong>
-				<span><?php esc_html_e( 'Practice Areas', 'rawlaw' ); ?></span>
+				<strong><?php esc_html_e( 'Wide', 'rawlaw' ); ?></strong>
+				<span><?php esc_html_e( 'Practice Area Coverage', 'rawlaw' ); ?></span>
 			</div>
 			<div class="sfa-trustbar__sep" aria-hidden="true"></div>
 			<div class="sfa-trustbar__item">
-				<strong>3</strong>
-				<span><?php esc_html_e( 'Revisions Included', 'rawlaw' ); ?></span>
+				<strong><?php esc_html_e( 'Included', 'rawlaw' ); ?></strong>
+				<span><?php esc_html_e( 'Revisions', 'rawlaw' ); ?></span>
 			</div>
 		</div>
 	</div>
