@@ -124,11 +124,16 @@ function rawlaw_serve_discovery_endpoints() {
 	$path = rawlaw_request_path();
 
 	if ( 'sitemap-news.xml' === $path ) {
+		// WordPress has already queued a 404 status by this point (nothing
+		// matched a real rewrite rule) — override it before any output, or
+		// crawlers correctly ignore this sitemap regardless of its body.
+		status_header( 200 );
 		rawlaw_render_news_sitemap();
 		exit;
 	}
 
 	if ( rawlaw_indexnow_key() . '.txt' === $path ) {
+		status_header( 200 );
 		header( 'Content-Type: text/plain; charset=UTF-8' );
 		echo rawlaw_indexnow_key(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		exit;
