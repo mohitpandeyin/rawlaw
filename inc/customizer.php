@@ -74,15 +74,17 @@ function rawlaw_customize_register( $wp_customize ) {
 		'type'        => 'url',
 	) );
 
-	// Google Analytics / GA4 Measurement ID for AMP analytics.
-	$wp_customize->add_setting( 'rawlaw_ga_id', array(
+	// Default OG image — used when a post has neither its own SEO image
+	// override nor a featured image (spec 17).
+	$wp_customize->add_setting( 'rawlaw_default_og_image', array(
 		'default'           => '',
-		'sanitize_callback' => 'sanitize_text_field',
+		'sanitize_callback' => 'absint',
 	) );
-	$wp_customize->add_control( 'rawlaw_ga_id', array(
-		'label'       => __( 'GA4 Measurement ID', 'rawlaw' ),
-		'description' => __( 'e.g. G-XXXXXXXXXX — used for AMP analytics.', 'rawlaw' ),
+	$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'rawlaw_default_og_image', array(
+		'label'       => __( 'Default social-share image', 'rawlaw' ),
+		'description' => __( 'Used for og:image/twitter:image when a page has no featured image and no per-post override. Falls back to the site logo if left empty.', 'rawlaw' ),
 		'section'     => 'rawlaw_brand',
-	) );
+		'mime_type'   => 'image',
+	) ) );
 }
 add_action( 'customize_register', 'rawlaw_customize_register' );

@@ -23,12 +23,31 @@ add_action( 'add_meta_boxes', 'rawlaw_seo_meta_box' );
 
 function rawlaw_seo_meta_box_cb( $post ) {
 	wp_nonce_field( 'rawlaw_seo_save', 'rawlaw_seo_nonce' );
-	$desc = get_post_meta( $post->ID, '_rawlaw_seo_description', true );
+	wp_enqueue_media();
+	wp_enqueue_script( 'rawlaw-seo-admin', RAWLAW_URI . 'assets/js/admin-seo.js', array( 'jquery' ), RAWLAW_VERSION, true );
+
+	$title    = get_post_meta( $post->ID, '_rawlaw_seo_title', true );
+	$desc     = get_post_meta( $post->ID, '_rawlaw_seo_description', true );
+	$image_id = get_post_meta( $post->ID, '_rawlaw_seo_og_image', true );
+	$image    = $image_id ? wp_get_attachment_image_src( $image_id, 'medium' ) : false;
 	?>
+	<p>
+		<label for="_rawlaw_seo_title"><strong><?php esc_html_e( 'SEO title', 'rawlaw' ); ?></strong></label><br>
+		<input type="text" id="_rawlaw_seo_title" name="_rawlaw_seo_title" class="widefat" maxlength="70" value="<?php echo esc_attr( $title ); ?>">
+		<span class="description" data-rawlaw-seo-counter="_rawlaw_seo_title" data-rawlaw-seo-ideal="60"><?php esc_html_e( 'Around 60 characters. Falls back to the post title when left empty.', 'rawlaw' ); ?></span>
+	</p>
 	<p>
 		<label for="_rawlaw_seo_description"><strong><?php esc_html_e( 'Meta description', 'rawlaw' ); ?></strong></label><br>
 		<textarea id="_rawlaw_seo_description" name="_rawlaw_seo_description" class="widefat" rows="2" maxlength="160"><?php echo esc_textarea( $desc ); ?></textarea>
-		<span class="description"><?php esc_html_e( '140-160 characters. Falls back to the excerpt when left empty.', 'rawlaw' ); ?></span>
+		<span class="description" data-rawlaw-seo-counter="_rawlaw_seo_description" data-rawlaw-seo-ideal="160"><?php esc_html_e( '140-160 characters. Falls back to the excerpt when left empty.', 'rawlaw' ); ?></span>
+	</p>
+	<p>
+		<label><strong><?php esc_html_e( 'Social share image', 'rawlaw' ); ?></strong></label><br>
+		<input type="hidden" id="_rawlaw_seo_og_image" name="_rawlaw_seo_og_image" value="<?php echo esc_attr( $image_id ); ?>">
+		<img id="_rawlaw_seo_og_image_preview" src="<?php echo $image ? esc_url( $image[0] ) : ''; ?>" style="max-width:200px;height:auto;display:<?php echo $image ? 'block' : 'none'; ?>;margin-bottom:8px;">
+		<button type="button" class="button" id="_rawlaw_seo_og_image_select"><?php esc_html_e( 'Select image', 'rawlaw' ); ?></button>
+		<button type="button" class="button" id="_rawlaw_seo_og_image_remove" style="display:<?php echo $image ? 'inline-block' : 'none'; ?>;"><?php esc_html_e( 'Remove', 'rawlaw' ); ?></button>
+		<br><span class="description"><?php esc_html_e( 'Falls back to the featured image, then the site default, when left empty.', 'rawlaw' ); ?></span>
 	</p>
 	<?php
 }
@@ -37,8 +56,14 @@ function rawlaw_seo_meta_save( $post_id ) {
 	if ( ! isset( $_POST['rawlaw_seo_nonce'] ) || ! wp_verify_nonce( $_POST['rawlaw_seo_nonce'], 'rawlaw_seo_save' ) ) { return; }
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) { return; }
 	if ( ! current_user_can( 'edit_post', $post_id ) ) { return; }
+	if ( isset( $_POST['_rawlaw_seo_title'] ) ) {
+		update_post_meta( $post_id, '_rawlaw_seo_title', sanitize_text_field( wp_unslash( $_POST['_rawlaw_seo_title'] ) ) );
+	}
 	if ( isset( $_POST['_rawlaw_seo_description'] ) ) {
 		update_post_meta( $post_id, '_rawlaw_seo_description', sanitize_textarea_field( wp_unslash( $_POST['_rawlaw_seo_description'] ) ) );
+	}
+	if ( isset( $_POST['_rawlaw_seo_og_image'] ) ) {
+		update_post_meta( $post_id, '_rawlaw_seo_og_image', absint( $_POST['_rawlaw_seo_og_image'] ) );
 	}
 }
 add_action( 'save_post', 'rawlaw_seo_meta_save' );
@@ -142,15 +167,42 @@ function rawlaw_seo_robots( $robots ) {
 add_filter( 'wp_robots', 'rawlaw_seo_robots' );
 
 function rawlaw_seo_og_image() {
-	if ( is_singular() && has_post_thumbnail() ) {
-		$src = wp_get_attachment_image_src( get_post_thumbnail_id(), 'rawlaw-og' );
+	if ( is_singular() ) {
+		$override_id = (int) get_post_meta( get_queried_object_id(), '_rawlaw_seo_og_image', true );
+		if ( $override_id ) {
+			$src = wp_get_attachment_image_src( $override_id, 'rawlaw-og' );
+			if ( $src ) {
+				$alt = get_post_meta( $override_id, '_wp_attachment_image_alt', true );
+				return array(
+					'url'    => $src[0],
+					'width'  => $src[1],
+					'height' => $src[2],
+					'alt'    => $alt ? $alt : get_the_title(),
+				);
+			}
+		}
+		if ( has_post_thumbnail() ) {
+			$src = wp_get_attachment_image_src( get_post_thumbnail_id(), 'rawlaw-og' );
+			if ( $src ) {
+				$alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
+				return array(
+					'url'    => $src[0],
+					'width'  => $src[1],
+					'height' => $src[2],
+					'alt'    => $alt ? $alt : get_the_title(),
+				);
+			}
+		}
+	}
+	$default_id = (int) get_theme_mod( 'rawlaw_default_og_image' );
+	if ( $default_id ) {
+		$src = wp_get_attachment_image_src( $default_id, 'rawlaw-og' );
 		if ( $src ) {
-			$alt = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
 			return array(
 				'url'    => $src[0],
 				'width'  => $src[1],
 				'height' => $src[2],
-				'alt'    => $alt ? $alt : get_the_title(),
+				'alt'    => get_bloginfo( 'name' ),
 			);
 		}
 	}
@@ -227,6 +279,12 @@ add_filter( 'document_title_separator', function() {
 } );
 
 add_filter( 'document_title_parts', function( $parts ) {
+	if ( is_singular() ) {
+		$custom = get_post_meta( get_queried_object_id(), '_rawlaw_seo_title', true );
+		if ( $custom ) {
+			$parts['title'] = mb_substr( $custom, 0, 60 );
+		}
+	}
 	if ( is_category() || is_tag() || is_tax() ) {
 		$term = get_queried_object();
 		if ( $term ) {
