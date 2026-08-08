@@ -440,6 +440,16 @@
 			});
 		});
 
+		// Same thing for real buttons. A control that opens a dialog should be
+		// a <button>, not an anchor pointing at a fragment that does not
+		// navigate anywhere — this lets templates use one without inventing a
+		// fake href.
+		doc.querySelectorAll('[data-query-modal-open]').forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				openModal();
+			});
+		});
+
 		if (modal) {
 			modal.querySelectorAll('[data-query-modal-close]').forEach(function (btn) {
 				btn.addEventListener('click', closeModal);

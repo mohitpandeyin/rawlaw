@@ -1574,7 +1574,15 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 	border: none;
 	border-right: 1px solid var(--border);
 	border-radius: var(--r-md);
+	/* These cards are <button> (they open the query modal, they do not
+	   navigate), so the UA button defaults have to be reset. */
+	width: 100%;
+	font: inherit;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
 }
+.service-card__name { margin: 0; }
 .service-card:last-child { border-right: 0; }
 .service-card:hover {
 	transform: translateY(-3px);
@@ -1747,6 +1755,7 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 	max-height: 260px;
 	background: var(--surface-alt);
 	border-radius: var(--r-sm);
+    border: 1px solid var(--border);
 }
 .np-feature__media img,
 .np-spotlight__media img,
@@ -2823,45 +2832,18 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 .section--social-proof {
 	background: var(--surface);
 }
-/*
- * Deliberately styled as principle chips, not a KPI/stat bar: the values
- * here ("Verified", "Private"…) are qualities, not numbers, and there are
- * no real usage metrics — lawyer data lives on app.rawlaw.in, not here
- * (see docs/AUDIT.md 2026-08-07). A bold oversized number treatment
- * would visually promise stats the product doesn't have.
- */
-.sp-stats {
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	list-style: none;
-	margin: 0 0 56px;
-	padding: 0;
-	flex-wrap: wrap;
-}
-.sp-stat {
-	display: flex;
-	align-items: baseline;
-	gap: 6px;
-	padding: 10px 18px;
-	background: var(--surface-alt);
-	border: 1px solid var(--border);
-	border-radius: 999px;
-}
-.sp-stat__value {
-	font-size: 14px;
-	font-weight: 700;
-	color: var(--navy);
-	letter-spacing: 0;
-	line-height: 1;
-}
-.sp-stat__label {
-	font-size: 12px;
-	color: var(--muted);
-	font-weight: 500;
-}
 .sp-header {
 	margin-bottom: 40px;
+}
+/* Closing action pair for the trust section. Centred to match the
+   section's centred header, and mirroring the closing-CTA button pair so
+   the two read as the same control, not two different patterns. */
+.sp-actions {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 40px;
 }
 .sp-testimonials {
 	display: grid;
@@ -2982,7 +2964,8 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 	.sp-testimonials { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
-	.sp-stats { justify-content: flex-start; }
+	.sp-actions { flex-direction: column; }
+	.sp-actions .btn { width: 100%; justify-content: center; }
 	.hero__trust-stat strong { font-size: 17px; }
 	.how-it-works__cta .btn { width: 100%; justify-content: center; }
 }

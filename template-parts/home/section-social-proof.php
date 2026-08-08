@@ -2,17 +2,20 @@
 /**
  * Section — Trust proof: decision checkpoints.
  *
- * Placed after the How It Works section to convert intent into trust.
+ * The `ul.sp-stats` chip row that used to open this section was removed
+ * 2026-08-08: all four chips ("Verified", "Private", "Compare",
+ * "Focused") already appear verbatim in the hero features marquee
+ * (`inc/homepage-settings.php` -> `features`), and three of the four are
+ * restated by the trust cards immediately below them in this very
+ * section. Moving the row would only relocate that duplication, so it
+ * went entirely, and the section now closes on a real action instead.
  *
  * @package RawLaw
  */
 
-$stats = array(
-	array( 'value' => __( 'Verified', 'rawlaw' ), 'label' => __( 'Profile checks', 'rawlaw' ) ),
-	array( 'value' => __( 'Private',  'rawlaw' ), 'label' => __( 'Legal queries', 'rawlaw' ) ),
-	array( 'value' => __( 'Compare',  'rawlaw' ), 'label' => __( 'Before consulting', 'rawlaw' ) ),
-	array( 'value' => __( 'Focused',  'rawlaw' ), 'label' => __( 'India legal guidance', 'rawlaw' ) ),
-);
+// Kept in sync with the For Advocates section rather than hardcoded, so
+// the advocate signup URL stays editable in one place (Homepage settings).
+$advocate_url = rawlaw_home_get( 'advocates.primary_url', 'https://app.rawlaw.in/register/lawyer' );
 
 $trust_points = array(
 	array(
@@ -31,15 +34,6 @@ $trust_points = array(
 ?>
 <section class="section section--social-proof" aria-labelledby="sp-heading" data-reveal>
 	<div class="container">
-
-		<ul class="sp-stats" aria-label="<?php esc_attr_e( 'Platform trust signals', 'rawlaw' ); ?>">
-			<?php foreach ( $stats as $stat ) : ?>
-			<li class="sp-stat">
-				<strong class="sp-stat__value"><?php echo esc_html( $stat['value'] ); ?></strong>
-				<span class="sp-stat__label"><?php echo esc_html( $stat['label'] ); ?></span>
-			</li>
-			<?php endforeach; ?>
-		</ul>
 
 		<header class="section__header section__header--centered sp-header">
 			<p class="section__eyebrow"><?php esc_html_e( 'Trust by design', 'rawlaw' ); ?></p>
@@ -60,6 +54,15 @@ $trust_points = array(
 				</footer>
 			</blockquote>
 			<?php endforeach; ?>
+		</div>
+
+		<div class="sp-actions">
+			<button class="btn btn--primary btn--lg" type="button" data-query-modal-open>
+				<?php esc_html_e( 'Get support', 'rawlaw' ); ?>
+			</button>
+			<a class="btn btn--ghost btn--lg" href="<?php echo esc_url( $advocate_url ); ?>" target="_blank" rel="noopener">
+				<?php esc_html_e( 'Join as lawyer', 'rawlaw' ); ?>
+			</a>
 		</div>
 
 	</div>
