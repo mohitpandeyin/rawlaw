@@ -143,6 +143,45 @@ function rawlaw_seo_robots( $robots ) {
 }
 add_filter( 'wp_robots', 'rawlaw_seo_robots' );
 
+/**
+ * Resolve a theme-shipped OG image (`assets/og/<name>.png`), or null.
+ *
+ * These exist because anything without a featured image — the homepage,
+ * every static page, category archives — used to fall back to the site
+ * logo, which is 1104x266. That is a ~4:1 banner: Facebook and LinkedIn
+ * crop it badly and WhatsApp generally drops it, so most shared RawLaw
+ * links previewed with no image at all. The shipped files are 1200x630,
+ * the 1.91:1 ratio those platforms actually expect, and PNG because
+ * WhatsApp will not render SVG.
+ *
+ * Dimensions are read rather than hardcoded so replacing a file by hand
+ * can't silently desync the og:image:width/height tags from reality.
+ */
+function rawlaw_shipped_og_image( $name, $alt = '' ) {
+	$name = sanitize_file_name( $name );
+	if ( '' === $name ) {
+		return null;
+	}
+
+	$relative = 'assets/og/' . $name . '.png';
+	$path     = RAWLAW_DIR . $relative;
+	if ( ! file_exists( $path ) ) {
+		return null;
+	}
+
+	$size = wp_getimagesize( $path );
+	if ( ! $size ) {
+		return null;
+	}
+
+	return array(
+		'url'    => RAWLAW_URI . $relative,
+		'width'  => $size[0],
+		'height' => $size[1],
+		'alt'    => $alt ? $alt : get_bloginfo( 'name' ),
+	);
+}
+
 function rawlaw_seo_og_image() {
 	if ( is_singular() ) {
 		$override_id = (int) get_post_meta( get_queried_object_id(), '_rawlaw_seo_og_image', true );
@@ -170,7 +209,20 @@ function rawlaw_seo_og_image() {
 				);
 			}
 		}
+
+		// Page-specific shipped artwork, matched on slug — the static pages
+		// (contact, privacy, terms, …) never carry a featured image, so
+		// without this they would all share one generic preview.
+		$queried = get_queried_object();
+		if ( $queried instanceof WP_Post && $queried->post_name ) {
+			$shipped = rawlaw_shipped_og_image( $queried->post_name, get_the_title() );
+			if ( $shipped ) {
+				return $shipped;
+			}
+		}
 	}
+
+	// Admin's own Customizer choice outranks the shipped generic default.
 	$default_id = (int) get_theme_mod( 'rawlaw_default_og_image' );
 	if ( $default_id ) {
 		$src = wp_get_attachment_image_src( $default_id, 'rawlaw-og' );
@@ -183,6 +235,14 @@ function rawlaw_seo_og_image() {
 			);
 		}
 	}
+
+	$shipped_default = rawlaw_shipped_og_image( 'default' );
+	if ( $shipped_default ) {
+		return $shipped_default;
+	}
+
+	// Last resort only. The logo is the wrong shape for a social card, which
+	// is exactly why the shipped defaults above exist.
 	$logo_id = get_theme_mod( 'custom_logo' );
 	if ( $logo_id ) {
 		$src = wp_get_attachment_image_src( $logo_id, 'full' );
