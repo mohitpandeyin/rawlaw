@@ -58,18 +58,6 @@ function rawlaw_render_news_sitemap() {
 }
 
 /* ------------------------------------------------------------------------
- * Core sitemap — exclude unverified lawyer profiles.
- * --------------------------------------------------------------------- */
-
-add_filter( 'wp_sitemaps_posts_query_args', function( $args, $post_type ) {
-	if ( 'lawyer' === $post_type ) {
-		$args['meta_key']   = '_rawlaw_verified';
-		$args['meta_value'] = '1';
-	}
-	return $args;
-}, 10, 2 );
-
-/* ------------------------------------------------------------------------
  * IndexNow — push new/updated URLs to Bing (upstream of Copilot grounding).
  * --------------------------------------------------------------------- */
 
@@ -99,7 +87,7 @@ function rawlaw_indexnow_ping( $url ) {
 
 function rawlaw_indexnow_on_publish( $new_status, $old_status, $post ) {
 	if ( 'publish' !== $new_status ) { return; }
-	if ( ! in_array( $post->post_type, array( 'post', 'lawyer', 'judgment', 'page' ), true ) ) { return; }
+	if ( ! in_array( $post->post_type, array( 'post', 'page' ), true ) ) { return; }
 	rawlaw_indexnow_ping( get_permalink( $post ) );
 }
 add_action( 'transition_post_status', 'rawlaw_indexnow_on_publish', 10, 3 );

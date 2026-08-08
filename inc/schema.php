@@ -1,6 +1,9 @@
 <?php
 /**
- * Schema.org JSON-LD for articles, authors, organisation, lawyer profiles.
+ * Schema.org JSON-LD for articles, authors, organisation.
+ *
+ * The `Attorney` node that used to render here for `lawyer` profiles
+ * was removed 2026-08-07 with the `lawyer` CPT (see docs/AUDIT.md).
  *
  * @package RawLaw
  */
@@ -95,25 +98,6 @@ function rawlaw_schema_jsonld() {
 			),
 			'publisher'        => array( '@id' => home_url( '/#organization' ) ),
 		);
-	}
-
-	if ( is_singular( 'lawyer' ) ) {
-		$id = get_the_ID();
-		$practice = get_the_terms( $id, 'practice_area' );
-		$location = get_the_terms( $id, 'lawyer_location' );
-
-		// No AggregateRating — RawLaw does not rate or rank advocates (roadmap 0.11).
-		$node = array(
-			'@type'       => 'Attorney',
-			'@id'         => get_permalink() . '#lawyer',
-			'name'        => get_the_title(),
-			'description' => wp_strip_all_tags( get_the_excerpt() ),
-			'url'         => get_permalink(),
-			'image'       => has_post_thumbnail() ? wp_get_attachment_image_url( get_post_thumbnail_id(), 'rawlaw-square' ) : null,
-			'knowsAbout'  => $practice ? wp_list_pluck( $practice, 'name' ) : null,
-			'areaServed'  => $location ? wp_list_pluck( $location, 'name' ) : null,
-		);
-		$nodes[] = $node;
 	}
 
 	$nodes = array_values( array_filter( array_map( 'rawlaw_schema_strip_empty', $nodes ) ) );

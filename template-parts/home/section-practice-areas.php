@@ -2,8 +2,10 @@
 /**
  * Section — Practice Areas (topic cluster cards with article counts).
  *
- * Each card shows the practice area, article count, and lawyer count to signal
- * topical depth and supply — key for both UX trust and SEO entity architecture.
+ * Each card shows the practice area and article count to signal topical
+ * depth — key for both UX trust and SEO entity architecture. The lawyer
+ * count shown here was removed 2026-08-07 with the `lawyer` CPT (see
+ * docs/AUDIT.md).
  *
  * @package RawLaw
  */
@@ -25,28 +27,16 @@ $services = array(
 			<div>
 				<p class="section__eyebrow"><?php esc_html_e( 'Trending legal topics', 'rawlaw' ); ?></p>
 				<h2 id="services-heading" class="section__title"><?php esc_html_e( 'Find the issue you need help with', 'rawlaw' ); ?></h2>
-				<p class="section__sub"><?php esc_html_e( 'Start from a topic, read plain-language guidance, then compare verified lawyers when you are ready.', 'rawlaw' ); ?></p>
+				<p class="section__sub"><?php esc_html_e( 'Start from a topic, read plain-language guidance, then describe your issue to get connected with the right advocate.', 'rawlaw' ); ?></p>
 			</div>
 			<a class="link-arrow" href="<?php echo esc_url( home_url( '/practice-area/' ) ); ?>"><?php esc_html_e( 'Browse practice areas', 'rawlaw' ); ?> <span aria-hidden="true">&rarr;</span></a>
 		</header>
 
 		<div class="services-grid" data-reveal-stagger>
 			<?php foreach ( $services as $svc ) :
-				$term        = get_term_by( 'slug', $svc['slug'], 'practice_area' );
-				$link        = $term ? get_term_link( $term ) : home_url( '/practice-area/' . $svc['slug'] . '/' );
-				$post_count  = $term ? (int) $term->count : 0;
-				$lawyer_q    = new WP_Query( array(
-					'post_type'      => 'lawyer',
-					'posts_per_page' => 1,
-					'no_found_rows'  => false,
-					'tax_query'      => $term ? array( array(
-						'taxonomy' => 'practice_area',
-						'field'    => 'term_id',
-						'terms'    => $term->term_id,
-					) ) : array(),
-				) );
-				$lawyer_count = $term ? $lawyer_q->found_posts : 0;
-				wp_reset_postdata();
+				$term       = get_term_by( 'slug', $svc['slug'], 'practice_area' );
+				$link       = $term ? get_term_link( $term ) : home_url( '/practice-area/' . $svc['slug'] . '/' );
+				$post_count = $term ? (int) $term->count : 0;
 			?>
 				<a class="service-card service-card--cluster" href="<?php echo esc_url( $link ); ?>" title="<?php echo esc_attr( $svc['name'] ); ?>">
 					<span class="service-card__icon" aria-hidden="true"><?php rawlaw_icon( $svc['icon'] ); ?></span>
@@ -55,9 +45,6 @@ $services = array(
 					<div class="service-card__meta">
 						<?php if ( $post_count > 0 ) : ?>
 							<span><?php echo esc_html( $post_count ); ?> <?php esc_html_e( 'articles', 'rawlaw' ); ?></span>
-						<?php endif; ?>
-						<?php if ( $lawyer_count > 0 ) : ?>
-							<span><?php echo esc_html( $lawyer_count ); ?>+ <?php esc_html_e( 'lawyers', 'rawlaw' ); ?></span>
 						<?php endif; ?>
 					</div>
 				</a>

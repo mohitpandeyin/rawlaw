@@ -6,7 +6,9 @@
  *   S1  Skip-link / header / utility bar (via get_header)
  *   S2  Hero — query wizard + top news + trust strip
  *   S3  How Citizens Use RawLaw — conversion funnel
- *   S3b Trust bar, practice areas, featured lawyers — RAWLAW_MARKETPLACE_LIVE only (0.10 / T-7)
+ *   S3b Trust bar, practice areas — editorial stats only; the featured-lawyers
+ *       grid that used to sit here was removed 2026-08-07 with the `lawyer`
+ *       CPT (lawyer data now lives on app.rawlaw.in — see docs/AUDIT.md)
  *   S4  Know Your Rights — issue-based guidance
  *   S5  News & Judgments — editorial authority
  *   S5b Social proof / trust-by-design — no data dependency (T-7)
@@ -53,16 +55,13 @@ $displayed_ids = array();
 get_template_part( 'template-parts/home/section-how-it-works' );
 
 /*--------------------------------------------------------------
- * S3b — Trust bar, practice areas, featured lawyers (T-7).
- * These need real marketplace data to not look broken (0 lawyers,
- * 0 practice-area terms today), so they key off the same toggle as
- * the /find-a-lawyer/ gate (0.10) and switch on together automatically.
+ * S3b — Trust bar + practice areas. No longer gated: both now show
+ * only editorial stats (articles, practice-area topic counts), not
+ * lawyer-marketplace data, since the `lawyer` CPT was removed
+ * 2026-08-07 (see docs/AUDIT.md).
  *-------------------------------------------------------------*/
-if ( rawlaw_marketplace_is_live() ) {
-	get_template_part( 'template-parts/home/trust-bar' );
-	get_template_part( 'template-parts/home/section-practice-areas' );
-	get_template_part( 'template-parts/home/section-advocates' );
-}
+get_template_part( 'template-parts/home/trust-bar' );
+get_template_part( 'template-parts/home/section-practice-areas' );
 
 /*--------------------------------------------------------------
  * S4 — Know Your Rights (issue-based guidance)

@@ -15,25 +15,13 @@ function rawlaw_breadcrumbs() {
 
 	if ( is_category() || is_single() ) {
 		if ( is_single() ) {
-			$post_type = get_post_type();
-			if ( 'lawyer' === $post_type ) {
-				$items[] = array(
-					'name' => __( 'Find a Lawyer', 'rawlaw' ),
-					'url'  => get_post_type_archive_link( 'lawyer' ),
-				);
-				$terms = get_the_terms( get_the_ID(), 'practice_area' );
-				if ( $terms && ! is_wp_error( $terms ) ) {
-					$items[] = array( 'name' => $terms[0]->name, 'url' => get_term_link( $terms[0] ) );
+			$cat = rawlaw_primary_category();
+			if ( $cat ) {
+				if ( $cat->parent ) {
+					$parent = get_term( $cat->parent, 'category' );
+					$items[] = array( 'name' => $parent->name, 'url' => get_term_link( $parent ) );
 				}
-			} else {
-				$cat = rawlaw_primary_category();
-				if ( $cat ) {
-					if ( $cat->parent ) {
-						$parent = get_term( $cat->parent, 'category' );
-						$items[] = array( 'name' => $parent->name, 'url' => get_term_link( $parent ) );
-					}
-					$items[] = array( 'name' => $cat->name, 'url' => get_term_link( $cat ) );
-				}
+				$items[] = array( 'name' => $cat->name, 'url' => get_term_link( $cat ) );
 			}
 			$items[] = array( 'name' => get_the_title(), 'url' => get_permalink() );
 		} else {
@@ -53,8 +41,6 @@ function rawlaw_breadcrumbs() {
 		$items[] = array( 'name' => get_the_author(), 'url' => get_author_posts_url( get_queried_object_id() ) );
 	} elseif ( is_search() ) {
 		$items[] = array( 'name' => sprintf( __( 'Search: %s', 'rawlaw' ), get_search_query() ), 'url' => '' );
-	} elseif ( is_post_type_archive( 'lawyer' ) ) {
-		$items[] = array( 'name' => __( 'Find a Lawyer', 'rawlaw' ), 'url' => get_post_type_archive_link( 'lawyer' ) );
 	} elseif ( is_page() ) {
 		$ancestors = array_reverse( get_post_ancestors( get_the_ID() ) );
 		foreach ( $ancestors as $aid ) {

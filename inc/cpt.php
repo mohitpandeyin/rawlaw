@@ -1,49 +1,23 @@
 <?php
 /**
- * Custom post types: Lawyer (marketplace) + Judgment (editorial deep archive).
+ * Custom post types.
+ *
+ * This theme has none left as of 2026-08-07 — see docs/AUDIT.md:
+ * `lawyer` was removed because that data now lives exclusively on
+ * app.rawlaw.in; `judgment` was removed by converting its posts to
+ * regular `post` rows (see `inc/judgment-redirects.php` for the URL
+ * redirect this required) since case-law write-ups are ordinary
+ * editorial content, not a distinct data model. `rawlaw_register_cpts()`
+ * is kept as a no-op hook point rather than deleted outright, since
+ * `rawlaw_activation_flush()` below still needs somewhere to call
+ * into before its rewrite flush.
  *
  * @package RawLaw
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-function rawlaw_register_cpts() {
-	// Lawyer / Advocate marketplace listing.
-	register_post_type( 'lawyer', array(
-		'labels' => array(
-			'name'                  => __( 'Lawyers', 'rawlaw' ),
-			'singular_name'         => __( 'Lawyer', 'rawlaw' ),
-			'menu_name'             => __( 'Lawyers', 'rawlaw' ),
-			'add_new_item'          => __( 'Add New Lawyer', 'rawlaw' ),
-			'edit_item'             => __( 'Edit Lawyer', 'rawlaw' ),
-			'search_items'          => __( 'Search Lawyers', 'rawlaw' ),
-			'not_found'             => __( 'No lawyers found.', 'rawlaw' ),
-		),
-		'public'             => true,
-		'has_archive'        => 'find-a-lawyer',
-		'rewrite'            => array( 'slug' => 'lawyer', 'with_front' => false ),
-		'menu_icon'          => 'dashicons-businessperson',
-		'show_in_rest'       => true,
-		'menu_position'      => 22,
-		'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'comments', 'revisions', 'author', 'custom-fields' ),
-	) );
-
-	// Judgment archive (treated like editorial content).
-	register_post_type( 'judgment', array(
-		'labels' => array(
-			'name'                  => __( 'Judgments', 'rawlaw' ),
-			'singular_name'         => __( 'Judgment', 'rawlaw' ),
-			'menu_name'             => __( 'Judgments', 'rawlaw' ),
-		),
-		'public'             => true,
-		'has_archive'        => 'judgments',
-		'rewrite'            => array( 'slug' => 'judgments', 'with_front' => false ),
-		'menu_icon'          => 'dashicons-book-alt',
-		'show_in_rest'       => true,
-		'menu_position'      => 6,
-		'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'author', 'custom-fields' ),
-	) );
-}
+function rawlaw_register_cpts() {}
 add_action( 'init', 'rawlaw_register_cpts' );
 
 /**

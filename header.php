@@ -72,7 +72,6 @@ if ( ! function_exists( 'rawlaw_default_menu' ) ) {
 		echo '<ul class="menu menu--primary">';
 		echo '<li><a href="' . esc_url( rawlaw_news_url() ) . '">' . esc_html__( 'Legal News', 'rawlaw' ) . '</a></li>';
 		echo '<li><a href="' . esc_url( home_url( '/practice-area/' ) ) . '">' . esc_html__( 'Practice Areas', 'rawlaw' ) . '</a></li>';
-		echo '<li><a href="' . esc_url( get_post_type_archive_link( 'judgment' ) ?: home_url( '/judgments/' ) ) . '">' . esc_html__( 'Judgments', 'rawlaw' ) . '</a></li>';
 		echo '<li><a href="' . esc_url( home_url( '/about/' ) ) . '">' . esc_html__( 'About', 'rawlaw' ) . '</a></li>';
 		echo '</ul>';
 	}

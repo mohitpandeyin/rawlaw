@@ -81,12 +81,9 @@ function rawlaw_content_width() {
 add_action( 'after_setup_theme', 'rawlaw_content_width', 0 );
 
 /**
- * Add a body class for marketplace pages so we can scope styles cleanly.
+ * Add a body class for editorial article pages so we can scope styles cleanly.
  */
 function rawlaw_body_classes( $classes ) {
-	if ( is_singular( 'lawyer' ) || is_post_type_archive( 'lawyer' ) || is_tax( array( 'practice_area', 'lawyer_location' ) ) ) {
-		$classes[] = 'is-marketplace';
-	}
 	if ( is_singular( 'post' ) ) {
 		$classes[] = 'is-article';
 	}

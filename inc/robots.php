@@ -2,10 +2,10 @@
 /**
  * robots.txt (spec 14 §2.2).
  *
- * Ships AFTER the canonical + noindex work in inc/seo-meta.php and the
- * facet containment in archive-lawyer.php: robots-disallowing an
- * already-indexed URL prevents re-crawl, which prevents a `noindex` from
- * ever being seen, which freezes bloat in the index permanently.
+ * Ships AFTER the canonical + noindex work in inc/seo-meta.php:
+ * robots-disallowing an already-indexed URL prevents re-crawl, which
+ * prevents a `noindex` from ever being seen, which freezes bloat in
+ * the index permanently.
  *
  * Per roadmap 0.14: no AI crawler is blocked, training included — one
  * ruleset applies to every crawler, human or bot, alike.
@@ -24,11 +24,6 @@ function rawlaw_robots_txt( $output, $public ) {
 		'User-agent: *',
 		'Disallow: /wp-admin/',
 		'Allow: /wp-admin/admin-ajax.php',
-		'Disallow: /find-a-lawyer/*?',
-		'Disallow: /post-a-requirement/*?',
-		'Disallow: /*?consult=',
-		'Disallow: /*?action=consult',
-		'Disallow: /*?requirement=',
 		'Disallow: /*?s=',
 		'Content-Signal: search=yes, ai-input=yes, ai-train=yes',
 		'',

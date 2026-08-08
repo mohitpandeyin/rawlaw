@@ -5,8 +5,9 @@
  * @package RawLaw
  */
 
-$services_url = esc_url( home_url( '/services-for-advocates/' ) );
-$advocates    = rawlaw_home_get( 'advocates', array() );
+$services_url   = esc_url( home_url( '/services-for-advocates/' ) );
+$advocates      = rawlaw_home_get( 'advocates', array() );
+$benefit_icons  = array( 'search', 'chat', 'shield-checkmark', 'drafts' );
 ?>
 <section id="for-advocates" class="section section--for-advocates" aria-labelledby="advocates-growth-heading" data-reveal>
 	<div class="container advocate-growth">
@@ -27,8 +28,9 @@ $advocates    = rawlaw_home_get( 'advocates', array() );
 		</div>
 
 		<ul class="advocate-growth__list" aria-label="<?php esc_attr_e( 'Advocate benefits', 'rawlaw' ); ?>">
-			<?php foreach ( $advocates['benefits'] as $benefit ) : ?>
+			<?php foreach ( $advocates['benefits'] as $i => $benefit ) : ?>
 			<li>
+				<span class="advocate-growth__icon" aria-hidden="true"><?php rawlaw_icon( $benefit_icons[ $i % count( $benefit_icons ) ] ); ?></span>
 				<strong><?php echo esc_html( $benefit['title'] ); ?></strong>
 				<span><?php echo esc_html( $benefit['text'] ); ?></span>
 			</li>

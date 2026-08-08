@@ -1,9 +1,11 @@
 <?php
 /**
  * On-page SEO metadata layer — canonical, description, Open Graph, Twitter
- * Card, robots and title filters. Owned in-theme (no SEO plugin installed);
- * marketplace indexability rules (facet noindex, unverified-profile gating)
- * are not expressible in a plugin UI.
+ * Card, robots and title filters. Owned in-theme (no SEO plugin installed).
+ *
+ * The lawyer-marketplace indexability rules that used to live here (facet
+ * noindex, unverified-profile gating) were removed 2026-08-07 with the
+ * `lawyer` CPT — see docs/AUDIT.md.
  *
  * @package RawLaw
  */
@@ -15,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * --------------------------------------------------------------------- */
 
 function rawlaw_seo_meta_box() {
-	foreach ( array( 'post', 'page', 'lawyer', 'judgment' ) as $post_type ) {
+	foreach ( array( 'post', 'page' ) as $post_type ) {
 		add_meta_box( 'rawlaw_seo', __( 'SEO', 'rawlaw' ), 'rawlaw_seo_meta_box_cb', $post_type, 'normal', 'low' );
 	}
 }
@@ -72,30 +74,9 @@ add_action( 'save_post', 'rawlaw_seo_meta_save' );
  * Resolution helpers
  * --------------------------------------------------------------------- */
 
-/**
- * Is the current request a faceted / free-text lawyer-archive query?
- * These never get their own canonical or index entry — they fold back to
- * the bare archive (spec 15 §3.3).
- */
-function rawlaw_seo_is_faceted_lawyer_request() {
-	if ( ! is_post_type_archive( 'lawyer' ) && ! ( is_search() && 'lawyer' === get_query_var( 'post_type' ) ) ) {
-		return false;
-	}
-	foreach ( array( 'practice', 'location', 'min_exp', 'verified', 'sort', 's', 'q', 'city', 'intent' ) as $key ) {
-		if ( isset( $_GET[ $key ] ) && '' !== $_GET[ $key ] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			return true;
-		}
-	}
-	return false;
-}
-
 function rawlaw_seo_canonical_url() {
 	if ( is_singular() ) {
 		return get_permalink();
-	}
-	if ( is_post_type_archive( 'lawyer' ) ) {
-		// Always the bare archive — facets never earn their own canonical.
-		return get_post_type_archive_link( 'lawyer' );
 	}
 	if ( is_post_type_archive() ) {
 		return get_post_type_archive_link( get_query_var( 'post_type' ) );
@@ -151,11 +132,7 @@ function rawlaw_seo_description() {
  * merged with core's own defaults, instead of a second competing tag.
  */
 function rawlaw_seo_robots( $robots ) {
-	$noindex = is_search() || is_404() || rawlaw_seo_is_faceted_lawyer_request();
-
-	if ( is_singular( 'lawyer' ) && ! get_post_meta( get_the_ID(), '_rawlaw_verified', true ) ) {
-		$noindex = true;
-	}
+	$noindex = is_search() || is_404();
 
 	if ( $noindex ) {
 		$robots['noindex'] = true;

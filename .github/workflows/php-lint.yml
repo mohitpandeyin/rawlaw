@@ -1,0 +1,31 @@
+name: PHP lint
+
+# Deliberately small first step for T-52 (docs/theme-fixes/01-defect-register.md):
+# this repo has no composer.json, phpcs config, or test suite yet, so this
+# only catches PHP syntax errors (php -l) — real protection against the class
+# of bug T-4 found this session (a PHP 8.2 fatal from sanitize_title()
+# receiving an array), at zero new dependencies. The full testing pyramid in
+# docs/specs/11-development-rules.md (PHPUnit, Playwright, axe-core,
+# Lighthouse CI) is T-41 — a deliberate, separate, larger decision on
+# tooling and coverage targets, not something to half-build here.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['8.1', '8.2']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+      - name: php -l on every theme file
+        run: |
+          set -e
+          find . -name '*.php' -print0 | xargs -0 -n1 php -l

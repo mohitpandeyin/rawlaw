@@ -150,29 +150,6 @@ function rawlaw_logo( $variant = 'mark' ) {
 }
 
 /**
- * Verified marketplace badge.
- */
-function rawlaw_verified_badge( $lawyer_id ) {
-	if ( get_post_meta( $lawyer_id, '_rawlaw_verified', true ) ) {
-		echo '<span class="badge badge--verified" title="' . esc_attr__( 'Verified by RawLaw', 'rawlaw' ) . '">';
-		rawlaw_icon( 'verified' );
-		echo '<span>' . esc_html__( 'Verified', 'rawlaw' ) . '</span></span>';
-	}
-}
-
-/**
- * Whether a lawyer's phone/email/Bar Council ID may be shown to the
- * current visitor (roadmap 0.12). Masked by default; visible only if
- * the lawyer opted to share publicly, or the visitor is logged in.
- */
-function rawlaw_contact_visible( $lawyer_id ) {
-	if ( get_post_meta( $lawyer_id, '_rawlaw_share_contact', true ) ) {
-		return true;
-	}
-	return is_user_logged_in();
-}
-
-/**
  * Render numeric pagination.
  */
 function rawlaw_pagination() {

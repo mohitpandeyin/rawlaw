@@ -71,6 +71,22 @@
 		}, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
 
 		doc.querySelectorAll('[data-reveal]:not(.is-revealed)').forEach(function (el) { io.observe(el); });
+
+		// A same-page anchor link (or a browser restoring a mid-page scroll
+		// position on load) can land the viewport on a section before this
+		// observer existed to see it cross into view — the section then sits
+		// in-frame at opacity 0 forever, since nothing ever "crosses" again.
+		// One sweep after full load catches anything already in view that
+		// never got its intersection callback.
+		window.addEventListener('load', function () {
+			doc.querySelectorAll('[data-reveal]:not(.is-revealed)').forEach(function (el) {
+				var rect = el.getBoundingClientRect();
+				if (rect.top < window.innerHeight && rect.bottom > 0) {
+					el.classList.add('is-revealed');
+					io.unobserve(el);
+				}
+			});
+		});
 	} else {
 		// Fallback: reveal everything immediately.
 		doc.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('is-revealed'); });

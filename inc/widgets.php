@@ -21,12 +21,6 @@ function rawlaw_register_sidebars() {
 		'description' => __( 'Appears next to articles and on archive pages.', 'rawlaw' ),
 	) ) );
 
-	register_sidebar( array_merge( $common, array(
-		'name'        => __( 'Marketplace Sidebar', 'rawlaw' ),
-		'id'          => 'sidebar-marketplace',
-		'description' => __( 'Appears on lawyer profiles and marketplace pages.', 'rawlaw' ),
-	) ) );
-
 	for ( $i = 1; $i <= 4; $i++ ) {
 		register_sidebar( array_merge( $common, array(
 			'name'        => sprintf( __( 'Footer %d', 'rawlaw' ), $i ),
