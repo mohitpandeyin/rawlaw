@@ -130,12 +130,20 @@ function rawlaw_seo_description() {
  * Robots directives ride WordPress core's own `wp_robots` filter chain
  * (WP 5.7+) so there is exactly one <meta name="robots"> tag on the page,
  * merged with core's own defaults, instead of a second competing tag.
+ *
+ * What counts as noindex is decided in inc/indexability.php, not here — the
+ * sitemap providers have to reach the same verdict, so the rule lives in one
+ * place and both consumers read it.
+ *
+ * core's own wp_robots_no_robots() supplies the directive pair rather than
+ * setting `noindex` by hand: it adds `follow` on a public site (and
+ * `nofollow` on a private one), which is what we want on a thin tag archive
+ * — drop the listing page from the index, keep crawling through it to the
+ * articles it links.
  */
 function rawlaw_seo_robots( $robots ) {
-	$noindex = is_search() || is_404();
-
-	if ( $noindex ) {
-		$robots['noindex'] = true;
+	if ( rawlaw_is_noindex_request() ) {
+		$robots = wp_robots_no_robots( $robots );
 	}
 	$robots['max-image-preview'] = 'large';
 

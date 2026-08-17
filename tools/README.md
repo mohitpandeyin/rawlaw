@@ -4,6 +4,24 @@ Developer utilities. **Nothing here is loaded or executed by WordPress** —
 these are build-time scripts kept in the repo so generated assets can be
 reproduced rather than being one-off artefacts nobody can regenerate.
 
+## verify-indexability.php
+
+Exercises `inc/indexability.php` without WordPress, by stubbing the handful
+of core functions it touches. Run it after changing the tag threshold, the
+utility-page slug list, or either sitemap filter.
+
+```bash
+php tools/verify-indexability.php          # predicate + populated tag set — 33 assertions
+php tools/verify-indexability.php empty    # the empty-tag-set branch — 26 assertions
+```
+
+Both must end `0 failed`. Two runs rather than one because
+`rawlaw_indexable_tag_ids()` memoises in a function static — correct for a
+real request, but it means a single process can only exercise one term set,
+and the empty set is the branch worth proving: `WP_Term_Query` **ignores an
+empty `include`**, so a threshold that no tag cleared would silently
+re-admit every tag archive to the sitemap instead of excluding them all.
+
 ## make-og-images.py
 
 Regenerates `assets/og/*.png` — the Open Graph / social-share cards

@@ -21,6 +21,7 @@ require RAWLAW_DIR . 'inc/widgets.php';
 require RAWLAW_DIR . 'inc/template-tags.php';
 require RAWLAW_DIR . 'inc/breadcrumbs.php';
 require RAWLAW_DIR . 'inc/schema.php';
+require RAWLAW_DIR . 'inc/indexability.php';
 require RAWLAW_DIR . 'inc/seo-meta.php';
 require RAWLAW_DIR . 'inc/robots.php';
 require RAWLAW_DIR . 'inc/discoverability.php';
