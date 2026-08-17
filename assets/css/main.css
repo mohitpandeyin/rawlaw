@@ -3010,6 +3010,12 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 	padding-bottom: clamp(48px, 6vw, 80px);
 }
 
+/* No TOC (Document template, page with <3 headings) — without this the
+   prose would render inside the 240px sidebar track. */
+.legal-page__body--full {
+	grid-template-columns: minmax(0, 1fr);
+}
+
 /* TOC sidebar */
 .legal-page__toc {
 	position: sticky;
@@ -3053,6 +3059,13 @@ select.hero__finder-input { appearance: none; cursor: pointer; }
 .legal-toc__list a:hover {
 	background: var(--surface);
 	color: var(--navy);
+}
+
+/* Sub-headings in an auto-generated contents list (Document template),
+   indented to match the article TOC's .toc__item--lvl-3 treatment. */
+.legal-toc__item--lvl-3 a {
+	padding-left: 22px;
+	font-size: 12px;
 }
 
 /* Prose content area */

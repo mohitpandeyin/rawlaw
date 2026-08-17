@@ -7,27 +7,29 @@
 4. Click the three-dot menu ⋮ (top-right) → Code editor
 5. Delete any existing content in the editor
 6. Copy and paste everything from the first <!-- wp: tag below
-7. Leave Page Attributes → Template on the Default template
+7. In the right sidebar → Page Attributes → Template → select
+   "Document (auto contents)"
 8. Click Publish, then add "About" to the footer menu (Appearance → Menus)
 
-BEFORE PUBLISHING — replace every {{PLACEHOLDER}}. They are facts only you
-know, and an About page that gets them wrong is worse than none at all.
-Search the text for "{{" to find them all. There are five:
+The operator, city, founding year and accountable person are now filled in
+to match what is already live at rawlaw.in/about — no placeholder tokens
+remain, so this can be pasted as-is.
 
-  {{OPERATOR}}        Legal entity or proprietor that operates RawLaw.
-                      Nothing in the Privacy Policy, Terms or Contact page
-                      names one today — AdSense reviewers and the DPDP Act
-                      both expect a disclosed operator, so this is the most
-                      important gap on the page.
-  {{CITY_STATE}}      Principal place of business, e.g. "New Delhi".
-  {{FOUNDED}}         Year RawLaw began publishing, e.g. "2024".
-  {{EDITOR_NAME}}     Person accountable for what is published.
-  {{EDITOR_CREDS}}    Their standing, in one clause — e.g. "advocate
-                      enrolled with the Bar Council of Delhi (D/1234/2016)"
-                      or "LL.B., National Law University Delhi". Do not
-                      overstate it; an unverifiable claim on a legal site is
-                      a liability, and a modest true one still satisfies the
-                      requirement.
+ONE OPTIONAL IMPROVEMENT, in the "Who writes it" section. The line names
+Siddharth Jha as Founder, which fixes accountability — a reader can now see
+who stands behind the reporting. What it does not yet state is *legal*
+standing, and this is a YMYL subject where Google weighs that heavily. If
+there is a true credential to add, add it in the same breath:
+
+  "Siddharth Jha, Founder at RawLaw and an advocate enrolled with the Bar
+   Council of Maharashtra & Goa (MAH/1234/2018), is responsible for…"
+  "Siddharth Jha, Founder at RawLaw (LL.B., Government Law College,
+   Mumbai), is responsible for…"
+
+Only if true, and do not inflate it — an unverifiable claim on a legal site
+is a liability, while a modest accurate one does the job. If there is no
+legal qualification to cite, leave the line exactly as it stands rather than
+reaching for something vaguer.
 -->
 
 <!-- wp:paragraph -->
@@ -76,7 +78,7 @@ Search the text for "{{" to find them all. There are five:
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>RawLaw's reporting is produced by an in-house editorial team working from the primary record. {{EDITOR_NAME}} ({{EDITOR_CREDS}}) is responsible for what appears on the site, including corrections.</p>
+<p>RawLaw's reporting is produced by an in-house editorial team working from the primary record. Siddharth Jha, Founder at RawLaw, is responsible for what appears on the site, including corrections.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -135,7 +137,7 @@ Search the text for "{{" to find them all. There are five:
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>RawLaw is published by {{OPERATOR}}, based in {{CITY_STATE}}, and has been reporting Indian judgments since {{FOUNDED}}.</p>
+<p>RawLaw is published by Siddharth Jha, based in Mumbai, India, and has been reporting Indian judgments since 2024.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:list -->

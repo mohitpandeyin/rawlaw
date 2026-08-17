@@ -7,31 +7,38 @@
 4. Click the three-dot menu ⋮ (top-right) → Code editor
 5. Delete any existing content in the editor
 6. Copy and paste everything from the first <!-- wp: tag below
-7. Leave Page Attributes → Template on the Default template
+7. In the right sidebar → Page Attributes → Template → select
+   "Document (auto contents)"
 8. Click Publish, then add "Editorial Policy" to the footer menu
 
-BEFORE PUBLISHING — two things need your decision, not mine.
+The accountability line reads "Siddharth Jha, Founder at RawLaw" to match
+the About page. See the About file's header for the optional legal-credential
+wording, which applies here identically.
 
-(1) {{EDITOR_NAME}} / {{EDITOR_CREDS}} — same values as the About page.
+NO PLACEHOLDERS AND NO CHOICES REMAIN — this file is ready to paste as-is.
 
-(2) THE "HOW A REPORT IS WRITTEN" SECTION contains two alternative blocks,
-    marked OPTION A and OPTION B. Keep exactly one and delete the other,
-    then delete the marker comments.
+The AI-disclosure decision is settled: AI produces the first draft, a person
+checks it against the judgment before publication. That is now a short
+"Our use of AI" subsection under "How a report is written", with the two
+alternative blocks removed.
 
-      OPTION A — drafting is assisted by language models, with a named
-                 human reviewing every report before it publishes.
-      OPTION B — reports are written by people, unassisted.
+WHAT PUBLISHING THIS COMMITS YOU TO. It is a public, checkable promise, and
+it is the right one — Google's spam policy on scaled content treats honest
+disclosure of AI-assisted work under human review very differently from
+undisclosed mass production. Two specifics to hold to:
 
-    Choose the one that is true. This matters more than any other line on
-    the site. RawLaw publishes 15–33 reports of ~1,600 words a day; that
-    rate invites the question either way, and Google's spam policy on
-    scaled content asks it directly. A truthful disclosure of AI-assisted
-    drafting under human review is explicitly acceptable to Google and to
-    readers. A false claim of unassisted human authorship is not, and it is
-    the kind of statement that is very hard to walk back once found.
-
-    If OPTION A is the true one, the review it describes has to actually
-    happen. Do not publish the claim ahead of the practice.
+  * "no draft reaches the site unread" and "a person reads it against the
+    judgment" must be literally true of every report, including on a
+    33-report day. If the review is ever skipped under volume pressure, the
+    page becomes a false statement rather than a partial one. Publishing at
+    a rate you can genuinely review is now an editorial constraint.
+  * The section promises the checks cover "the holding, the provisions
+    construed, the parties, the directions and every figure". Deliberately
+    NOT claimed: case numbers and dates of judgment, because they appear in
+    some live reports and not others (verified 2026-08-17 — "MFA No." recurs
+    in the Karnataka poultry report, while the Calcutta IPRS report carries
+    no case number at all). Once case metadata is published consistently,
+    add it back here and to the paragraph above.
 -->
 
 <!-- wp:paragraph -->
@@ -39,7 +46,7 @@ BEFORE PUBLISHING — two things need your decision, not mine.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>{{EDITOR_NAME}} ({{EDITOR_CREDS}}) is responsible for editorial decisions and for corrections.</p>
+<p>Siddharth Jha, Founder at RawLaw, is responsible for editorial decisions and for corrections.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:separator -->
@@ -92,28 +99,24 @@ BEFORE PUBLISHING — two things need your decision, not mine.
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Reports follow a fixed structure — facts, issues, analysis of the law, conclusion — and each one names the court, the bench, the case number and the date of the decision. We quote the court's own words for the holding rather than paraphrasing it, and we distinguish between what the court decided and what it observed in passing.</p>
+<p>Reports follow a fixed structure — facts, issues, analysis of the law, conclusion — and identify the court and the judges who decided the matter. We quote the court's own words for the holding rather than paraphrasing it, and we distinguish between what the court decided and what it observed in passing.</p>
 <!-- /wp:paragraph -->
 
-<!-- OPTION A — AI-assisted drafting under human review. KEEP ONE. -->
+<!-- wp:heading {"level":3,"anchor":"ed-ai"} -->
+<h3 class="wp-block-heading" id="ed-ai">Our use of AI</h3>
+<!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>We use language models to help produce first drafts from the judgment text. They are a drafting tool and nothing more: they do not choose what we cover, and no draft reaches the site unread. Before a report publishes, a member of the editorial team checks it against the judgment — the holding, the provisions construed, the case number, the parties, the directions and every figure — and is answerable for it afterwards. Where a model's draft and the judgment disagree, the judgment wins and the draft is rewritten.</p>
+<p>We use AI to help produce the first draft of a report from the judgment text. It is a drafting tool and nothing more: it does not decide what we cover, and no draft reaches the site unread.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>We disclose this because readers are entitled to know how what they are reading was made. It does not reduce our responsibility for accuracy by any amount.</p>
+<p>Before a report publishes, a person reads it against the judgment itself — the holding, the provisions construed, the parties, the directions and every figure — and is answerable for it afterwards. Where the draft and the judgment disagree, the judgment governs and the draft is rewritten. Editorial responsibility for every published report rests with Siddharth Jha, Founder at RawLaw, exactly as it would if no such tool were involved.</p>
 <!-- /wp:paragraph -->
-
-<!-- OPTION A ENDS -->
-
-<!-- OPTION B — written by people, unassisted. KEEP ONE. -->
 
 <!-- wp:paragraph -->
-<p>Reports are written by members of the editorial team reading the judgment in full. We do not use language models to generate reports, and we do not republish summaries produced elsewhere. Every report is read by a second person against the judgment before it publishes.</p>
+<p>We disclose this because readers are entitled to know how what they are reading was made. It does not reduce our responsibility for accuracy by any amount, and it is not a reason to take a report on trust: every report links the judgment it describes so you can check it against the source.</p>
 <!-- /wp:paragraph -->
-
-<!-- OPTION B ENDS -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>

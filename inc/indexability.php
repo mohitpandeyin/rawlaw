@@ -282,3 +282,42 @@ function rawlaw_sitemap_drop_users_provider( $provider, $name ) {
 	return $provider;
 }
 add_filter( 'wp_sitemaps_add_provider', 'rawlaw_sitemap_drop_users_provider', 10, 2 );
+
+/**
+ * 404 a sitemap URL whose provider is no longer registered.
+ *
+ * Unregistering a provider drops it from the sitemap index but leaves the
+ * rewrite rule in place, and WP_Sitemaps::render_sitemaps() bails on a
+ * missing provider with a bare `return` — no status, no output. The request
+ * then falls through the template hierarchy and WordPress serves the *front
+ * page*, as HTML, with a 200, from a `.xml` URL. Verified against both
+ * production and the local install after retiring the users provider:
+ * `wp-sitemap-users-1.xml` returned `text/html` 200 with
+ * `<body class="home blog … is-front">`.
+ *
+ * That is a soft 404 and a duplicate of the homepage on a URL Google has
+ * been crawling for months, which is the opposite of the point of this
+ * file. Note the narrow scope: core handles a *missing page* of a
+ * registered provider correctly on its own — `…post_tag-3.xml` already
+ * 404s properly — so only the unregistered-provider case needs this.
+ *
+ * Priority 11 because core renders on `template_redirect` at 10 and exits
+ * when it succeeds; reaching this at all means it declined to render.
+ */
+function rawlaw_sitemap_404_unknown_provider() {
+	$sitemap = sanitize_text_field( get_query_var( 'sitemap' ) );
+	if ( ! $sitemap || 'index' === $sitemap ) {
+		return;
+	}
+
+	$server = wp_sitemaps_get_server();
+	if ( ! $server || $server->registry->get_provider( $sitemap ) ) {
+		return;
+	}
+
+	global $wp_query;
+	$wp_query->set_404();
+	status_header( 404 );
+	nocache_headers();
+}
+add_action( 'template_redirect', 'rawlaw_sitemap_404_unknown_provider', 11 );

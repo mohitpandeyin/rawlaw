@@ -182,6 +182,19 @@ function rawlaw_build_toc( $content ) {
 	foreach ( $m as $h ) {
 		$level = (int) $h[1];
 		$text  = wp_strip_all_tags( $h[3] );
+
+		// Respect an anchor the editor already set — Gutenberg's "HTML
+		// anchor" field, which the static pages (Privacy, Terms, About,
+		// Editorial Policy) use on every heading. Generating a slug here
+		// regardless would inject a *second* `id` into the same tag, which
+		// is invalid and leaves the TOC pointing at whichever one the
+		// browser decided to honour.
+		if ( preg_match( '/\bid=(["\'])\s*(.*?)\s*\1/i', $h[2], $anchor ) && '' !== $anchor[2] ) {
+			$used[]  = $anchor[2];
+			$items[] = array( 'level' => $level, 'text' => $text, 'slug' => $anchor[2] );
+			continue;
+		}
+
 		$slug  = sanitize_title( $text );
 		$base  = $slug;
 		$i     = 2;
@@ -204,5 +217,9 @@ function rawlaw_build_toc( $content ) {
 		</ol>
 	</aside>
 	<?php
-	return array( 'html' => ob_get_clean(), 'content' => $content );
+	// `items` is additive — single.php only reads html/content. It lets a
+	// template render the list in its own markup (see the Document page
+	// template, which needs .legal-toc rather than .toc) without a second
+	// heading parser existing in the theme.
+	return array( 'html' => ob_get_clean(), 'content' => $content, 'items' => $items );
 }
