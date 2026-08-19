@@ -86,6 +86,25 @@ add_action( 'comment_form_top', 'rawlaw_comment_form_guard_fields' );
  *    comment form is held until it's attached (see assets/js/recaptcha-v3.js)
  * ───────────────────────────────────────────────────────────────────────────── */
 
+/**
+ * Only `rawlaw-recaptcha-v3` (our own handler) is enqueued eagerly — Google's
+ * `api.js` is not. `api.js?render=SITE_KEY` spins up a hidden anchor iframe
+ * the moment it loads, on every page view, whether or not that visitor ever
+ * touches the comment field. That iframe is Google's own code running in
+ * `google.com`'s origin: it calls `requestStorageAccess()` for its risk
+ * heuristics, the browser denies it under third-party-cookie restrictions,
+ * and Chrome logs that denial as a console error — harmless (reCAPTCHA
+ * degrades gracefully and still scores the request) but real, and it is not
+ * fixable from our side: a page cannot intercept or suppress a console
+ * message logged inside a cross-origin frame's own JS context.
+ *
+ * What *is* ours to fix is exposure: loading `api.js` on every single
+ * article view for the sake of the small fraction of visitors who ever
+ * write a comment is real third-party weight (script parse + an iframe
+ * request) paid by everyone. `recaptcha-v3.js` now injects `api.js` itself,
+ * lazily, on first interaction with the comment field — see that file for
+ * the load sequencing.
+ */
 function rawlaw_maybe_enqueue_recaptcha() {
 	if ( ! is_singular() || ! comments_open() || current_user_can( 'moderate_comments' ) || ! rawlaw_recaptcha_configured() ) {
 		return;
@@ -93,25 +112,18 @@ function rawlaw_maybe_enqueue_recaptcha() {
 
 	$site_key = get_theme_mod( 'rawlaw_recaptcha_site_key', '' );
 
-	wp_enqueue_script(
-		'rawlaw-recaptcha',
-		'https://www.google.com/recaptcha/api.js?render=' . rawurlencode( $site_key ),
-		array(),
-		null,
-		true
-	);
-
 	$ver = file_exists( RAWLAW_DIR . 'assets/js/recaptcha-v3.js' )
 		? filemtime( RAWLAW_DIR . 'assets/js/recaptcha-v3.js' ) : RAWLAW_VERSION;
 
 	wp_enqueue_script(
 		'rawlaw-recaptcha-v3',
 		RAWLAW_URI . 'assets/js/recaptcha-v3.js',
-		array( 'rawlaw-recaptcha' ),
+		array(),
 		$ver,
 		true
 	);
 	wp_localize_script( 'rawlaw-recaptcha-v3', 'RawLawRecaptcha', array(
+		'apiUrl'  => 'https://www.google.com/recaptcha/api.js?render=' . rawurlencode( $site_key ),
 		'siteKey' => $site_key,
 		'action'  => RAWLAW_RECAPTCHA_ACTION,
 	) );

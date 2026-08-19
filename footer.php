@@ -50,6 +50,8 @@ $footer_content     = rawlaw_home_get( 'footer', array() );
 				<div class="site-footer__group">
 					<h2 class="site-footer__heading"><?php esc_html_e( 'Company', 'rawlaw' ); ?></h2>
 					<ul>
+						<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>"><?php esc_html_e( 'About', 'rawlaw' ); ?></a></li>
+						<li><a href="<?php echo esc_url( home_url( '/editorial-policy/' ) ); ?>"><?php esc_html_e( 'Editorial Policy', 'rawlaw' ); ?></a></li>
 						<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Contact', 'rawlaw' ); ?></a></li>
 						<li><a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>"><?php esc_html_e( 'Privacy Policy', 'rawlaw' ); ?></a></li>
 						<li><a href="<?php echo esc_url( home_url( '/terms-and-conditions/' ) ); ?>"><?php esc_html_e( 'Terms', 'rawlaw' ); ?></a></li>

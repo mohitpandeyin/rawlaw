@@ -27,8 +27,24 @@ function rawlaw_enqueue_assets() {
 	wp_enqueue_style( 'rawlaw-main', RAWLAW_URI . 'assets/css/main.css', array( 'rawlaw-style' ), $ver_main );
 	wp_enqueue_style( 'rawlaw-print', RAWLAW_URI . 'assets/css/print.css', array( 'rawlaw-main' ), $ver_main, 'print' );
 
-	wp_enqueue_script( 'rawlaw-main', RAWLAW_URI . 'assets/js/main.js', array(), $ver_js, true );
-	wp_script_add_data( 'rawlaw-main', 'defer', true );
+	// `array( 'in_footer' => true, 'strategy' => 'defer' )` is the WP 6.3+
+	// form. The previous `wp_script_add_data( $handle, 'defer', true )` call
+	// looked correct but did nothing: that data key is only honoured via a
+	// `script_loader_tag` filter, which this theme never registered, so
+	// main.js has been rendering with no `defer` attribute on every single
+	// page — confirmed 2026-08-18 by reading the live HTML on both the
+	// homepage and an article. `wp_enqueue_script()`'s $args array form,
+	// unlike the data-key approach, is honoured directly by WP core.
+	wp_enqueue_script(
+		'rawlaw-main',
+		RAWLAW_URI . 'assets/js/main.js',
+		array(),
+		$ver_js,
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
 
 	// Scroll-driven marquee (homepage features-bar).
 	if ( is_front_page() ) {
